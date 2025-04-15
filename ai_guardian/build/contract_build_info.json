@@ -1,0 +1,102 @@
+{
+  "contracts": {
+    "ERC6551Registry": {
+      "address": "0x123456789012345678901234567890REGISTRY",
+      "abi": [
+        {
+          "inputs": [
+            {"name": "implementation", "type": "address"},
+            {"name": "chainId", "type": "uint256"},
+            {"name": "tokenContract", "type": "address"},
+            {"name": "tokenId", "type": "uint256"},
+            {"name": "salt", "type": "uint256"},
+            {"name": "initData", "type": "bytes"}
+          ],
+          "name": "createAccount",
+          "outputs": [{"name": "", "type": "address"}],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        }
+      ]
+    },
+    "MusicRightsNFT": {
+      "address": "0x123456789012345678901234567890NFT12345",
+      "abi": [
+        {
+          "inputs": [
+            {"name": "to", "type": "address"},
+            {"name": "contractId", "type": "string"},
+            {"name": "rightsType", "type": "string"},
+            {"name": "territory", "type": "string"},
+            {"name": "tokenURI", "type": "string"}
+          ],
+          "name": "mintRights",
+          "outputs": [{"name": "", "type": "uint256"}],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        }
+      ]
+    },
+    "MusicRightsContainer": {
+      "address": "0x123456789012345678901234567890CONTAINER",
+      "abi": [
+        {
+          "inputs": [
+            {"name": "attestationId", "type": "bytes32"},
+            {"name": "contractId", "type": "string"},
+            {"name": "rightsType", "type": "string"},
+            {"name": "territory", "type": "string"}
+          ],
+          "name": "initialize",
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {"name": "recipients", "type": "address[]"},
+            {"name": "shares", "type": "uint256[]"}
+          ],
+          "name": "configurePaymentSplitting",
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "distributePayment",
+          "outputs": [],
+          "stateMutability": "payable",
+          "type": "function"
+        }
+      ]
+    },
+    "MockEAS": {
+      "address": "0x123456789012345678901234567890EAS12345",
+      "abi": [
+        {
+          "inputs": [
+            {"name": "name", "type": "string"},
+            {"name": "description", "type": "string"},
+            {"name": "fields", "type": "string[]"}
+          ],
+          "name": "registerSchema",
+          "outputs": [{"name": "", "type": "bytes32"}],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {"name": "schemaId", "type": "bytes32"},
+            {"name": "recipient", "type": "address"},
+            {"name": "data", "type": "bytes"}
+          ],
+          "name": "attest",
+          "outputs": [{"name": "", "type": "bytes32"}],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        }
+      ]
+    }
+  }
+} 

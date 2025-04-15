@@ -1,0 +1,34 @@
+{
+  "language": "Solidity",
+  "sources": {
+    "RightsVault.sol": {
+      "content": "// SPDX-License-Identifier: MIT\npragma solidity ^0.8.19;\n\n/**\n * @title RightsVault\n * @dev Core contract for storing and managing rights data with privacy features\n */\ncontract RightsVault {\n    address public owner;\n    bool private locked;\n\n    // Struct to store rights data\n    struct RightsData {\n        bytes32 encryptedData;      // Encrypted rights data\n        bytes32 dataHash;           // Hash of the original data\n        address rightsOwner;        // Address of the rights owner\n        uint256 timestamp;          // Timestamp of registration\n        bool isActive;              // Whether the rights are active\n    }\n\n    // Mapping from rights ID to RightsData\n    mapping(bytes32 => RightsData) public rightsRegistry;\n    \n    // Mapping from rights owner to their rights IDs\n    mapping(address => bytes32[]) public ownerRights;\n    \n    // Events\n    event RightsRegistered(bytes32 indexed rightsId, address indexed owner, uint256 timestamp);\n    event RightsUpdated(bytes32 indexed rightsId, address indexed owner);\n    event RightsDeactivated(bytes32 indexed rightsId);\n\n    modifier onlyOwner() {\n        require(msg.sender == owner, \"Not owner\");\n        _;\n    }\n\n    modifier nonReentrant() {\n        require(!locked, \"Reentrant call\");\n        locked = true;\n        _;\n        locked = false;\n    }\n\n    constructor() {\n        owner = msg.sender;\n        locked = false;\n    }\n\n    /**\n     * @dev Register new rights data\n     * @param rightsId Unique identifier for the rights\n     * @param encryptedData Encrypted rights data\n     * @param dataHash Hash of the original data\n     */\n    function registerRights(\n        bytes32 rightsId,\n        bytes32 encryptedData,\n        bytes32 dataHash\n    ) public virtual nonReentrant {\n        require(rightsRegistry[rightsId].timestamp == 0, \"Rights already registered\");\n        \n        rightsRegistry[rightsId] = RightsData({\n            encryptedData: encryptedData,\n            dataHash: dataHash,\n            rightsOwner: msg.sender,\n            timestamp: block.timestamp,\n            isActive: true\n        });\n        \n        ownerRights[msg.sender].push(rightsId);\n        \n        emit RightsRegistered(rightsId, msg.sender, block.timestamp);\n    }\n\n    /**\n     * @dev Update existing rights data\n     * @param rightsId Rights identifier to update\n     * @param encryptedData New encrypted rights data\n     * @param dataHash New hash of the original data\n     */\n    function updateRights(\n        bytes32 rightsId,\n        bytes32 encryptedData,\n        bytes32 dataHash\n    ) external nonReentrant {\n        require(rightsRegistry[rightsId].rightsOwner == msg.sender, \"Not rights owner\");\n        require(rightsRegistry[rightsId].isActive, \"Rights not active\");\n        \n        rightsRegistry[rightsId].encryptedData = encryptedData;\n        rightsRegistry[rightsId].dataHash = dataHash;\n        \n        emit RightsUpdated(rightsId, msg.sender);\n    }\n\n    /**\n     * @dev Deactivate rights\n     * @param rightsId Rights identifier to deactivate\n     */\n    function deactivateRights(bytes32 rightsId) external nonReentrant {\n        require(rightsRegistry[rightsId].rightsOwner == msg.sender, \"Not rights owner\");\n        require(rightsRegistry[rightsId].isActive, \"Rights already inactive\");\n        \n        rightsRegistry[rightsId].isActive = false;\n        \n        emit RightsDeactivated(rightsId);\n    }\n\n    /**\n     * @dev Get rights data\n     * @param rightsId Rights identifier\n     * @return RightsData struct containing the rights information\n     */\n    function getRightsData(bytes32 rightsId) external view returns (RightsData memory) {\n        return rightsRegistry[rightsId];\n    }\n\n    /**\n     * @dev Get all rights IDs for an owner\n     * @param _owner Address of the rights owner\n     * @return Array of rights IDs\n     */\n    function getOwnerRights(address _owner) public view virtual returns (bytes32[] memory) {\n        return ownerRights[_owner];\n    }\n}"
+    }
+  },
+  "settings": {
+    "optimizer": {
+      "enabled": true,
+      "runs": 200,
+      "details": {
+        "peephole": true,
+        "inliner": true,
+        "jumpdestRemover": true,
+        "orderLiterals": true,
+        "deduplicate": true,
+        "cse": true,
+        "constantOptimizer": true,
+        "yul": true
+      }
+    },
+    "outputSelection": {
+      "*": {
+        "*": ["abi", "evm.bytecode", "evm.deployedBytecode", "metadata"]
+      }
+    },
+    "evmVersion": "london",
+    "viaIR": true,
+    "metadata": {
+      "bytecodeHash": "ipfs"
+    }
+  }
+} 

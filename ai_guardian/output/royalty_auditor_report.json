@@ -1,0 +1,97 @@
+{
+  "timestamp": 1744258245.6658623,
+  "audit_results": {
+    "status": "completed",
+    "statement_file": "C:\\Users\\hobie\\owl-ai-agency\\MESA_Base_Hackathon\\ai_guardian\\output\\sample_statement.json",
+    "discrepancies": [
+      {
+        "type": "missing_work",
+        "details": "Song 'Example Title' appears in usage but not in payments",
+        "potential_value": "$120.50",
+        "confidence": 0.92
+      },
+      {
+        "type": "metadata_mismatch",
+        "details": "Writer credit for 'Another Song' has incorrect spelling",
+        "correct_value": "John A. Smith",
+        "statement_value": "John Smith",
+        "confidence": 0.89
+      }
+    ],
+    "summary": {
+      "total_works_checked": 128,
+      "discrepancies_found": 2,
+      "estimated_recovery_value": "$120.50"
+    }
+  },
+  "metadata_corrections": {
+    "work_id": "WORK123",
+    "corrections": {
+      "writer": {
+        "from": "John Smith",
+        "to": "John A. Smith"
+      }
+    },
+    "submission_templates": {
+      "ascap": "Generated ASCAP correction template",
+      "bmi": "Generated BMI correction template"
+    },
+    "status": "ready_for_submission"
+  },
+  "black_box_funds": {
+    "identifier": {
+      "type": "isrc",
+      "value": "US-AB1-23-00001"
+    },
+    "pro": "soundexchange",
+    "has_unclaimed_funds": true,
+    "estimated_amount": "$876.54",
+    "usage_periods": [
+      "2021-Q3",
+      "2021-Q4",
+      "2022-Q1"
+    ],
+    "claim_eligibility": "eligible",
+    "claim_deadline": "2023-12-31"
+  },
+  "catalog_analysis": {
+    "catalog_size": 2,
+    "recovery_opportunities": [
+      {
+        "work_id": "WORK123",
+        "issue": "Unregistered with SoundExchange",
+        "estimated_value": "$1,240.00",
+        "confidence": 0.95,
+        "actions": [
+          "register_work",
+          "submit_claim"
+        ]
+      },
+      {
+        "work_id": "WORK456",
+        "issue": "Metadata mismatch at ASCAP",
+        "estimated_value": "$520.00",
+        "confidence": 0.88,
+        "actions": [
+          "correct_metadata",
+          "request_audit"
+        ]
+      }
+    ],
+    "summary": {
+      "total_estimated_recovery": "$1,760.00",
+      "priority_actions": 2,
+      "recommended_timeline": "30 days"
+    }
+  },
+  "summary": {
+    "total_works": 2,
+    "works_with_issues": 2,
+    "total_estimated_recovery": "$1,760.00",
+    "recommended_actions": [
+      "Submit metadata corrections to ASCAP and BMI",
+      "File claim for unclaimed SoundExchange royalties",
+      "Register missing works with MLC"
+    ]
+  }
+}

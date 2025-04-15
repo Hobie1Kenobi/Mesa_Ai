@@ -1,0 +1,51 @@
+2025-04-09 19:11:30,927 - INFO - Loaded 10 rights records from sample_music_rights.json
+2025-04-09 19:11:30,927 - INFO - Generating 1000 training samples for ownership_proof
+2025-04-09 19:11:30,927 - INFO - Generated 1000 samples for ownership_proof
+2025-04-09 19:11:30,927 - INFO - Compiling circuit: ownership_proof
+2025-04-09 19:11:30,927 - INFO - [SIMULATION] circom circuit_templates\ownership_proof.circom --r1cs --wasm --output training_output\ownership_proof
+2025-04-09 19:11:30,927 - INFO - Generating proving key for: ownership_proof
+2025-04-09 19:11:30,944 - INFO - Generating proof 1/10 for ownership_proof
+2025-04-09 19:11:30,944 - INFO - Generating proof 2/10 for ownership_proof
+2025-04-09 19:11:30,944 - INFO - Generating proof 3/10 for ownership_proof
+2025-04-09 19:11:30,946 - INFO - Generating proof 4/10 for ownership_proof
+2025-04-09 19:11:30,946 - INFO - Generating proof 5/10 for ownership_proof
+2025-04-09 19:11:30,946 - INFO - Generating proof 6/10 for ownership_proof
+2025-04-09 19:11:30,946 - INFO - Generating proof 7/10 for ownership_proof
+2025-04-09 19:11:30,946 - INFO - Generating proof 8/10 for ownership_proof
+2025-04-09 19:11:30,946 - INFO - Generating proof 9/10 for ownership_proof
+2025-04-09 19:11:30,946 - INFO - Generating proof 10/10 for ownership_proof
+2025-04-09 19:11:30,946 - INFO - Generating 1000 training samples for selective_disclosure
+2025-04-09 19:11:30,969 - INFO - Generated 1000 samples for selective_disclosure
+2025-04-09 19:11:30,969 - INFO - Compiling circuit: selective_disclosure
+2025-04-09 19:11:30,969 - INFO - [SIMULATION] circom circuit_templates\selective_disclosure.circom --r1cs --wasm --output training_output\selective_disclosure
+2025-04-09 19:11:30,976 - INFO - Generating proving key for: selective_disclosure
+2025-04-09 19:11:30,977 - INFO - Generating proof 1/10 for selective_disclosure
+2025-04-09 19:11:30,977 - INFO - Generating proof 2/10 for selective_disclosure
+2025-04-09 19:11:30,980 - INFO - Generating proof 3/10 for selective_disclosure
+2025-04-09 19:11:30,980 - INFO - Generating proof 4/10 for selective_disclosure
+2025-04-09 19:11:30,980 - INFO - Generating proof 5/10 for selective_disclosure
+2025-04-09 19:11:30,980 - INFO - Generating proof 6/10 for selective_disclosure
+2025-04-09 19:11:30,980 - INFO - Generating proof 7/10 for selective_disclosure
+2025-04-09 19:11:30,980 - INFO - Generating proof 8/10 for selective_disclosure
+2025-04-09 19:11:30,980 - INFO - Generating proof 9/10 for selective_disclosure
+2025-04-09 19:11:30,980 - INFO - Generating proof 10/10 for selective_disclosure
+2025-04-09 19:11:30,980 - INFO - Generating 800 training samples for royalty_proof
+2025-04-09 19:11:30,980 - INFO - Generated 800 samples for royalty_proof
+2025-04-09 19:11:30,991 - INFO - Compiling circuit: royalty_proof
+2025-04-09 19:11:30,991 - INFO - [SIMULATION] circom circuit_templates\royalty_proof.circom --r1cs --wasm --output training_output\royalty_proof
+2025-04-09 19:11:30,992 - INFO - Generating proving key for: royalty_proof
+2025-04-09 19:11:30,994 - INFO - Generating proof 1/10 for royalty_proof
+2025-04-09 19:11:30,994 - INFO - Generating proof 2/10 for royalty_proof
+2025-04-09 19:11:30,994 - INFO - Generating proof 3/10 for royalty_proof
+2025-04-09 19:11:30,994 - INFO - Generating proof 4/10 for royalty_proof
+2025-04-09 19:11:30,994 - INFO - Generating proof 5/10 for royalty_proof
+2025-04-09 19:11:30,994 - INFO - Generating proof 6/10 for royalty_proof
+2025-04-09 19:11:30,994 - INFO - Generating proof 7/10 for royalty_proof
+2025-04-09 19:11:30,994 - INFO - Generating proof 8/10 for royalty_proof
+2025-04-09 19:11:30,994 - INFO - Generating proof 9/10 for royalty_proof
+2025-04-09 19:11:30,994 - INFO - Generating proof 10/10 for royalty_proof
+2025-04-09 19:11:31,014 - INFO - Saved 1000 training samples to training_output\ownership_proof_samples.json
+2025-04-09 19:11:31,028 - INFO - Saved 1000 training samples to training_output\selective_disclosure_samples.json
+2025-04-09 19:11:31,053 - INFO - Saved 800 training samples to training_output\royalty_proof_samples.json
+2025-04-09 19:11:31,056 - INFO - Saved circuit information to training_output\compiled_circuits.json
+2025-04-09 19:11:31,056 - INFO - Training completed successfully

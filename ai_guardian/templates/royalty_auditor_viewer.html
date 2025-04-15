@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MESA Rights Vault - AI Royalty Auditor</title>
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2ecc71;
+            --danger-color: #e74c3c;
+            --warning-color: #f39c12;
+            --dark-color: #2c3e50;
+            --light-color: #ecf0f1;
+            --card-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f7fa;
+            color: #333;
+        }
+        
+        header {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .dashboard {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: var(--card-shadow);
+        }
+        
+        .full-width {
+            grid-column: 1 / -1;
+        }
+        
+        .metrics {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+        }
+        
+        .metric {
+            text-align: center;
+            padding: 1rem;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: var(--card-shadow);
+            flex: 1;
+            margin: 0 0.5rem;
+        }
+        
+        .metric-value {
+            font-size: 2rem;
+            font-weight: bold;
+            margin: 0.5rem 0;
+            color: var(--primary-color);
+        }
+        
+        .metric.warning .metric-value {
+            color: var(--warning-color);
+        }
+        
+        .metric.success .metric-value {
+            color: var(--secondary-color);
+        }
+        
+        .metric.danger .metric-value {
+            color: var(--danger-color);
+        }
+        
+        h1, h2, h3 {
+            color: var(--dark-color);
+        }
+        
+        h2 {
+            margin-top: 0;
+            border-bottom: 2px solid var(--light-color);
+            padding-bottom: 0.5rem;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+        
+        th, td {
+            text-align: left;
+            padding: 0.75rem;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        th {
+            background-color: var(--light-color);
+            font-weight: 600;
+        }
+        
+        tr:hover {
+            background-color: rgba(236, 240, 241, 0.5);
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        
+        .badge-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .badge-success {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+        
+        .badge-warning {
+            background-color: var(--warning-color);
+            color: white;
+        }
+        
+        .badge-danger {
+            background-color: var(--danger-color);
+            color: white;
+        }
+        
+        .actions {
+            margin-top: 1rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            background-color: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            cursor: pointer;
+            border: none;
+        }
+        
+        .btn-success {
+            background-color: var(--secondary-color);
+        }
+        
+        .btn-warning {
+            background-color: var(--warning-color);
+        }
+        
+        .progress-container {
+            margin: 1rem 0;
+            background-color: var(--light-color);
+            border-radius: 4px;
+            height: 8px;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            border-radius: 4px;
+            background-color: var(--primary-color);
+        }
+        
+        .confidence-high {
+            background-color: var(--secondary-color);
+        }
+        
+        .confidence-medium {
+            background-color: var(--warning-color);
+        }
+        
+        .confidence-low {
+            background-color: var(--danger-color);
+        }
+        
+        .visualization {
+            margin-top: 2rem;
+        }
+        
+        .details {
+            margin-top: 1rem;
+            padding: 1rem;
+            background-color: var(--light-color);
+            border-radius: 4px;
+        }
+        
+        .expandable-row {
+            cursor: pointer;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            text-align: center;
+            padding: 1rem;
+            margin-top: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>MESA Rights Vault - AI Royalty Auditor</h1>
+        <div>
+            <span id="current-date"></span>
+        </div>
+    </header>
+    
+    <div class="container">
+        <div class="metrics">
+            <div class="metric">
+                <div class="metric-label">Total Works</div>
+                <div class="metric-value" id="total-works">0</div>
+            </div>
+            <div class="metric warning">
+                <div class="metric-label">Works With Issues</div>
+                <div class="metric-value" id="works-with-issues">0</div>
+            </div>
+            <div class="metric success">
+                <div class="metric-label">Estimated Recovery</div>
+                <div class="metric-value" id="total-recovery">$0</div>
+            </div>
+            <div class="metric danger">
+                <div class="metric-label">Black Box Funds</div>
+                <div class="metric-value" id="black-box-funds">$0</div>
+            </div>
+        </div>
+        
+        <div class="dashboard">
+            <div class="card full-width">
+                <h2>Recovery Opportunities</h2>
+                <table id="opportunities-table">
+                    <thead>
+                        <tr>
+                            <th>Work ID</th>
+                            <th>Issue</th>
+                            <th>Estimated Value</th>
+                            <th>Confidence</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="opportunities-body">
+                        <!-- Data will be populated by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="card">
+                <h2>Discrepancies Found</h2>
+                <table id="discrepancies-table">
+                    <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Details</th>
+                            <th>Confidence</th>
+                        </tr>
+                    </thead>
+                    <tbody id="discrepancies-body">
+                        <!-- Data will be populated by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="card">
+                <h2>Metadata Corrections</h2>
+                <table id="corrections-table">
+                    <thead>
+                        <tr>
+                            <th>Field</th>
+                            <th>From</th>
+                            <th>To</th>
+                        </tr>
+                    </thead>
+                    <tbody id="corrections-body">
+                        <!-- Data will be populated by JavaScript -->
+                    </tbody>
+                </table>
+                <div class="actions">
+                    <button class="btn" id="submit-corrections-btn">Submit Corrections</button>
+                </div>
+            </div>
+            
+            <div class="card full-width">
+                <h2>Recommended Actions</h2>
+                <ul id="recommended-actions">
+                    <!-- Data will be populated by JavaScript -->
+                </ul>
+                <div class="actions">
+                    <button class="btn btn-success" id="generate-claim-package-btn">Generate Claim Package</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <p>MESA Rights Vault - AI Guardian - Royalty Auditor Demo</p>
+    </footer>
+    
+    <script>
+        // Sample data - in a real implementation this would be replaced with actual data
+        const reportData = REPORT_DATA_PLACEHOLDER;
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            // Update current date
+            const now = new Date();
+            document.getElementById('current-date').textContent = now.toLocaleDateString();
+            
+            // Update metrics
+            document.getElementById('total-works').textContent = reportData.summary.total_works;
+            document.getElementById('works-with-issues').textContent = reportData.summary.works_with_issues;
+            document.getElementById('total-recovery').textContent = reportData.summary.total_estimated_recovery;
+            
+            if (reportData.black_box_funds && reportData.black_box_funds.estimated_amount) {
+                document.getElementById('black-box-funds').textContent = reportData.black_box_funds.estimated_amount;
+            }
+            
+            // Populate recovery opportunities
+            const opportunitiesBody = document.getElementById('opportunities-body');
+            if (reportData.catalog_analysis && reportData.catalog_analysis.recovery_opportunities) {
+                reportData.catalog_analysis.recovery_opportunities.forEach(opportunity => {
+                    const row = document.createElement('tr');
+                    
+                    const workIdCell = document.createElement('td');
+                    workIdCell.textContent = opportunity.work_id;
+                    
+                    const issueCell = document.createElement('td');
+                    issueCell.textContent = opportunity.issue;
+                    
+                    const valueCell = document.createElement('td');
+                    valueCell.textContent = opportunity.estimated_value;
+                    
+                    const confidenceCell = document.createElement('td');
+                    const confidenceValue = opportunity.confidence * 100;
+                    let confidenceClass = 'confidence-medium';
+                    if (confidenceValue >= 90) confidenceClass = 'confidence-high';
+                    if (confidenceValue < 75) confidenceClass = 'confidence-low';
+                    
+                    const progressContainer = document.createElement('div');
+                    progressContainer.className = 'progress-container';
+                    
+                    const progressBar = document.createElement('div');
+                    progressBar.className = `progress-bar ${confidenceClass}`;
+                    progressBar.style.width = `${confidenceValue}%`;
+                    
+                    progressContainer.appendChild(progressBar);
+                    confidenceCell.appendChild(progressContainer);
+                    confidenceCell.appendChild(document.createTextNode(`${confidenceValue.toFixed(0)}%`));
+                    
+                    const actionsCell = document.createElement('td');
+                    if (opportunity.actions && opportunity.actions.length) {
+                        opportunity.actions.forEach(action => {
+                            const badge = document.createElement('span');
+                            badge.className = 'badge badge-primary';
+                            badge.textContent = action.replace('_', ' ');
+                            actionsCell.appendChild(badge);
+                            actionsCell.appendChild(document.createTextNode(' '));
+                        });
+                    }
+                    
+                    row.appendChild(workIdCell);
+                    row.appendChild(issueCell);
+                    row.appendChild(valueCell);
+                    row.appendChild(confidenceCell);
+                    row.appendChild(actionsCell);
+                    
+                    opportunitiesBody.appendChild(row);
+                });
+            }
+            
+            // Populate discrepancies
+            const discrepanciesBody = document.getElementById('discrepancies-body');
+            if (reportData.audit_results && reportData.audit_results.discrepancies) {
+                reportData.audit_results.discrepancies.forEach(discrepancy => {
+                    const row = document.createElement('tr');
+                    
+                    const typeCell = document.createElement('td');
+                    const typeBadge = document.createElement('span');
+                    typeBadge.className = `badge badge-${discrepancy.type === 'missing_work' ? 'danger' : 'warning'}`;
+                    typeBadge.textContent = discrepancy.type.replace('_', ' ');
+                    typeCell.appendChild(typeBadge);
+                    
+                    const detailsCell = document.createElement('td');
+                    detailsCell.textContent = discrepancy.details;
+                    
+                    const confidenceCell = document.createElement('td');
+                    const confidenceValue = discrepancy.confidence * 100;
+                    let confidenceClass = 'confidence-medium';
+                    if (confidenceValue >= 90) confidenceClass = 'confidence-high';
+                    if (confidenceValue < 75) confidenceClass = 'confidence-low';
+                    
+                    const progressContainer = document.createElement('div');
+                    progressContainer.className = 'progress-container';
+                    
+                    const progressBar = document.createElement('div');
+                    progressBar.className = `progress-bar ${confidenceClass}`;
+                    progressBar.style.width = `${confidenceValue}%`;
+                    
+                    progressContainer.appendChild(progressBar);
+                    confidenceCell.appendChild(progressContainer);
+                    confidenceCell.appendChild(document.createTextNode(`${confidenceValue.toFixed(0)}%`));
+                    
+                    row.appendChild(typeCell);
+                    row.appendChild(detailsCell);
+                    row.appendChild(confidenceCell);
+                    
+                    discrepanciesBody.appendChild(row);
+                });
+            }
+            
+            // Populate metadata corrections
+            const correctionsBody = document.getElementById('corrections-body');
+            if (reportData.metadata_corrections && reportData.metadata_corrections.corrections) {
+                for (const [field, correction] of Object.entries(reportData.metadata_corrections.corrections)) {
+                    const row = document.createElement('tr');
+                    
+                    const fieldCell = document.createElement('td');
+                    fieldCell.textContent = field;
+                    
+                    const fromCell = document.createElement('td');
+                    fromCell.textContent = correction.from;
+                    
+                    const toCell = document.createElement('td');
+                    toCell.textContent = correction.to;
+                    
+                    row.appendChild(fieldCell);
+                    row.appendChild(fromCell);
+                    row.appendChild(toCell);
+                    
+                    correctionsBody.appendChild(row);
+                }
+            }
+            
+            // Populate recommended actions
+            const recommendedActions = document.getElementById('recommended-actions');
+            if (reportData.summary && reportData.summary.recommended_actions) {
+                reportData.summary.recommended_actions.forEach(action => {
+                    const li = document.createElement('li');
+                    li.textContent = action;
+                    recommendedActions.appendChild(li);
+                });
+            }
+            
+            // Add button event handlers
+            document.getElementById('submit-corrections-btn').addEventListener('click', function() {
+                alert('Metadata corrections submitted to PROs for processing.');
+            });
+            
+            document.getElementById('generate-claim-package-btn').addEventListener('click', function() {
+                alert('Claim package generated. Ready for submission to rights organizations.');
+            });
+        });
+    </script>
+</body>
+</html> 

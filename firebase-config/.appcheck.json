@@ -1,0 +1,15 @@
+{
+  "appCheck": {
+    "providers": {
+      "recaptchaV3": {
+        "siteKey": "YOUR_RECAPTCHA_SITE_KEY"
+      },
+      "play": {
+        "enabled": true
+      },
+      "appAttest": {
+        "enabled": true
+      }
+    }
+  }
+}

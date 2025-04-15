@@ -1,0 +1,30 @@
+{
+  "catalog_size": 2,
+  "recovery_opportunities": [
+    {
+      "work_id": "WORK123",
+      "issue": "Unregistered with SoundExchange",
+      "estimated_value": "$1,240.00",
+      "confidence": 0.95,
+      "actions": [
+        "register_work",
+        "submit_claim"
+      ]
+    },
+    {
+      "work_id": "WORK456",
+      "issue": "Metadata mismatch at ASCAP",
+      "estimated_value": "$520.00",
+      "confidence": 0.88,
+      "actions": [
+        "correct_metadata",
+        "request_audit"
+      ]
+    }
+  ],
+  "summary": {
+    "total_estimated_recovery": "$1,760.00",
+    "priority_actions": 2,
+    "recommended_timeline": "30 days"
+  }
+}

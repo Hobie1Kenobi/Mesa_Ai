@@ -1,0 +1,320 @@
+{
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_rightsVault",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "rightsId",
+          "type": "bytes32"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "RoyaltyDistributed",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "rightsId",
+          "type": "bytes32"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "recipient",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "sharePercentage",
+          "type": "uint256"
+        }
+      ],
+      "name": "RoyaltySplitAdded",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "rightsId",
+          "type": "bytes32"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "recipient",
+          "type": "address"
+        }
+      ],
+      "name": "RoyaltySplitRemoved",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "rightsId",
+          "type": "bytes32"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "recipient",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "newSharePercentage",
+          "type": "uint256"
+        }
+      ],
+      "name": "RoyaltySplitUpdated",
+      "type": "event"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "rightsId",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "address payable",
+          "name": "recipient",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "sharePercentage",
+          "type": "uint256"
+        }
+      ],
+      "name": "addRoyaltySplit",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "rightsId",
+          "type": "bytes32"
+        }
+      ],
+      "name": "distributeRoyalties",
+      "outputs": [],
+      "stateMutability": "payable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "rightsId",
+          "type": "bytes32"
+        }
+      ],
+      "name": "getRoyaltySplits",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "address payable",
+              "name": "recipient",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "sharePercentage",
+              "type": "uint256"
+            },
+            {
+              "internalType": "bool",
+              "name": "isActive",
+              "type": "bool"
+            }
+          ],
+          "internalType": "struct RoyaltyManager.RoyaltySplit[]",
+          "name": "",
+          "type": "tuple[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "rightsId",
+          "type": "bytes32"
+        }
+      ],
+      "name": "getTotalShares",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "owner",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "rightsId",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "uint256",
+          "name": "recipientIndex",
+          "type": "uint256"
+        }
+      ],
+      "name": "removeRoyaltySplit",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "rightsVault",
+      "outputs": [
+        {
+          "internalType": "contract RightsVault",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "royaltySplits",
+      "outputs": [
+        {
+          "internalType": "address payable",
+          "name": "recipient",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "sharePercentage",
+          "type": "uint256"
+        },
+        {
+          "internalType": "bool",
+          "name": "isActive",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "name": "totalShares",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "rightsId",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "uint256",
+          "name": "recipientIndex",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "newSharePercentage",
+          "type": "uint256"
+        }
+      ],
+      "name": "updateRoyaltySplit",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "stateMutability": "payable",
+      "type": "receive"
+    }
+  ],
+  "bytecode": "608060405234801561001057600080fd5b506040516111ac3803806111ac83398101604081905261002f91610070565b60018054600080546001600160a01b0319166001600160a01b0394909416939093179092556001600160a81b03199091163360ff60a01b19161790556100a0565b60006020828403121561008257600080fd5b81516001600160a01b038116811461009957600080fd5b9392505050565b6110fd806100af6000396000f3fe6080604052600436106100955760003560e01c80638da5cb5b116100595780638da5cb5b146101a4578063b661f567146101dc578063c3c2992f146101fc578063e8650b401461021c578063f184d9131461022f57600080fd5b806312e8d594146100a1578063290ffb7f146100e15780633070e4d0146101285780637c35ee741461015557806389de46111461017757600080fd5b3661009c57005b600080fd5b3480156100ad57600080fd5b506100ce6100bc366004610e1e565b60036020526000908152604090205481565b6040519081526020015b60405180910390f35b3480156100ed57600080fd5b506101016100fc366004610e37565b61024f565b604080516001600160a01b03909416845260208401929092521515908201526060016100d8565b34801561013457600080fd5b506100ce610143366004610e1e565b60009081526003602052604090205490565b34801561016157600080fd5b50610175610170366004610e71565b61029e565b005b34801561018357600080fd5b50610197610192366004610e1e565b610529565b6040516100d89190610ea9565b3480156101b057600080fd5b506001546101c4906001600160a01b031681565b6040516001600160a01b0390911681526020016100d8565b3480156101e857600080fd5b506101756101f7366004610f0d565b6105c3565b34801561020857600080fd5b506000546101c4906001600160a01b031681565b61017561022a366004610e1e565b6108d5565b34801561023b57600080fd5b5061017561024a366004610e37565b610bf5565b6002602052816000526040600020818154811061026b57600080fd5b60009182526020909120600390910201805460018201546002909201546001600160a01b03909116935090915060ff1683565b60005460405163428c18c360e11b815260048101859052849133916001600160a01b039091169063851831869060240160a060405180830381865afa1580156102eb573d6000803e3d6000fd5b505050506040513d601f19601f8201168201806040525081019061030f9190610f39565b604001516001600160a01b0316146103425760405162461bcd60e51b815260040161033990610fcb565b60405180910390fd5b600154600160a01b900460ff161561036c5760405162461bcd60e51b815260040161033990610ff5565b6001805460ff60a01b1916600160a01b179055811580159061039057506127108211155b6103d75760405162461bcd60e51b8152602060048201526018602482015277496e76616c69642073686172652070657263656e7461676560401b6044820152606401610339565b600084815260036020526040902054612710906103f5908490611033565b111561043e5760405162461bcd60e51b8152602060048201526018602482015277546f74616c2073686172657320657863656564203130302560401b6044820152606401610339565b600084815260026020818152604080842081516060810183526001600160a01b038981168252818501898152600183860181815285548083018755958a52878a209451600396870290950180546001600160a01b0319169590941694909417835590519082015590519401805460ff191694151594909417909355878452919052812080548492906104d1908490611033565b90915550506040518281526001600160a01b0384169085907f3d1354da68692ed04bbd2df8622c06de5f345f7d6794184b73fb47923d9d8e789060200160405180910390a350506001805460ff60a01b191690555050565b606060026000838152602001908152602001600020805480602002602001604051908101604052809291908181526020016000905b828210156105b8576000848152602090819020604080516060810182526003860290920180546001600160a01b031683526001808201548486015260029091015460ff16151591830191909152908352909201910161055e565b505050509050919050565b60005460405163428c18c360e11b815260048101859052849133916001600160a01b039091169063851831869060240160a060405180830381865afa158015610610573d6000803e3d6000fd5b505050506040513d601f19601f820116820180604052508101906106349190610f39565b604001516001600160a01b03161461065e5760405162461bcd60e51b815260040161033990610fcb565b600154600160a01b900460ff16156106885760405162461bcd60e51b815260040161033990610ff5565b6001805460ff60a01b1916600160a01b17905560008481526002602052604090205483106106f25760405162461bcd60e51b8152602060048201526017602482015276092dcecc2d8d2c840e4cac6d2e0d2cadce840d2dcc8caf604b1b6044820152606401610339565b60008211801561070457506127108211155b61074b5760405162461bcd60e51b8152602060048201526018602482015277496e76616c69642073686172652070657263656e7461676560401b6044820152606401610339565b600084815260026020526040812080548590811061076b5761076b61104c565b60009182526020909120600390910201600281015490915060ff166107c55760405162461bcd60e51b815260206004820152601060248201526f53706c6974206e6f742061637469766560801b6044820152606401610339565b60018101546000868152600360205260409020546127109085906107ea908490611062565b6107f49190611033565b111561083d5760405162461bcd60e51b8152602060048201526018602482015277546f74616c2073686172657320657863656564203130302560401b6044820152606401610339565b6000868152600360205260409020548490610859908390611062565b6108639190611033565b6000878152600360209081526040918290209290925560018401869055835490518681526001600160a01b039091169188917f6d7958d13fd0d9ce52864f500b3ea893b9bf991e3086950ab06e70d4f45f8ccb910160405180910390a350506001805460ff60a01b1916905550505050565b600154600160a01b900460ff16156108ff5760405162461bcd60e51b815260040161033990610ff5565b6001805460ff60a01b1916600160a01b1790553461095f5760405162461bcd60e51b815260206004820152601a60248201527f4e6f20726f79616c7469657320746f20646973747269627574650000000000006044820152606401610339565b6000818152600360205260409020546109ba5760405162461bcd60e51b815260206004820152601960248201527f4e6f20726f79616c74792073706c69747320646566696e6564000000000000006044820152606401610339565b600081815260026020526040812034915b8154811015610b18578181815481106109e6576109e661104c565b600091825260209091206002600390920201015460ff1615610b06576000612710838381548110610a1957610a1961104c565b90600052602060002090600302016001015434610a369190611075565b610a40919061108c565b9050610a4c8185611062565b93506000838381548110610a6257610a6261104c565b600091825260208220600390910201546040516001600160a01b039091169184919081818185875af1925050503d8060008114610abb576040519150601f19603f3d011682016040523d82523d6000602084013e610ac0565b606091505b5050905080610b035760405162461bcd60e51b815260206004820152600f60248201526e151c985b9cd9995c8819985a5b1959608a1b6044820152606401610339565b50505b80610b10816110ae565b9150506109cb565b508115610ba957604051600090339084908381818185875af1925050503d8060008114610b61576040519150601f19603f3d011682016040523d82523d6000602084013e610b66565b606091505b5050905080610ba75760405162461bcd60e51b815260206004820152600d60248201526c1499599d5b990819985a5b1959609a1b6044820152606401610339565b505b827fb228ea14fd0f84c767cdd8f69e47aec1a5c19b9c6034b9d791bb4a0583debc5f34604051610bdb91815260200190565b60405180910390a250506001805460ff60a01b1916905550565b60005460405163428c18c360e11b815260048101849052839133916001600160a01b039091169063851831869060240160a060405180830381865afa158015610c42573d6000803e3d6000fd5b505050506040513d601f19601f82011682018060405250810190610c669190610f39565b604001516001600160a01b031614610c905760405162461bcd60e51b815260040161033990610fcb565b600154600160a01b900460ff1615610cba5760405162461bcd60e51b815260040161033990610ff5565b6001805460ff60a01b1916600160a01b1790556000838152600260205260409020548210610d245760405162461bcd60e51b8152602060048201526017602482015276092dcecc2d8d2c840e4cac6d2e0d2cadce840d2dcc8caf604b1b6044820152606401610339565b6000838152600260205260408120805484908110610d4457610d4461104c565b60009182526020909120600390910201600281015490915060ff16610d9e5760405162461bcd60e51b815260206004820152601060248201526f53706c6974206e6f742061637469766560801b6044820152606401610339565b600181015460008581526003602052604081208054909190610dc1908490611062565b909155505060028101805460ff1916905580546040516001600160a01b039091169085907f79ae005c6163a0a248142ea3f35147129e41513c2942e78e6c65560c85fc2c3a90600090a350506001805460ff60a01b191690555050565b600060208284031215610e3057600080fd5b5035919050565b60008060408385031215610e4a57600080fd5b50508035926020909101359150565b6001600160a01b0381168114610e6e57600080fd5b50565b600080600060608486031215610e8657600080fd5b833592506020840135610e9881610e59565b929592945050506040919091013590565b602080825282518282018190526000919060409081850190868401855b82811015610f0057815180516001600160a01b03168552868101518786015285015115158585015260609093019290850190600101610ec6565b5091979650505050505050565b600080600060608486031215610f2257600080fd5b505081359360208301359350604090920135919050565b600060a08284031215610f4b57600080fd5b60405160a0810181811067ffffffffffffffff82111715610f7c57634e487b7160e01b600052604160045260246000fd5b806040525082518152602083015160208201526040830151610f9d81610e59565b60408201526060838101519082015260808301518015158114610fbf57600080fd5b60808201529392505050565b60208082526010908201526f2737ba103934b3b43a399037bbb732b960811b604082015260600190565b6020808252600e908201526d1499595b9d1c985b9d0818d85b1b60921b604082015260600190565b634e487b7160e01b600052601160045260246000fd5b808201808211156110465761104661101d565b92915050565b634e487b7160e01b600052603260045260246000fd5b818103818111156110465761104661101d565b80820281158282048414176110465761104661101d565b6000826110a957634e487b7160e01b600052601260045260246000fd5b500490565b6000600182016110c0576110c061101d565b506001019056fea2646970667358221220cc35779b95e8665b6162fdcdfc6f1869dabea1106be2f8cfe09efb6d1f10ef3564736f6c63430008130033",
+  "metadata": "{\"compiler\":{\"version\":\"0.8.19+commit.7dd6d404\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_rightsVault\",\"type\":\"address\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"rightsId\",\"type\":\"bytes32\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"RoyaltyDistributed\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"rightsId\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"recipient\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"sharePercentage\",\"type\":\"uint256\"}],\"name\":\"RoyaltySplitAdded\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"rightsId\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"recipient\",\"type\":\"address\"}],\"name\":\"RoyaltySplitRemoved\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"rightsId\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"recipient\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"newSharePercentage\",\"type\":\"uint256\"}],\"name\":\"RoyaltySplitUpdated\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"rightsId\",\"type\":\"bytes32\"},{\"internalType\":\"address payable\",\"name\":\"recipient\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"sharePercentage\",\"type\":\"uint256\"}],\"name\":\"addRoyaltySplit\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"rightsId\",\"type\":\"bytes32\"}],\"name\":\"distributeRoyalties\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"rightsId\",\"type\":\"bytes32\"}],\"name\":\"getRoyaltySplits\",\"outputs\":[{\"components\":[{\"internalType\":\"address payable\",\"name\":\"recipient\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"sharePercentage\",\"type\":\"uint256\"},{\"internalType\":\"bool\",\"name\":\"isActive\",\"type\":\"bool\"}],\"internalType\":\"struct RoyaltyManager.RoyaltySplit[]\",\"name\":\"\",\"type\":\"tuple[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"rightsId\",\"type\":\"bytes32\"}],\"name\":\"getTotalShares\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"rightsId\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"recipientIndex\",\"type\":\"uint256\"}],\"name\":\"removeRoyaltySplit\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"rightsVault\",\"outputs\":[{\"internalType\":\"contract RightsVault\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"royaltySplits\",\"outputs\":[{\"internalType\":\"address payable\",\"name\":\"recipient\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"sharePercentage\",\"type\":\"uint256\"},{\"internalType\":\"bool\",\"name\":\"isActive\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"name\":\"totalShares\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"rightsId\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"recipientIndex\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"newSharePercentage\",\"type\":\"uint256\"}],\"name\":\"updateRoyaltySplit\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"stateMutability\":\"payable\",\"type\":\"receive\"}],\"devdoc\":{\"details\":\"Manages royalty distributions for music rights\",\"kind\":\"dev\",\"methods\":{\"addRoyaltySplit(bytes32,address,uint256)\":{\"details\":\"Add a new royalty split for rights\",\"params\":{\"recipient\":\"Address to receive royalties\",\"rightsId\":\"Rights identifier\",\"sharePercentage\":\"Share percentage (base 10000)\"}},\"distributeRoyalties(bytes32)\":{\"details\":\"Distribute royalties to all recipients\",\"params\":{\"rightsId\":\"Rights identifier\"}},\"getRoyaltySplits(bytes32)\":{\"details\":\"Get all royalty splits for rights\",\"params\":{\"rightsId\":\"Rights identifier\"},\"returns\":{\"_0\":\"Array of active royalty splits\"}},\"getTotalShares(bytes32)\":{\"details\":\"Get total shares for rights\",\"params\":{\"rightsId\":\"Rights identifier\"},\"returns\":{\"_0\":\"Total share percentage\"}},\"removeRoyaltySplit(bytes32,uint256)\":{\"details\":\"Remove a royalty split\",\"params\":{\"recipientIndex\":\"Index of the recipient in the splits array\",\"rightsId\":\"Rights identifier\"}},\"updateRoyaltySplit(bytes32,uint256,uint256)\":{\"details\":\"Update an existing royalty split\",\"params\":{\"newSharePercentage\":\"New share percentage\",\"recipientIndex\":\"Index of the recipient in the splits array\",\"rightsId\":\"Rights identifier\"}}},\"title\":\"RoyaltyManager\",\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"RoyaltyManager.sol\":\"RoyaltyManager\"},\"evmVersion\":\"paris\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"RightsVault.sol\":{\"keccak256\":\"0x2ead305b94b9e92516c13cfd49d9e75afa551654331315d8aa5e6447298f3c9f\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://3e64886fe8ef73b8cd896aae862e160fc0b68aa96fc33198d050a8dc897ac5f2\",\"dweb:/ipfs/QmPni2f8QR4JMcetHSfnAmudgA56VB5Yh1kgf59vzprEcG\"]},\"RoyaltyManager.sol\":{\"keccak256\":\"0xcd9d6ef07ce717dc89341d0316deb782a48a0a354f5dfc8a5ba235fed6d80394\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://58eab17fb922450e507e78188bf896945d22cce755a17c2777123d8eeb42cc85\",\"dweb:/ipfs/QmSFnrAPTAHxiQ9NZm9B8vGA4onHqTHcFABBivKBMq3sBg\"]}},\"version\":1}"
+}

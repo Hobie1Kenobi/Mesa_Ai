@@ -1,0 +1,14 @@
+{
+  "work_id": "WORK123",
+  "corrections": {
+    "writer": {
+      "from": "John Smith",
+      "to": "John A. Smith"
+    }
+  },
+  "submission_templates": {
+    "ascap": "Generated ASCAP correction template",
+    "bmi": "Generated BMI correction template"
+  },
+  "status": "ready_for_submission"
+}

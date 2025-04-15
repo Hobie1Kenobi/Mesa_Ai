@@ -1,0 +1,80 @@
+{
+  "user_token": "",
+  "user_agent": "MESA Rights Vault/1.0 +https://mesarightsvault.example.com",
+  "encryption_key": "XVD29xmk8PsXVD29xmk8Psoq67jmn09zBY",
+  
+  "bulk_pull": {
+    "batch_size": 15,
+    "pause_between_batches": 3,
+    "max_items_per_category": 75,
+    "target_total": 500
+  },
+  
+  "genres": [
+    "rock", 
+    "electronic", 
+    "jazz", 
+    "hip hop", 
+    "classical", 
+    "pop", 
+    "metal", 
+    "folk", 
+    "reggae", 
+    "r&b"
+  ],
+  
+  "artists": [
+    "Beatles", 
+    "Queen", 
+    "Michael Jackson", 
+    "Madonna", 
+    "David Bowie", 
+    "Beyoncé", 
+    "Kendrick Lamar", 
+    "Miles Davis", 
+    "Daft Punk", 
+    "Bob Marley"
+  ],
+  
+  "years": [
+    "1970", 
+    "1980", 
+    "1990", 
+    "2000", 
+    "2010", 
+    "2020"
+  ],
+  
+  "search_options": {
+    "include_formats": ["Vinyl", "CD", "Digital"],
+    "boost_identifiers": true,
+    "prioritize_with_artwork": true
+  },
+  
+  "privacy": {
+    "default_public_fields": ["workTitle", "releaseDate", "genres", "styles"],
+    "default_private_fields": ["artistParty", "publisherParty", "identifiers", "royaltyInfo"],
+    "selective_disclosure": true
+  },
+  
+  "export": {
+    "statistics_file": "data_pull_stats.json",
+    "save_raw_sample": true,
+    "max_raw_samples": 5,
+    "sample_dir": "raw_samples"
+  },
+  
+  "mesa_integration": {
+    "auto_generate_rights": true,
+    "simulated_royalty_data": true,
+    "rights_types": ["recording", "composition", "performance", "publishing"],
+    "create_zk_proofs": true
+  },
+  
+  "logging": {
+    "level": "INFO",
+    "file": "discogs_data_pull.log",
+    "console": true,
+    "format": "%(asctime)s - %(levelname)s - %(message)s"
+  }
+} 

@@ -1,0 +1,21 @@
+{
+  "id": "d026aa3891cfd535",
+  "type": "catalog_analysis",
+  "source": "targeted_scan",
+  "first_discovered": "2025-04-09T23:16:01.284846",
+  "last_seen": "2025-04-09T23:16:01.284846",
+  "seen_count": 1,
+  "session_id": "6f069554-753f-4f63-9cb6-8eaed3ce8711",
+  "agency_identifier": "MESA-DEMO-AGENCY",
+  "confidence": 0.95,
+  "data": {
+    "work_id": "WORK123",
+    "issue": "Unregistered with SoundExchange",
+    "estimated_value": "$1,240.00",
+    "actions": [
+      "register_work",
+      "submit_claim"
+    ],
+    "from_catalog_analysis": true
+  }
+}

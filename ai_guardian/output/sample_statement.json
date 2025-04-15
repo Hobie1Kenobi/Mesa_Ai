@@ -1,0 +1,15 @@
+{
+  "statement_id": "BMI-2023-Q1",
+  "period": "January-March 2023",
+  "rights_holder": "Sample Artist",
+  "payments": [
+    {
+      "work_title": "Sample Snog Title",
+      "writer": "John Smith",
+      "isrc": "US-AB1-23-00001",
+      "usage_type": "Streaming",
+      "plays": 15000,
+      "amount": "$120.50"
+    }
+  ]
+}

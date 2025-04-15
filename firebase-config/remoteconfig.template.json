@@ -1,0 +1,48 @@
+{
+  "parameters": {
+    "feature_selective_disclosure": {
+      "defaultValue": {
+        "value": "true"
+      },
+      "description": "Enable/disable selective disclosure of rights data"
+    },
+    "feature_musicbrainz_integration": {
+      "defaultValue": {
+        "value": "true"
+      },
+      "description": "Enable/disable MusicBrainz integration"
+    },
+    "feature_zk_proofs": {
+      "defaultValue": {
+        "value": "true"
+      },
+      "description": "Enable/disable zero-knowledge proofs"
+    },
+    "blockchain_network": {
+      "defaultValue": {
+        "value": "sepolia"
+      },
+      "description": "Which blockchain network to use (sepolia, mainnet)"
+    },
+    "api_rate_limit": {
+      "defaultValue": {
+        "value": "100"
+      },
+      "description": "API rate limit per user per day"
+    },
+    "feature_mesa_track_id_integration": {
+      "defaultValue": {
+        "value": "true"
+      },
+      "description": "Enable/disable MESA Track ID integration"
+    }
+  },
+  "version": {
+    "versionNumber": "1",
+    "updateTime": "2025-04-09T12:00:00.000Z",
+    "updateUser": {
+      "email": "admin@mesarightsvault.com"
+    },
+    "description": "Initial configuration"
+  }
+}

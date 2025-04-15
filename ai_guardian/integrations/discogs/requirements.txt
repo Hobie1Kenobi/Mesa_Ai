@@ -1,0 +1,17 @@
+# Requirements for MESA Rights Vault Discogs Integration
+
+# Core dependencies
+requests>=2.28.0
+cryptography>=39.0.0
+python-dateutil>=2.8.2
+
+# Database
+sqlite3
+
+# For testing
+pytest>=7.0.0
+pytest-cov>=4.0.0
+responses>=0.23.0
+
+# Documentation
+sphinx>=6.0.0 

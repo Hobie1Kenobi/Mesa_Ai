@@ -1,0 +1,2198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MESA AI Guardian - Simple Demo</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      line-height: 1.6;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+      color: #333;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #eee;
+    }
+    .btn {
+      background-color: #4299e1;
+      color: white;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .profile-card {
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      padding: 20px;
+      margin-bottom: 30px;
+    }
+    .publisher-name {
+      font-size: 24px;
+      color: #4299e1;
+      margin: 0 0 10px 0;
+    }
+    .badge {
+      display: inline-block;
+      background: #48bb78;
+      color: white;
+      font-size: 12px;
+      padding: 4px 8px;
+      border-radius: 20px;
+      margin-right: 5px;
+    }
+    .badge.blue {
+      background: #4299e1;
+    }
+    .badge.purple {
+      background: #9f7aea;
+    }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      margin: 20px 0;
+    }
+    .stat-card {
+      background: #f8f9fa;
+      padding: 15px;
+      border-radius: 8px;
+      border-left: 4px solid #4299e1;
+    }
+    .stat-value {
+      font-size: 24px;
+      font-weight: bold;
+    }
+    .stat-label {
+      color: #718096;
+      font-size: 14px;
+    }
+    .tabs {
+      margin-top: 20px;
+    }
+    .tab-nav {
+      display: flex;
+      border-bottom: 1px solid #e2e8f0;
+    }
+    .tab {
+      padding: 10px 20px;
+      cursor: pointer;
+    }
+    .tab.active {
+      border-bottom: 2px solid #4299e1;
+      color: #4299e1;
+    }
+    .tab-content {
+      padding: 20px 0;
+      display: none;
+    }
+    .tab-content.active {
+      display: block;
+    }
+    .visualization {
+      background: #f0f5ff;
+      height: 400px;
+      border-radius: 8px;
+      padding: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+    }
+    .tile {
+      width: 180px;
+      height: 120px;
+      background: rgba(66, 153, 225, 0.8);
+      border-radius: 8px;
+      padding: 15px;
+      color: white;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      transform: rotate(3deg);
+      animation: float 3s ease-in-out infinite;
+      backdrop-filter: blur(5px);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .tile:nth-child(2) {
+      background: rgba(236, 201, 75, 0.8);
+      animation-delay: 0.5s;
+      transform: rotate(-2deg);
+    }
+    .tile:nth-child(3) {
+      background: rgba(229, 62, 62, 0.8);
+      animation-delay: 1s;
+      transform: rotate(1deg);
+    }
+    .tile:nth-child(4) {
+      animation-delay: 1.5s;
+      transform: rotate(-1deg);
+    }
+    .tile:nth-child(5) {
+      animation-delay: 2s;
+      transform: rotate(2deg);
+    }
+    .tile-title {
+      font-weight: bold;
+      font-size: 16px;
+    }
+    .tile-artist {
+      font-size: 14px;
+      opacity: 0.9;
+    }
+    .tile-id {
+      font-family: monospace;
+      font-size: 12px;
+      opacity: 0.8;
+    }
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+    .modal.active {
+      display: flex;
+    }
+    .modal-content {
+      background: white;
+      border-radius: 8px;
+      width: 90%;
+      max-width: 600px;
+      max-height: 90vh;
+      overflow: auto;
+    }
+    .modal-header {
+      padding: 15px 20px;
+      border-bottom: 1px solid #e2e8f0;
+      display: flex;
+      justify-content: space-between;
+    }
+    .modal-body {
+      padding: 20px;
+    }
+    .modal-footer {
+      padding: 15px 20px;
+      border-top: 1px solid #e2e8f0;
+      text-align: right;
+    }
+    .dropzone {
+      border: 2px dashed #e2e8f0;
+      padding: 40px;
+      text-align: center;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    .table th, .table td {
+      padding: 8px;
+      text-align: left;
+      border-bottom: 1px solid #e2e8f0;
+    }
+    .table th {
+      background: #f8f9fa;
+    }
+    .catalog-table {
+      width: 100%;
+      border-collapse: collapse;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      background: white;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .catalog-table th {
+      background: #f8f9fa;
+      padding: 12px 15px;
+      text-align: left;
+      font-weight: 600;
+      color: #4a5568;
+      border-bottom: 1px solid #e2e8f0;
+    }
+    .catalog-table td {
+      padding: 12px 15px;
+      border-bottom: 1px solid #e2e8f0;
+    }
+    .catalog-table tr:hover {
+      background: #f8fafc;
+    }
+    .search-filter {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+    .search-input {
+      flex: 1;
+      min-width: 250px;
+      padding: 8px 12px;
+      border: 1px solid #e2e8f0;
+      border-radius: 4px;
+    }
+    .filter-select {
+      padding: 8px 12px;
+      border: 1px solid #e2e8f0;
+      border-radius: 4px;
+      min-width: 150px;
+    }
+    .status-badge {
+      display: inline-block;
+      padding: 4px 8px;
+      border-radius: 9999px;
+      font-size: 12px;
+      font-weight: 500;
+      text-align: center;
+    }
+    .status-registered {
+      background-color: #e6f6ff;
+      color: #3182ce;
+    }
+    .status-pending {
+      background-color: #fefcbf;
+      color: #d69e2e;
+    }
+    .status-failed {
+      background-color: #fed7d7;
+      color: #e53e3e;
+    }
+    .report-card {
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+    .report-card h4 {
+      margin-top: 0;
+      color: #2d3748;
+      border-bottom: 1px solid #e2e8f0;
+      padding-bottom: 10px;
+      margin-bottom: 15px;
+    }
+    .report-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 20px;
+    }
+    .chart-container {
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      padding: 20px;
+      margin-bottom: 20px;
+      height: 250px;
+      position: relative;
+    }
+    .chart-container h4 {
+      margin-top: 0;
+      color: #2d3748;
+    }
+    .chart-placeholder {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: #a0aec0;
+      font-style: italic;
+    }
+    .chart-bar {
+      display: flex;
+      flex-direction: column;
+      height: 180px;
+      justify-content: flex-end;
+      padding-top: 20px;
+    }
+    .chart-bars {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-around;
+      height: 100%;
+      padding-top: 10px;
+    }
+    .bar {
+      width: 40px;
+      background: #4299e1;
+      margin: 0 5px;
+      border-radius: 4px 4px 0 0;
+      position: relative;
+    }
+    .bar-label {
+      position: absolute;
+      top: -20px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 12px;
+      white-space: nowrap;
+    }
+    .bar-value {
+      position: absolute;
+      bottom: -25px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 12px;
+    }
+    .activity-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .activity-item {
+      padding: 10px 0;
+      border-bottom: 1px solid #e2e8f0;
+      display: flex;
+      align-items: center;
+    }
+    .activity-icon {
+      width: 30px;
+      height: 30px;
+      background: #ebf8ff;
+      color: #4299e1;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 10px;
+      font-size: 14px;
+    }
+    .activity-content {
+      flex: 1;
+    }
+    .activity-title {
+      font-weight: 500;
+    }
+    .activity-time {
+      font-size: 12px;
+      color: #718096;
+    }
+    @keyframes float {
+      0% {
+        transform: translateY(0px) rotate(var(--rotation, 3deg));
+      }
+      50% {
+        transform: translateY(-10px) rotate(var(--rotation, 3deg));
+      }
+      100% {
+        transform: translateY(0px) rotate(var(--rotation, 3deg));
+      }
+    }
+    .import-progress {
+      margin-top: 20px;
+      display: none;
+    }
+    .progress-bar {
+      height: 10px;
+      background-color: #e2e8f0;
+      border-radius: 5px;
+      margin-bottom: 5px;
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      background-color: #4299e1;
+      width: 0%;
+      transition: width 0.5s ease-in-out;
+    }
+    .progress-status {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      color: #718096;
+    }
+    .notification {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      padding: 15px 20px;
+      background-color: #48bb78;
+      color: white;
+      border-radius: 4px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      opacity: 0;
+      transform: translateY(-20px);
+      transition: all 0.3s ease-in-out;
+      z-index: 2000;
+    }
+    .notification.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .notification.error {
+      background-color: #e53e3e;
+    }
+    .loading-spinner {
+      display: inline-block;
+      width: 15px;
+      height: 15px;
+      border: 2px solid rgba(255,255,255,0.3);
+      border-radius: 50%;
+      border-top-color: white;
+      animation: spin 1s ease-in-out infinite;
+      margin-right: 10px;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    .visualized-tile {
+      transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+      cursor: pointer;
+    }
+    .visualized-tile:hover {
+      transform: translateY(-5px) rotate(var(--rotation, 3deg)) !important;
+      box-shadow: 0 6px 8px rgba(0,0,0,0.15);
+    }
+    .file-instructions {
+      margin-top: 10px;
+      padding: 10px;
+      background-color: #ebf8ff;
+      border-radius: 4px;
+      font-size: 13px;
+      color: #2c5282;
+    }
+    .tab-content {
+      min-height: 400px;
+    }
+    .details-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+    .details-modal.active {
+      display: flex;
+    }
+    .details-content {
+      background: white;
+      border-radius: 8px;
+      width: 90%;
+      max-width: 700px;
+      max-height: 90vh;
+      overflow: auto;
+    }
+    .details-header {
+      padding: 15px 20px;
+      border-bottom: 1px solid #e2e8f0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .details-header h3 {
+      margin: 0;
+      font-size: 1.25rem;
+      color: #2d3748;
+    }
+    .details-body {
+      padding: 20px;
+    }
+    .details-section {
+      margin-bottom: 25px;
+    }
+    .details-section h4 {
+      margin-top: 0;
+      margin-bottom: 10px;
+      color: #4299e1;
+      font-size: 1rem;
+      padding-bottom: 5px;
+      border-bottom: 1px solid #e2e8f0;
+    }
+    .details-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 15px;
+    }
+    .details-table th, .details-table td {
+      text-align: left;
+      padding: 8px 12px;
+      border-bottom: 1px solid #edf2f7;
+    }
+    .details-table th {
+      font-weight: 600;
+      color: #4a5568;
+      background: #f7fafc;
+      width: 40%;
+    }
+    .details-footer {
+      padding: 15px 20px;
+      border-top: 1px solid #e2e8f0;
+      text-align: right;
+    }
+    .rights-id-box {
+      background: #f0f5ff;
+      border-radius: 4px;
+      padding: 12px;
+      font-family: monospace;
+      word-break: break-all;
+      margin-bottom: 15px;
+    }
+    .detail-row {
+      display: flex;
+      margin-bottom: 8px;
+    }
+    .detail-label {
+      flex: 0 0 40%;
+      font-weight: 600;
+      color: #4a5568;
+    }
+    .detail-value {
+      flex: 0 0 60%;
+    }
+    .role-tag {
+      display: inline-block;
+      background: #e2e8f0;
+      color: #4a5568;
+      font-size: 12px;
+      padding: 2px 8px;
+      border-radius: 12px;
+      margin-right: 5px;
+      margin-bottom: 5px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>MESA AI Guardian</h1>
+    <button class="btn" id="importBtn">Import Catalog</button>
+  </header>
+
+  <div class="profile-card">
+    <h2 class="publisher-name">Evergreen Music Publishing</h2>
+    <p>Verified Music Rights Publisher</p>
+    <div>
+      <span class="badge">Verified</span>
+      <span class="badge blue">Premium Account</span>
+      <span class="badge purple">Blockchain Secured</span>
+    </div>
+    
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-value">29</div>
+        <div class="stat-label">Total Tracks</div>
+      </div>
+      <div class="stat-card" style="border-left-color: #48bb78">
+        <div class="stat-value">86.2%</div>
+        <div class="stat-label">Registration Rate</div>
+      </div>
+      <div class="stat-card" style="border-left-color: #9f7aea">
+        <div class="stat-value">25/29</div>
+        <div class="stat-label">Verified on Chain</div>
+      </div>
+      <div class="stat-card" style="border-left-color: #ed8936">
+        <div class="stat-value">0.0012 ETH</div>
+        <div class="stat-label">Avg Gas Cost</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="notification" id="notification">
+    <div class="notification-content">
+      <span id="notification-message"></span>
+    </div>
+  </div>
+
+  <div class="tabs">
+    <div class="tab-nav">
+      <div class="tab" data-tab="catalog">Catalog</div>
+      <div class="tab active" data-tab="analytics">Analytics</div>
+      <div class="tab" data-tab="reports">Reports</div>
+    </div>
+    
+    <!-- Catalog Tab -->
+    <div class="tab-content" id="catalog-tab">
+      <h3>Music Catalog</h3>
+      <p>Complete listing of all registered and pending music tracks in your catalog.</p>
+      
+      <div class="search-filter">
+        <input type="text" class="search-input" placeholder="Search by title, artist or ISRC...">
+        <select class="filter-select">
+          <option value="all">All Statuses</option>
+          <option value="registered">Registered</option>
+          <option value="pending">Pending</option>
+          <option value="failed">Failed</option>
+        </select>
+        <button class="btn">Export</button>
+      </div>
+      
+      <table class="catalog-table">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Artist</th>
+            <th>ISRC</th>
+            <th>Year</th>
+            <th>Status</th>
+            <th>Rights ID</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Midnight Dreams</td>
+            <td>Sophia Chen</td>
+            <td>USRC78901234</td>
+            <td>2022</td>
+            <td><span class="status-badge status-registered">Registered</span></td>
+            <td>0x8b4c...e721</td>
+            <td><button class="btn" style="padding: 4px 8px; font-size: 12px;">View</button></td>
+          </tr>
+          <tr>
+            <td>Ocean Breeze</td>
+            <td>The Wavelengths</td>
+            <td>USRC45678901</td>
+            <td>2020</td>
+            <td><span class="status-badge status-registered">Registered</span></td>
+            <td>0x2a7d...9c45</td>
+            <td><button class="btn" style="padding: 4px 8px; font-size: 12px;">View</button></td>
+          </tr>
+          <tr>
+            <td>Skyward</td>
+            <td>Marcus Lee</td>
+            <td>USRC56789012</td>
+            <td>2023</td>
+            <td><span class="status-badge status-pending">Pending</span></td>
+            <td>-</td>
+            <td><button class="btn" style="padding: 4px 8px; font-size: 12px;">View</button></td>
+          </tr>
+          <tr>
+            <td>Autumn Leaves Fall</td>
+            <td>The Seasons</td>
+            <td>USRC34567890</td>
+            <td>2018</td>
+            <td><span class="status-badge status-registered">Registered</span></td>
+            <td>0x7d2c...b943</td>
+            <td><button class="btn" style="padding: 4px 8px; font-size: 12px;">View</button></td>
+          </tr>
+          <tr>
+            <td>City Lights</td>
+            <td>Urban Noise Collective</td>
+            <td>USRC23456789</td>
+            <td>2021</td>
+            <td><span class="status-badge status-failed">Failed</span></td>
+            <td>-</td>
+            <td><button class="btn" style="padding: 4px 8px; font-size: 12px;">View</button></td>
+          </tr>
+          <tr>
+            <td>Mountain High</td>
+            <td>Nature's Voice</td>
+            <td>USRC12345678</td>
+            <td>2019</td>
+            <td><span class="status-badge status-registered">Registered</span></td>
+            <td>0x3f5e...a812</td>
+            <td><button class="btn" style="padding: 4px 8px; font-size: 12px;">View</button></td>
+          </tr>
+          <tr>
+            <td>Electric Soul</td>
+            <td>The Volts</td>
+            <td>USRC90123456</td>
+            <td>2022</td>
+            <td><span class="status-badge status-registered">Registered</span></td>
+            <td>0x6c1b...d493</td>
+            <td><button class="btn" style="padding: 4px 8px; font-size: 12px;">View</button></td>
+          </tr>
+          <tr>
+            <td>Whispers in the Dark</td>
+            <td>Night Owls</td>
+            <td>USRC89012345</td>
+            <td>2020</td>
+            <td><span class="status-badge status-registered">Registered</span></td>
+            <td>0x9d4f...b726</td>
+            <td><button class="btn" style="padding: 4px 8px; font-size: 12px;">View</button></td>
+          </tr>
+          <tr>
+            <td>Desert Wind</td>
+            <td>Amir Hassan</td>
+            <td>USRC67890123</td>
+            <td>2023</td>
+            <td><span class="status-badge status-registered">Registered</span></td>
+            <td>0x2b8e...c651</td>
+            <td><button class="btn" style="padding: 4px 8px; font-size: 12px;">View</button></td>
+          </tr>
+          <tr>
+            <td>Golden Hour</td>
+            <td>Sunset Brigade</td>
+            <td>USRC98765432</td>
+            <td>2021</td>
+            <td><span class="status-badge status-registered">Registered</span></td>
+            <td>0x7f1a...e392</td>
+            <td><button class="btn" style="padding: 4px 8px; font-size: 12px;">View</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    
+    <!-- Analytics Tab -->
+    <div class="tab-content active" id="analytics-tab">
+      <h3>Analytics Dashboard</h3>
+      <p>Interactive visualization of your music catalog with registration status and details.</p>
+      
+      <div class="visualization">
+        <div class="tile">
+          <div class="tile-title">Midnight Dreams</div>
+          <div class="tile-artist">Sophia Chen</div>
+          <div class="tile-id">0x8b4c...e721</div>
+        </div>
+        <div class="tile">
+          <div class="tile-title">Ocean Breeze</div>
+          <div class="tile-artist">The Wavelengths</div>
+          <div class="tile-id">0x2a7d...9c45</div>
+        </div>
+        <div class="tile">
+          <div class="tile-title">Skyward</div>
+          <div class="tile-artist">Marcus Lee</div>
+          <div class="tile-id">Pending</div>
+        </div>
+        <div class="tile">
+          <div class="tile-title">Autumn Leaves</div>
+          <div class="tile-artist">The Seasons</div>
+          <div class="tile-id">0x7d2c...b943</div>
+        </div>
+        <div class="tile">
+          <div class="tile-title">City Lights</div>
+          <div class="tile-artist">Urban Noise</div>
+          <div class="tile-id">Failed</div>
+        </div>
+      </div>
+      
+      <div class="report-grid" style="margin-top: 30px;">
+        <div class="chart-container">
+          <h4>Registration Activity</h4>
+          <div class="chart-bar">
+            <div class="chart-bars">
+              <div class="bar" style="height: 60%;">
+                <div class="bar-label">Jan</div>
+                <div class="bar-value">6</div>
+              </div>
+              <div class="bar" style="height: 80%;">
+                <div class="bar-label">Feb</div>
+                <div class="bar-value">8</div>
+              </div>
+              <div class="bar" style="height: 50%;">
+                <div class="bar-label">Mar</div>
+                <div class="bar-value">5</div>
+              </div>
+              <div class="bar" style="height: 40%;">
+                <div class="bar-label">Apr</div>
+                <div class="bar-value">4</div>
+              </div>
+              <div class="bar" style="height: 70%;">
+                <div class="bar-label">May</div>
+                <div class="bar-value">7</div>
+              </div>
+              <div class="bar" style="height: 30%;">
+                <div class="bar-label">Jun</div>
+                <div class="bar-value">3</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="chart-container">
+          <h4>Status Distribution</h4>
+          <div style="display: flex; height: 180px; align-items: center; justify-content: center; gap: 20px;">
+            <div style="text-align: center;">
+              <div style="width: 100px; height: 100px; border-radius: 50%; background-color: #3182ce; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 24px;">86%</div>
+              <div style="margin-top: 10px;">Registered</div>
+            </div>
+            <div style="text-align: center;">
+              <div style="width: 50px; height: 50px; border-radius: 50%; background-color: #ecc94b; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 16px;">10%</div>
+              <div style="margin-top: 10px;">Pending</div>
+            </div>
+            <div style="text-align: center;">
+              <div style="width: 25px; height: 25px; border-radius: 50%; background-color: #e53e3e; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 10px;">4%</div>
+              <div style="margin-top: 10px;">Failed</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Reports Tab -->
+    <div class="tab-content" id="reports-tab">
+      <h3>Reports Dashboard</h3>
+      <p>Generated reports and blockchain verification documents for your music catalog.</p>
+      
+      <div class="report-card">
+        <h4>Recent Activity</h4>
+        <ul class="activity-list">
+          <li class="activity-item">
+            <div class="activity-icon">✓</div>
+            <div class="activity-content">
+              <div class="activity-title">"Midnight Dreams" registered successfully</div>
+              <div class="activity-time">Today, 14:23</div>
+            </div>
+          </li>
+          <li class="activity-item">
+            <div class="activity-icon">✓</div>
+            <div class="activity-content">
+              <div class="activity-title">"Ocean Breeze" verified on chain</div>
+              <div class="activity-time">Yesterday, 09:15</div>
+            </div>
+          </li>
+          <li class="activity-item">
+            <div class="activity-icon">⚠</div>
+            <div class="activity-content">
+              <div class="activity-title">"Skyward" registration pending</div>
+              <div class="activity-time">2 days ago, 16:42</div>
+            </div>
+          </li>
+          <li class="activity-item">
+            <div class="activity-icon">✓</div>
+            <div class="activity-content">
+              <div class="activity-title">Batch registration successful (3 tracks)</div>
+              <div class="activity-time">3 days ago, 11:30</div>
+            </div>
+          </li>
+          <li class="activity-item">
+            <div class="activity-icon">✗</div>
+            <div class="activity-content">
+              <div class="activity-title">"City Lights" registration failed</div>
+              <div class="activity-time">5 days ago, 15:18</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+      
+      <div class="report-grid">
+        <div class="report-card">
+          <h4>Available Reports</h4>
+          <ul style="padding-left: 20px;">
+            <li><a href="#" style="color: #4299e1; text-decoration: none;">Monthly Registration Summary</a></li>
+            <li><a href="#" style="color: #4299e1; text-decoration: none;">Blockchain Transaction Audit</a></li>
+            <li><a href="#" style="color: #4299e1; text-decoration: none;">Rights Management Overview</a></li>
+            <li><a href="#" style="color: #4299e1; text-decoration: none;">Catalog Valuation Report</a></li>
+            <li><a href="#" style="color: #4299e1; text-decoration: none;">Gas Optimization Analysis</a></li>
+          </ul>
+        </div>
+        
+        <div class="report-card">
+          <h4>Verification Documents</h4>
+          <ul style="padding-left: 20px;">
+            <li><a href="#" style="color: #4299e1; text-decoration: none;">Blockchain Proof of Ownership</a></li>
+            <li><a href="#" style="color: #4299e1; text-decoration: none;">Rights Vault Certificate</a></li>
+            <li><a href="#" style="color: #4299e1; text-decoration: none;">Smart Contract Verification</a></li>
+            <li><a href="#" style="color: #4299e1; text-decoration: none;">ISRC Registration Confirmation</a></li>
+            <li><a href="#" style="color: #4299e1; text-decoration: none;">Royalty Distribution Records</a></li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="chart-container" style="height: 300px; margin-top: 20px;">
+        <h4>Gas Usage Trends</h4>
+        <div class="chart-bar">
+          <div class="chart-bars">
+            <div class="bar" style="height: 30%; background-color: #9f7aea;">
+              <div class="bar-label">Jan</div>
+              <div class="bar-value">0.0009 ETH</div>
+            </div>
+            <div class="bar" style="height: 40%; background-color: #9f7aea;">
+              <div class="bar-label">Feb</div>
+              <div class="bar-value">0.0012 ETH</div>
+            </div>
+            <div class="bar" style="height: 35%; background-color: #9f7aea;">
+              <div class="bar-label">Mar</div>
+              <div class="bar-value">0.0010 ETH</div>
+            </div>
+            <div class="bar" style="height: 25%; background-color: #9f7aea;">
+              <div class="bar-label">Apr</div>
+              <div class="bar-value">0.0007 ETH</div>
+            </div>
+            <div class="bar" style="height: 45%; background-color: #9f7aea;">
+              <div class="bar-label">May</div>
+              <div class="bar-value">0.0013 ETH</div>
+            </div>
+            <div class="bar" style="height: 20%; background-color: #9f7aea;">
+              <div class="bar-label">Jun</div>
+              <div class="bar-value">0.0006 ETH</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Import Modal -->
+  <div class="modal" id="importModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Import Music Catalog</h3>
+        <button id="closeModal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="dropzone" id="dropzone">
+          <p>Drag and drop your CSV file here</p>
+          <p>or click to browse</p>
+          <input type="file" id="fileInput" accept=".csv" style="display: none;">
+        </div>
+        
+        <div class="file-instructions">
+          <p><strong>CSV Format:</strong> Your file should have columns for Title, Artist, ISRC, Year, and Publisher.</p>
+          <p><strong>Example:</strong> "Song Title","Artist Name","USRC12345678","2023","Your Publishing Company"</p>
+        </div>
+        
+        <div class="import-progress" id="importProgress">
+          <p>Importing catalog...</p>
+          <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+          </div>
+          <div class="progress-status">
+            <span id="progressStatus">Processing...</span>
+            <span id="progressPercentage">0%</span>
+          </div>
+        </div>
+        
+        <div id="previewContainer" style="display: none;">
+          <h4>Preview:</h4>
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Title</th>
+                <th>Artist</th>
+                <th>ISRC</th>
+                <th>Year</th>
+                <th>Publisher</th>
+              </tr>
+            </thead>
+            <tbody id="previewTableBody">
+              <!-- Preview data will be inserted here -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn" style="background-color: #a0aec0;" id="cancelImport">Cancel</button>
+        <button class="btn" id="confirmImport">Import Catalog</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add a new Details Modal -->
+  <div class="details-modal" id="detailsModal">
+    <div class="details-content">
+      <div class="details-header">
+        <h3 id="detailsTitle">Track Details</h3>
+        <button id="closeDetails">&times;</button>
+      </div>
+      <div class="details-body" id="detailsBody">
+        <!-- Content will be dynamically inserted here -->
+      </div>
+      <div class="details-footer">
+        <button class="btn" id="closeDetailsBtn">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Modal handling
+    const importBtn = document.getElementById('importBtn');
+    const importModal = document.getElementById('importModal');
+    const closeModal = document.getElementById('closeModal');
+    const dropzone = document.getElementById('dropzone');
+    const fileInput = document.getElementById('fileInput');
+    const previewContainer = document.getElementById('previewContainer');
+    const previewTableBody = document.getElementById('previewTableBody');
+    const confirmImport = document.getElementById('confirmImport');
+    const cancelImport = document.getElementById('cancelImport');
+    const importProgress = document.getElementById('importProgress');
+    const progressFill = document.getElementById('progressFill');
+    const progressStatus = document.getElementById('progressStatus');
+    const progressPercentage = document.getElementById('progressPercentage');
+    const notification = document.getElementById('notification');
+    const notificationMessage = document.getElementById('notification-message');
+    const catalogTable = document.querySelector('.catalog-table tbody');
+    const visualization = document.querySelector('.visualization');
+    const statsValue = document.querySelectorAll('.stat-value');
+    
+    let parsedData = [];
+    let uploadedFile = null;
+    
+    // Modal open/close
+    importBtn.addEventListener('click', () => {
+      importModal.classList.add('active');
+    });
+    
+    closeModal.addEventListener('click', () => {
+      importModal.classList.remove('active');
+      resetImportState();
+    });
+    
+    cancelImport.addEventListener('click', () => {
+      importModal.classList.remove('active');
+      resetImportState();
+    });
+    
+    // File upload handling
+    dropzone.addEventListener('click', () => {
+      fileInput.click();
+    });
+    
+    dropzone.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      dropzone.style.backgroundColor = '#f0f9ff';
+      dropzone.style.borderColor = '#4299e1';
+    });
+    
+    dropzone.addEventListener('dragleave', () => {
+      dropzone.style.backgroundColor = '';
+      dropzone.style.borderColor = '';
+    });
+    
+    dropzone.addEventListener('drop', (e) => {
+      e.preventDefault();
+      dropzone.style.backgroundColor = '';
+      dropzone.style.borderColor = '';
+      
+      if (e.dataTransfer.files.length) {
+        handleFileUpload(e.dataTransfer.files[0]);
+      }
+    });
+    
+    fileInput.addEventListener('change', (e) => {
+      if (e.target.files.length) {
+        handleFileUpload(e.target.files[0]);
+      }
+    });
+    
+    function handleFileUpload(file) {
+      if (file.type !== 'text/csv' && !file.name.endsWith('.csv')) {
+        showNotification('Please upload a CSV file', true);
+        return;
+      }
+      
+      uploadedFile = file;
+      previewCSV(file);
+    }
+    
+    function previewCSV(file) {
+      const reader = new FileReader();
+      
+      reader.onload = function(e) {
+        const csvData = e.target.result;
+        parsedData = parseCSV(csvData);
+        
+        if (parsedData.length === 0) {
+          showNotification('Could not parse CSV file', true);
+          return;
+        }
+        
+        updatePreview(parsedData.slice(0, 3)); // Show first 3 rows
+      };
+      
+      reader.readAsText(file);
+    }
+    
+    function parseCSV(csvText) {
+      const lines = csvText.split(/\r\n|\n/);
+      const result = [];
+      
+      // Simple CSV parsing (doesn't handle quoted commas perfectly)
+      let headers = lines[0].split(',').map(h => h.trim().replace(/"/g, ''));
+      
+      // Check if this is ASCAP format
+      const isASCAPFormat = headers.includes('RoleType') && headers.includes('Title');
+      
+      // Group by title for ASCAP format
+      let currentTitle = '';
+      let currentEntry = null;
+      
+      for (let i = 1; i < lines.length; i++) {
+        if (lines[i].trim() === '') continue;
+        
+        const values = lines[i].split(',').map(v => v.trim().replace(/"/g, ''));
+        
+        if (isASCAPFormat) {
+          // Handle ASCAP format (group by title)
+          const entry = {};
+          
+          headers.forEach((header, index) => {
+            entry[header.toLowerCase()] = values[index] || '';
+          });
+          
+          const title = entry.title.trim();
+          
+          // If this is a new title, create a new entry
+          if (title && title !== currentTitle) {
+            if (currentEntry) {
+              // If we have writers but no artist, use the first writer as the artist
+              if (currentEntry.writers.length > 0 && !currentEntry.artist) {
+                currentEntry.artist = currentEntry.writers[0];
+              }
+              
+              // Finalize entry with enhanced metadata
+              finalizeAscapEntry(currentEntry);
+              result.push(currentEntry);
+            }
+            
+            currentTitle = title;
+            currentEntry = {
+              title: title,
+              artist: '',
+              publisher: '',
+              writers: [],
+              performers: [],
+              roles: {}, // Store all roles associated with the title
+              shares: {}, // Store ownership shares by role and name
+              notes: {}, // Store any notes by role and name
+              roleNames: {}, // Map role codes to readable names
+              totalAscapShare: 0, // Track ASCAP's total share
+              isrc: generateISRC(), // Generate fake ISRC for ASCAP data
+              year: new Date().getFullYear().toString(), // Current year
+              proAffiliation: 'ASCAP', // Set PRO affiliation to ASCAP
+              ipiNumbers: {}, // Store IPI numbers if available
+              compositionDate: '', // Composition date if available
+              masterOwner: 'ASCAP Registry', // Default master owner
+              genre: inferGenreFromTitle(title) // Try to infer genre from title
+            };
+          }
+          
+          // Store all role information
+          const roletype = entry.roletype;
+          const name = entry.name;
+          const shares = parseFloat(entry.shares) || 0;
+          const note = entry.note || '';
+          
+          // Skip if no role type or if it's just a total
+          if (!roletype || roletype === 'ASCAP') {
+            if (roletype === 'ASCAP' && entry.name === 'Total Current ASCAP Share') {
+              currentEntry.totalAscapShare = shares;
+            }
+            continue;
+          }
+          
+          // Store all role-specific information
+          if (name) {
+            // Map role codes to readable names
+            if (!currentEntry.roleNames[roletype]) {
+              currentEntry.roleNames[roletype] = getRoleFullName(roletype);
+            }
+            
+            // Track this role
+            if (!currentEntry.roles[roletype]) {
+              currentEntry.roles[roletype] = [];
+            }
+            if (!currentEntry.roles[roletype].includes(name)) {
+              currentEntry.roles[roletype].push(name);
+            }
+            
+            // Track shares
+            if (shares > 0) {
+              currentEntry.shares[`${roletype}:${name}`] = shares;
+            }
+            
+            // Track notes
+            if (note) {
+              currentEntry.notes[`${roletype}:${name}`] = note;
+              
+              // Extract any IPI numbers from notes (format might be "IPI: 123456789")
+              const ipiMatch = note.match(/IPI:?\s*(\d+)/i);
+              if (ipiMatch && ipiMatch[1]) {
+                currentEntry.ipiNumbers[name] = ipiMatch[1];
+              }
+              
+              // Extract any dates (might contain composition date)
+              const dateMatch = note.match(/(\d{1,2}[\/\-\.]\d{1,2}[\/\-\.]\d{2,4})/);
+              if (dateMatch && dateMatch[1] && !currentEntry.compositionDate) {
+                currentEntry.compositionDate = dateMatch[1];
+              }
+            }
+            
+            // Handle specific roles we care about for display purposes
+            if (roletype === 'P' && name) {
+              currentEntry.publisher = name;
+            } else if (roletype === 'W' && name) {
+              if (!currentEntry.writers.includes(name)) {
+                currentEntry.writers.push(name);
+                // If no artist yet, make the writer the artist
+                if (!currentEntry.artist) {
+                  currentEntry.artist = name;
+                }
+              }
+            } else if (roletype === 'PA' || roletype === 'PR' || roletype === 'E' || roletype === 'A') {
+              // PA (Performing Artist), PR (Performer), E (Composer/Performer), A (Artist)
+              currentEntry.artist = name;
+              if (!currentEntry.performers.includes(name)) {
+                currentEntry.performers.push(name);
+              }
+            } else if (roletype === 'C' || roletype === 'CA') {
+              // C (Composer), CA (Composer/Arranger)
+              if (!currentEntry.writers.includes(name)) {
+                currentEntry.writers.push(name);
+              }
+            }
+          }
+        } else {
+          // Handle standard format
+          const entry = {};
+          
+          headers.forEach((header, index) => {
+            entry[header.toLowerCase()] = values[index] || '';
+          });
+          
+          result.push(entry);
+        }
+      }
+      
+      // Add the last entry for ASCAP format
+      if (isASCAPFormat && currentEntry) {
+        // If we have writers but no artist, use the first writer as the artist
+        if (currentEntry.writers.length > 0 && !currentEntry.artist) {
+          currentEntry.artist = currentEntry.writers[0];
+        }
+        
+        // Finalize entry with enhanced metadata
+        finalizeAscapEntry(currentEntry);
+        result.push(currentEntry);
+      }
+      
+      // Log the enriched data for verification in console
+      if (isASCAPFormat && result.length > 0) {
+        console.log("Complete ASCAP data structure:", result[0]);
+      }
+      
+      return result;
+    }
+    
+    // Helper function to finalize ASCAP entry with enhanced metadata
+    function finalizeAscapEntry(entry) {
+      // If no artist is set yet, try composers or any other role
+      if (!entry.artist) {
+        const allPeople = new Set();
+        
+        // Collect all people involved in the track
+        Object.values(entry.roles).forEach(people => {
+          people.forEach(person => allPeople.add(person));
+        });
+        
+        if (allPeople.size > 0) {
+          entry.artist = Array.from(allPeople)[0]; // Use the first person as artist
+        } else {
+          entry.artist = "Unknown Artist"; // Fallback
+        }
+      }
+      
+      // Ensure writerShares object exists
+      if (!entry.writerShares) {
+        entry.writerShares = {};
+        
+        // Populate writer shares
+        entry.writers.forEach(writer => {
+          const shareKey = `W:${writer}`;
+          if (entry.shares[shareKey]) {
+            entry.writerShares[writer] = entry.shares[shareKey];
+          } else {
+            // If no specific share found, divide evenly
+            entry.writerShares[writer] = Math.round(100 / entry.writers.length);
+          }
+        });
+      }
+      
+      // Try to extract or generate more metadata
+      
+      // Set album if none exists
+      if (!entry.album) {
+        // Try to find if there's a collection or album reference in the notes
+        let albumFound = false;
+        Object.values(entry.notes).forEach(note => {
+          const albumMatch = note.match(/album:?\s*([^,\.]+)/i);
+          if (albumMatch && albumMatch[1] && !albumFound) {
+            entry.album = albumMatch[1].trim();
+            albumFound = true;
+          }
+        });
+        
+        if (!albumFound) {
+          // Generate plausible album name based on title or artist
+          if (entry.title.includes(" - ")) {
+            // Title might be in "Album - Song" format
+            const parts = entry.title.split(" - ");
+            if (parts.length > 1) {
+              entry.album = parts[0].trim();
+            }
+          } else if (entry.artist) {
+            // Use "Artist Collection" as a fallback
+            entry.album = `${entry.artist} Collection`;
+          }
+        }
+      }
+      
+      // Infer duration if none exists (create a plausible value)
+      if (!entry.duration) {
+        // Average song length is between 3-5 minutes
+        const minutes = Math.floor(Math.random() * 3) + 3;
+        const seconds = Math.floor(Math.random() * 60);
+        entry.duration = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+      }
+      
+      // Add more metadata for better visuals
+      if (!entry.masterOwner || entry.masterOwner === 'ASCAP Registry') {
+        // Try to use publisher as master owner if available
+        if (entry.publisher) {
+          entry.masterOwner = entry.publisher;
+        }
+      }
+    }
+    
+    // Helper function to infer genre from title
+    function inferGenreFromTitle(title) {
+      const lowerTitle = title.toLowerCase();
+      
+      // Map of keywords to genres
+      const genreKeywords = {
+        'rock': 'Rock',
+        'pop': 'Pop',
+        'jazz': 'Jazz',
+        'blues': 'Blues',
+        'country': 'Country',
+        'folk': 'Folk',
+        'hip hop': 'Hip Hop',
+        'rap': 'Hip Hop',
+        'r&b': 'R&B',
+        'soul': 'Soul',
+        'funk': 'Funk',
+        'electronic': 'Electronic',
+        'dance': 'Dance',
+        'disco': 'Disco',
+        'classical': 'Classical',
+        'opera': 'Classical',
+        'symphony': 'Classical',
+        'metal': 'Metal',
+        'reggae': 'Reggae',
+        'indie': 'Indie',
+        'gospel': 'Gospel',
+        'soundtrack': 'Soundtrack'
+      };
+      
+      // Check if title contains any genre keywords
+      for (const [keyword, genre] of Object.entries(genreKeywords)) {
+        if (lowerTitle.includes(keyword)) {
+          return genre;
+        }
+      }
+      
+      // Try mood-based inference
+      const moodKeywords = {
+        'happy': 'Pop',
+        'sad': 'Ballad',
+        'love': 'Pop',
+        'party': 'Dance',
+        'night': 'Electronic',
+        'dream': 'Ambient',
+        'dark': 'Alternative',
+        'light': 'Pop'
+      };
+      
+      for (const [mood, genre] of Object.entries(moodKeywords)) {
+        if (lowerTitle.includes(mood)) {
+          return genre;
+        }
+      }
+      
+      // Default genres by type of title
+      if (lowerTitle.includes('remix')) return 'Electronic';
+      if (lowerTitle.includes('live')) return 'Live Recording';
+      if (lowerTitle.includes('acoustic')) return 'Acoustic';
+      if (lowerTitle.includes('instrumental')) return 'Instrumental';
+      
+      // Select random genre as fallback
+      const defaultGenres = ['Pop', 'Rock', 'Hip Hop', 'R&B', 'Electronic', 'Alternative', 'Indie'];
+      return defaultGenres[Math.floor(Math.random() * defaultGenres.length)];
+    }
+    
+    // Helper function to map role codes to readable names
+    function getRoleFullName(roleCode) {
+      const roleMappings = {
+        'A': 'Artist',
+        'C': 'Composer',
+        'CA': 'Composer/Arranger',
+        'E': 'Composer/Performer',
+        'P': 'Publisher',
+        'PA': 'Performing Artist',
+        'PR': 'Performer',
+        'W': 'Writer',
+        'S': 'Songwriter',
+        'L': 'Lyricist',
+        'AR': 'Arranger',
+        'AD': 'Adapter',
+        'SE': 'Subpublisher',
+        'TR': 'Translator',
+        'SA': 'Sample',
+        'OW': 'Original Writer',
+        'OP': 'Original Publisher'
+      };
+      
+      return roleMappings[roleCode] || roleCode;
+    }
+    
+    function updatePreview(data) {
+      previewTableBody.innerHTML = '';
+      
+      data.forEach(item => {
+        const row = document.createElement('tr');
+        
+        // Check if this is transformed ASCAP data
+        const isASCAPTransformed = item.writers && Array.isArray(item.writers);
+        
+        if (isASCAPTransformed) {
+          const artist = item.artist || 'Unknown Artist';
+          const writers = item.writers.join(', ') || 'Unknown';
+          
+          row.innerHTML = `
+            <td>${item.title || ''}</td>
+            <td>${artist}</td>
+            <td>${item.isrc || ''}</td>
+            <td>${item.year || ''}</td>
+            <td>${item.publisher || 'Unknown Publisher'}</td>
+          `;
+        } else {
+          // Try to map to expected columns regardless of CSV headers
+          row.innerHTML = `
+            <td>${item.title || item.name || item.track || ''}</td>
+            <td>${item.artist || item.performer || item.musician || item.name || ''}</td>
+            <td>${item.isrc || item.id || ''}</td>
+            <td>${item.year || item.date || ''}</td>
+            <td>${item.publisher || item.label || ''}</td>
+          `;
+        }
+        
+        previewTableBody.appendChild(row);
+      });
+      
+      previewContainer.style.display = 'block';
+      confirmImport.disabled = false;
+    }
+    
+    confirmImport.addEventListener('click', () => {
+      if (!parsedData.length) return;
+      
+      previewContainer.style.display = 'none';
+      importProgress.style.display = 'block';
+      
+      simulateImport(parsedData);
+    });
+    
+    function simulateImport(data) {
+      const totalSteps = 10;
+      let currentStep = 0;
+      
+      function updateProgress() {
+        currentStep++;
+        const percentage = Math.round((currentStep / totalSteps) * 100);
+        progressFill.style.width = `${percentage}%`;
+        progressPercentage.textContent = `${percentage}%`;
+        
+        if (currentStep === 3) {
+          progressStatus.textContent = 'Validating track data...';
+        } else if (currentStep === 5) {
+          progressStatus.textContent = 'Preparing for blockchain...';
+        } else if (currentStep === 8) {
+          progressStatus.textContent = 'Finalizing import...';
+        }
+        
+        if (currentStep < totalSteps) {
+          setTimeout(updateProgress, 400);
+        } else {
+          completeImport(data);
+        }
+      }
+      
+      updateProgress();
+    }
+    
+    function completeImport(data) {
+      importModal.classList.remove('active');
+      resetImportState();
+      
+      // Update the catalog with new data
+      updateCatalog(data);
+      
+      // Update visualization
+      updateVisualization(data);
+      
+      // Update statistics
+      updateStatistics(data);
+      
+      // Show notification
+      showNotification(`Successfully imported ${data.length} tracks`);
+      
+      // Switch to catalog tab to show the data
+      document.querySelector('.tab[data-tab="catalog"]').click();
+    }
+    
+    function updateCatalog(data) {
+      // Clear existing rows except the first 5 (keep some examples)
+      const existingRows = Array.from(catalogTable.querySelectorAll('tr')).slice(5);
+      existingRows.forEach(row => row.remove());
+      
+      // Add new rows
+      data.forEach((item, index) => {
+        if (index >= 15) return; // Only show first 15 imported items for demo
+        
+        const row = document.createElement('tr');
+        const isRegistered = Math.random() > 0.2; // 80% chance of being registered
+        const isPending = !isRegistered && Math.random() > 0.5; // If not registered, 50% chance of pending
+        const status = isRegistered ? 'registered' : (isPending ? 'pending' : 'failed');
+        const rightsId = isRegistered ? generateRightsId() : '-';
+        
+        // Store all this track's data for later retrieval
+        const trackData = { ...item, status, rightsId };
+        trackDataMap[trackData.title] = trackData;
+        
+        // Check if this is transformed ASCAP data
+        const isASCAPTransformed = item.writers && Array.isArray(item.writers);
+        
+        if (isASCAPTransformed) {
+          const artist = item.artist || 'Unknown Artist';
+          
+          row.innerHTML = `
+            <td>${item.title || `Imported Track ${index+1}`}</td>
+            <td>${artist}</td>
+            <td>${item.isrc || generateISRC()}</td>
+            <td>${item.year || new Date().getFullYear()}</td>
+            <td><span class="status-badge status-${status}">${status.charAt(0).toUpperCase() + status.slice(1)}</span></td>
+            <td>${rightsId}</td>
+            <td><button class="btn" style="padding: 4px 8px; font-size: 12px;">View</button></td>
+          `;
+        } else {
+          row.innerHTML = `
+            <td>${item.title || item.name || item.track || `Imported Track ${index+1}`}</td>
+            <td>${item.artist || item.performer || item.musician || item.name || 'Unknown Artist'}</td>
+            <td>${item.isrc || item.id || generateISRC()}</td>
+            <td>${item.year || item.date || new Date().getFullYear()}</td>
+            <td><span class="status-badge status-${status}">${status.charAt(0).toUpperCase() + status.slice(1)}</span></td>
+            <td>${rightsId}</td>
+            <td><button class="btn" style="padding: 4px 8px; font-size: 12px;">View</button></td>
+          `;
+        }
+        
+        // Add event listener to the view button
+        const viewButton = row.querySelector('.btn');
+        viewButton.addEventListener('click', () => {
+          showTrackDetails(trackData);
+        });
+        
+        catalogTable.appendChild(row);
+      });
+    }
+    
+    function updateVisualization(data) {
+      // Remove existing visualized tiles beyond the first 5
+      const existingTiles = visualization.querySelectorAll('.tile');
+      for (let i = 5; i < existingTiles.length; i++) {
+        existingTiles[i].remove();
+      }
+      
+      // Add new tiles for imported data
+      data.forEach((item, index) => {
+        if (index >= 10) return; // Limit to 10 new tiles
+        
+        const isRegistered = Math.random() > 0.2;
+        const isPending = !isRegistered && Math.random() > 0.5;
+        
+        const tileColor = isRegistered ? 
+          'rgba(66, 153, 225, 0.8)' : 
+          (isPending ? 'rgba(236, 201, 75, 0.8)' : 'rgba(229, 62, 62, 0.8)');
+        
+        const statusText = isRegistered ? 
+          generateRightsId() : 
+          (isPending ? 'Pending' : 'Failed');
+        
+        const rotation = Math.floor(Math.random() * 7) - 3; // Random rotation between -3 and 3 degrees
+        
+        const tile = document.createElement('div');
+        tile.className = 'tile visualized-tile';
+        tile.style.setProperty('--rotation', `${rotation}deg`);
+        tile.style.background = tileColor;
+        tile.style.animationDelay = `${index * 0.3}s`;
+        
+        // Check if this is transformed ASCAP data
+        const isASCAPTransformed = item.writers && Array.isArray(item.writers);
+        
+        if (isASCAPTransformed) {
+          const artist = item.artist || 'Unknown Artist';
+          
+          tile.innerHTML = `
+            <div class="tile-title">${item.title || `Track ${index+1}`}</div>
+            <div class="tile-artist">${artist}</div>
+            <div class="tile-id">${statusText}</div>
+          `;
+        } else {
+          tile.innerHTML = `
+            <div class="tile-title">${item.title || item.name || item.track || `Track ${index+1}`}</div>
+            <div class="tile-artist">${item.artist || item.performer || item.musician || item.name || 'Unknown Artist'}</div>
+            <div class="tile-id">${statusText}</div>
+          `;
+        }
+        
+        // Add click event to show details
+        tile.addEventListener('click', () => {
+          const titleText = item.title || item.name || `Track ${index+1}`;
+          const artistText = isASCAPTransformed ? item.artist : (item.artist || item.performer || item.musician || 'Unknown Artist');
+          const publisherText = isASCAPTransformed ? item.publisher : (item.publisher || item.label || 'Unknown Publisher');
+          
+          let detailText = `${titleText} by ${artistText}`;
+          
+          // For ASCAP data, add more complete information
+          if (isASCAPTransformed) {
+            if (item.writers && item.writers.length > 0) {
+              detailText += `\nWriters: ${item.writers.join(', ')}`;
+            }
+            if (item.performers && item.performers.length > 0) {
+              detailText += `\nPerformers: ${item.performers.join(', ')}`;
+            }
+            if (item.totalAscapShare) {
+              detailText += `\nASCAP Share: ${item.totalAscapShare}%`;
+            }
+            
+            // Display additional roles, if present
+            if (item.roles) {
+              const otherRoles = Object.keys(item.roles).filter(role => !['W', 'P', 'PA', 'PR', 'E'].includes(role));
+              if (otherRoles.length > 0) {
+                detailText += `\nOther Roles: ${otherRoles.join(', ')}`;
+              }
+            }
+          }
+          
+          console.log("Complete track data:", item);
+          showNotification(detailText, false, 6000);
+        });
+        
+        visualization.appendChild(tile);
+      });
+    }
+    
+    function updateStatistics(data) {
+      // Update total tracks
+      const currentTotal = parseInt(statsValue[0].textContent);
+      const newTotal = currentTotal + data.length;
+      statsValue[0].textContent = newTotal;
+      
+      // Update registration rate (randomly between 80-95%)
+      const newRate = (Math.random() * 15 + 80).toFixed(1);
+      statsValue[1].textContent = `${newRate}%`;
+      
+      // Update verified on chain
+      const verifiedCount = Math.floor(newTotal * newRate / 100);
+      statsValue[2].textContent = `${verifiedCount}/${newTotal}`;
+      
+      // Update average gas cost (random slight variation)
+      const newGasCost = (0.0012 + (Math.random() * 0.0008 - 0.0004)).toFixed(4);
+      statsValue[3].textContent = `${newGasCost} ETH`;
+    }
+    
+    function resetImportState() {
+      previewContainer.style.display = 'none';
+      importProgress.style.display = 'none';
+      previewTableBody.innerHTML = '';
+      progressFill.style.width = '0%';
+      progressStatus.textContent = 'Processing...';
+      progressPercentage.textContent = '0%';
+      uploadedFile = null;
+      parsedData = [];
+      
+      if (fileInput) fileInput.value = '';
+    }
+    
+    function showNotification(message, isError = false, duration = 3000) {
+      notificationMessage.textContent = message;
+      notification.className = isError ? 'notification error show' : 'notification show';
+      
+      setTimeout(() => {
+        notification.className = 'notification';
+      }, duration);
+    }
+    
+    function generateRightsId() {
+      const prefix = '0x';
+      const chars = '0123456789abcdef';
+      let result = prefix;
+      
+      // Generate first 4 chars
+      for (let i = 0; i < 4; i++) {
+        result += chars.charAt(Math.floor(Math.random() * chars.length));
+      }
+      
+      result += '...';
+      
+      // Generate last 4 chars
+      for (let i = 0; i < 4; i++) {
+        result += chars.charAt(Math.floor(Math.random() * chars.length));
+      }
+      
+      return result;
+    }
+    
+    function generateISRC() {
+      let result = 'USRC';
+      
+      // Generate 8 random digits
+      for (let i = 0; i < 8; i++) {
+        result += Math.floor(Math.random() * 10);
+      }
+      
+      return result;
+    }
+    
+    // Tab switching with proper content display
+    const tabs = document.querySelectorAll('.tab');
+    const tabContents = document.querySelectorAll('.tab-content');
+    
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        // Remove active class from all tabs and contents
+        tabs.forEach(t => t.classList.remove('active'));
+        tabContents.forEach(c => c.classList.remove('active'));
+        
+        // Add active class to selected tab
+        tab.classList.add('active');
+        
+        // Add active class to corresponding content
+        const tabId = tab.getAttribute('data-tab');
+        document.getElementById(`${tabId}-tab`).classList.add('active');
+      });
+    });
+    
+    // Example data for import simulation if user doesn't have a CSV
+    dropzone.addEventListener('dblclick', () => {
+      const exampleData = [
+        { title: 'Dancing Flames', artist: 'Fire & Ice', isrc: 'USRC87654321', year: '2019', publisher: 'Evergreen Music Publishing' },
+        { title: 'River Flow', artist: 'The Currents', isrc: 'USRC76543210', year: '2022', publisher: 'Evergreen Music Publishing' },
+        { title: 'Starlight Symphony', artist: 'Cosmic Orchestra', isrc: 'USRC65432109', year: '2020', publisher: 'Evergreen Music Publishing' },
+        { title: 'Urban Jungle', artist: 'City Beats', isrc: 'USRC54321098', year: '2021', publisher: 'Evergreen Music Publishing' },
+        { title: 'Mountain Echo', artist: 'Alpine Band', isrc: 'USRC43210987', year: '2023', publisher: 'Evergreen Music Publishing' },
+        { title: 'Desert Mirage', artist: 'Sand Drifters', isrc: 'USRC32109876', year: '2022', publisher: 'Evergreen Music Publishing' },
+        { title: 'Ocean Depths', artist: 'Deep Blue', isrc: 'USRC21098765', year: '2021', publisher: 'Evergreen Music Publishing' },
+        { title: 'Neon Lights', artist: 'Electric Pulse', isrc: 'USRC10987654', year: '2020', publisher: 'Evergreen Music Publishing' }
+      ];
+      
+      parsedData = exampleData;
+      updatePreview(exampleData.slice(0, 3));
+    });
+    
+    // Make sure the visualization tiles are interactive
+    document.querySelectorAll('.tile').forEach(tile => {
+      tile.classList.add('visualized-tile');
+      
+      tile.addEventListener('click', () => {
+        const title = tile.querySelector('.tile-title').textContent;
+        showNotification(`Track details: ${title}`);
+      });
+    });
+    
+    // Add a demo CSV creator for easy testing
+    document.addEventListener('keydown', (e) => {
+      // Press Ctrl+Shift+D to download a sample CSV
+      if (e.ctrlKey && e.shiftKey && e.key === 'D') {
+        e.preventDefault();
+        downloadSampleCSV();
+      }
+    });
+    
+    function downloadSampleCSV() {
+      const csvContent = `Title,Artist,ISRC,Year,Publisher
+"Midnight Dreams","Sophia Chen","USRC78901234","2022","Evergreen Music Publishing"
+"Ocean Breeze","The Wavelengths","USRC45678901","2020","Evergreen Music Publishing"
+"Skyward","Marcus Lee","USRC56789012","2023","Evergreen Music Publishing"
+"Autumn Leaves","The Seasons","USRC34567890","2018","Evergreen Music Publishing"
+"City Lights","Urban Noise","USRC23456789","2021","Evergreen Music Publishing"
+"Mountain High","Nature's Voice","USRC12345678","2019","Evergreen Music Publishing"
+"Electric Soul","The Volts","USRC90123456","2022","Evergreen Music Publishing"
+"Whispers in the Dark","Night Owls","USRC89012345","2020","Evergreen Music Publishing"`;
+      
+      const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+      const link = document.createElement('a');
+      const url = URL.createObjectURL(blob);
+      
+      link.setAttribute('href', url);
+      link.setAttribute('download', 'sample_music_catalog.csv');
+      link.style.visibility = 'hidden';
+      
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      
+      showNotification('Sample CSV file downloaded successfully');
+    }
+    
+    // Modified download function to get our sample ASCAP data
+    document.addEventListener('keydown', (e) => {
+      // Press Ctrl+Shift+A to download the ASCAP sample CSV
+      if (e.ctrlKey && e.shiftKey && e.key === 'A') {
+        e.preventDefault();
+        window.location.href = 'ascap_sample.csv';
+        showNotification('Downloading ASCAP sample CSV file...');
+      }
+    });
+    
+    // Add information about the ASCAP shortcut to the file instructions
+    document.querySelector('.file-instructions').innerHTML += `
+      <p><strong>ASCAP Data:</strong> Press <code>Ctrl+Shift+A</code> to download our sample ASCAP data file.</p>
+    `;
+    
+    // Add Track Details Modal functionality
+    const detailsModal = document.getElementById('detailsModal');
+    const closeDetails = document.getElementById('closeDetails');
+    const closeDetailsBtn = document.getElementById('closeDetailsBtn');
+    const detailsTitle = document.getElementById('detailsTitle');
+    const detailsBody = document.getElementById('detailsBody');
+    
+    closeDetails.addEventListener('click', () => {
+      detailsModal.classList.remove('active');
+    });
+    
+    closeDetailsBtn.addEventListener('click', () => {
+      detailsModal.classList.remove('active');
+    });
+    
+    // Track data storage for lookup
+    let trackDataMap = {};
+    
+    // Initialize default demo tracks
+    function initializeDefaultTracks() {
+      const defaultTracks = [
+        {
+          title: 'Midnight Dreams',
+          artist: 'Sophia Chen',
+          isrc: 'USRC78901234',
+          year: '2022',
+          publisher: 'Evergreen Music Publishing',
+          status: 'registered',
+          rightsId: '0x8b4c...e721',
+          writers: ['Sophia Chen', 'D.J. Miller', 'Martin Reeves'],
+          writerShares: {'Sophia Chen': 60, 'D.J. Miller': 30, 'Martin Reeves': 10},
+          genre: 'Pop',
+          album: 'Sleepless Nights',
+          duration: '3:42',
+          masterOwner: 'Universal Music Group',
+          proAffiliation: 'ASCAP'
+        },
+        {
+          title: 'Ocean Breeze',
+          artist: 'The Wavelengths',
+          isrc: 'USRC45678901',
+          year: '2020',
+          publisher: 'Evergreen Music Publishing',
+          status: 'registered',
+          rightsId: '0x2a7d...9c45',
+          writers: ['Julian Morales', 'Tara Williams'],
+          writerShares: {'Julian Morales': 50, 'Tara Williams': 50},
+          genre: 'Indie',
+          album: 'Coastal Vibes',
+          duration: '4:15',
+          masterOwner: 'Evergreen Records',
+          proAffiliation: 'BMI'
+        },
+        {
+          title: 'Skyward',
+          artist: 'Marcus Lee',
+          isrc: 'USRC56789012',
+          year: '2023',
+          publisher: 'Evergreen Music Publishing',
+          status: 'pending',
+          rightsId: '',
+          writers: ['Marcus Lee', 'Elena Vasquez', 'Christopher Wright'],
+          writerShares: {'Marcus Lee': 40, 'Elena Vasquez': 40, 'Christopher Wright': 20},
+          genre: 'Electronic',
+          album: 'Altitude',
+          duration: '5:31',
+          masterOwner: 'Sony Music',
+          proAffiliation: 'ASCAP'
+        },
+        {
+          title: 'Autumn Leaves Fall',
+          artist: 'The Seasons',
+          isrc: 'USRC34567890',
+          year: '2018',
+          publisher: 'Evergreen Music Publishing',
+          status: 'registered',
+          rightsId: '0x7d2c...b943',
+          writers: ['Hannah Johnson'],
+          writerShares: {'Hannah Johnson': 100},
+          genre: 'Folk',
+          album: 'Changing Seasons',
+          duration: '3:58',
+          masterOwner: 'Evergreen Records',
+          proAffiliation: 'BMI'
+        },
+        {
+          title: 'City Lights',
+          artist: 'Urban Noise Collective',
+          isrc: 'USRC23456789',
+          year: '2021',
+          publisher: 'Evergreen Music Publishing',
+          status: 'failed',
+          rightsId: '',
+          writers: ['David Chen', 'Lisa Park', 'Michael Torres'],
+          writerShares: {'David Chen': 33, 'Lisa Park': 33, 'Michael Torres': 33},
+          genre: 'Hip Hop',
+          album: 'Concrete Jungle',
+          duration: '4:27',
+          masterOwner: 'Warner Music',
+          proAffiliation: 'ASCAP'
+        }
+      ];
+      
+      // Store default tracks in the map
+      defaultTracks.forEach(track => {
+        trackDataMap[track.title] = track;
+      });
+      
+      // Add event listeners to the view buttons for default tracks
+      const viewButtons = document.querySelectorAll('.catalog-table tbody tr .btn');
+      viewButtons.forEach((button, index) => {
+        if (index < defaultTracks.length) {
+          button.addEventListener('click', () => {
+            showTrackDetails(defaultTracks[index]);
+          });
+        }
+      });
+    }
+    
+    // Initialize default tracks when the page loads
+    initializeDefaultTracks();
+    
+    function showTrackDetails(trackData) {
+      detailsTitle.textContent = trackData.title || 'Track Details';
+      
+      // Generate the details HTML based on track data
+      let detailsHTML = '';
+      
+      // Add blockchain information if registered
+      if (trackData.status === 'registered' && trackData.rightsId) {
+        detailsHTML += `
+          <div class="details-section">
+            <h4>Blockchain Information</h4>
+            <div class="rights-id-box">
+              <div><strong>Rights ID:</strong> ${trackData.rightsId}</div>
+              <div><strong>Status:</strong> <span class="status-badge status-registered">Registered</span></div>
+              <div><strong>Verification Date:</strong> ${new Date().toLocaleDateString()}</div>
+            </div>
+          </div>
+        `;
+      } else if (trackData.status === 'pending') {
+        detailsHTML += `
+          <div class="details-section">
+            <h4>Registration Status</h4>
+            <div class="rights-id-box" style="background-color: #fffbeb;">
+              <div><strong>Status:</strong> <span class="status-badge status-pending">Pending</span></div>
+              <div><strong>Submitted:</strong> ${new Date().toLocaleDateString()}</div>
+              <div><strong>Expected Completion:</strong> In progress</div>
+            </div>
+          </div>
+        `;
+      } else if (trackData.status === 'failed') {
+        detailsHTML += `
+          <div class="details-section">
+            <h4>Registration Status</h4>
+            <div class="rights-id-box" style="background-color: #fef2f2;">
+              <div><strong>Status:</strong> <span class="status-badge status-failed">Failed</span></div>
+              <div><strong>Error:</strong> Validation failed - missing required metadata</div>
+              <div><strong>Recommendation:</strong> Please update track information and try again</div>
+            </div>
+          </div>
+        `;
+      }
+      
+      // Basic track information
+      detailsHTML += `
+        <div class="details-section">
+          <h4>Track Information</h4>
+          <table class="details-table">
+            <tr>
+              <th>Title</th>
+              <td>${trackData.title || 'Unknown'}</td>
+            </tr>
+            <tr>
+              <th>Artist</th>
+              <td>${trackData.artist || 'Unknown'}</td>
+            </tr>
+            <tr>
+              <th>ISRC</th>
+              <td>${trackData.isrc || 'Not assigned'}</td>
+            </tr>
+            <tr>
+              <th>Year</th>
+              <td>${trackData.year || 'Unknown'}</td>
+            </tr>
+            <tr>
+              <th>Album</th>
+              <td>${trackData.album || 'N/A'}</td>
+            </tr>
+            <tr>
+              <th>Duration</th>
+              <td>${trackData.duration || 'N/A'}</td>
+            </tr>
+            <tr>
+              <th>Genre</th>
+              <td>${trackData.genre || 'N/A'}</td>
+            </tr>
+          </table>
+        </div>
+      `;
+      
+      // Rights holders section
+      detailsHTML += `
+        <div class="details-section">
+          <h4>Rights Information</h4>
+          <table class="details-table">
+            <tr>
+              <th>Publisher</th>
+              <td>${trackData.publisher || 'Unknown'}</td>
+            </tr>
+            <tr>
+              <th>PRO Affiliation</th>
+              <td>${trackData.proAffiliation || 'Unknown'}</td>
+            </tr>
+            <tr>
+              <th>Master Owner</th>
+              <td>${trackData.masterOwner || 'N/A'}</td>
+            </tr>
+          </table>
+        </div>
+      `;
+      
+      // Writers and shares section
+      if (trackData.writers && trackData.writers.length > 0) {
+        detailsHTML += `
+          <div class="details-section">
+            <h4>Writers & Shares</h4>
+            <table class="details-table">
+              <tr>
+                <th>Writer</th>
+                <th>Share (%)</th>
+              </tr>
+        `;
+        
+        trackData.writers.forEach(writer => {
+          const share = trackData.writerShares ? (trackData.writerShares[writer] || 'N/A') : 'N/A';
+          detailsHTML += `
+            <tr>
+              <td>${writer}</td>
+              <td>${share}</td>
+            </tr>
+          `;
+        });
+        
+        detailsHTML += `
+            </table>
+          </div>
+        `;
+      }
+      
+      // ASCAP-specific data (if available)
+      if (trackData.roles || trackData.totalAscapShare || trackData.shares) {
+        detailsHTML += `
+          <div class="details-section">
+            <h4>Additional Rights Data</h4>
+        `;
+        
+        if (trackData.compositionDate) {
+          detailsHTML += `
+            <div class="detail-row">
+              <div class="detail-label">Composition Date</div>
+              <div class="detail-value">${trackData.compositionDate}</div>
+            </div>
+          `;
+        }
+        
+        if (trackData.totalAscapShare) {
+          detailsHTML += `
+            <div class="detail-row">
+              <div class="detail-label">ASCAP Share</div>
+              <div class="detail-value">${trackData.totalAscapShare}%</div>
+            </div>
+          `;
+        }
+        
+        // Display all roles with their full names
+        if (trackData.roles && Object.keys(trackData.roles).length > 0) {
+          detailsHTML += `
+            <div class="detail-row" style="align-items: flex-start;">
+              <div class="detail-label">Roles</div>
+              <div class="detail-value">
+          `;
+          
+          Object.entries(trackData.roles).forEach(([role, people]) => {
+            const roleName = trackData.roleNames && trackData.roleNames[role] ? trackData.roleNames[role] : role;
+            detailsHTML += `<div style="margin-bottom: 5px;"><strong>${roleName} (${role}):</strong> ${Array.isArray(people) ? people.join(', ') : people}</div>`;
+          });
+          
+          detailsHTML += `
+              </div>
+            </div>
+          `;
+        }
+        
+        // Display all shares
+        if (trackData.shares && Object.keys(trackData.shares).length > 0) {
+          detailsHTML += `
+            <div class="detail-row" style="align-items: flex-start;">
+              <div class="detail-label">Detailed Shares</div>
+              <div class="detail-value">
+          `;
+          
+          Object.entries(trackData.shares).forEach(([key, share]) => {
+            const [role, name] = key.split(':');
+            const roleName = trackData.roleNames && trackData.roleNames[role] ? trackData.roleNames[role] : role;
+            detailsHTML += `<div style="margin-bottom: 5px;"><strong>${name} (${roleName}):</strong> ${share}%</div>`;
+          });
+          
+          detailsHTML += `
+              </div>
+            </div>
+          `;
+        }
+        
+        // Display IPI numbers if available
+        if (trackData.ipiNumbers && Object.keys(trackData.ipiNumbers).length > 0) {
+          detailsHTML += `
+            <div class="detail-row" style="align-items: flex-start;">
+              <div class="detail-label">IPI Numbers</div>
+              <div class="detail-value">
+          `;
+          
+          Object.entries(trackData.ipiNumbers).forEach(([name, ipi]) => {
+            detailsHTML += `<div style="margin-bottom: 5px;"><strong>${name}:</strong> ${ipi}</div>`;
+          });
+          
+          detailsHTML += `
+              </div>
+            </div>
+          `;
+        }
+        
+        detailsHTML += `
+          </div>
+        `;
+      }
+      
+      // Set the details HTML
+      detailsBody.innerHTML = detailsHTML;
+      
+      // Show the modal
+      detailsModal.classList.add('active');
+    }
+  </script>
+</body>
+</html> 

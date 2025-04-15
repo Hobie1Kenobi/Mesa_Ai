@@ -1,0 +1,105 @@
+{
+  "zk_proof_types": {
+    "ownership_proof": {
+      "description": "Proves ownership of a music right without revealing sensitive details",
+      "public_inputs": ["workIdHash", "rightsTypeHash", "ownerAddressHash"],
+      "private_inputs": ["workId", "rightsType", "ownerAddress", "salt"],
+      "circuit": "ownership_proof.circom",
+      "constraints": [
+        "workIdCalcHash === workIdHash",
+        "rightsTypeCalcHash === rightsTypeHash",
+        "ownerAddressCalcHash === ownerAddressHash"
+      ],
+      "training_samples": 1000
+    },
+    "selective_disclosure": {
+      "description": "Reveals only specific fields from a rights document",
+      "public_inputs": ["originalDataHash", "disclosedFieldsHash"],
+      "private_inputs": ["originalData", "disclosedFields", "undisclosedFields", "salt"],
+      "circuit": "selective_disclosure.circom",
+      "constraints": [
+        "originalHasher.out === originalDataHash",
+        "disclosedHasher.out === disclosedFieldsHash"
+      ],
+      "training_samples": 1000
+    },
+    "royalty_proof": {
+      "description": "Verifies royalty calculations without revealing rates",
+      "public_inputs": ["paymentAmount", "totalRoyaltyHash", "partiesCountHash"],
+      "private_inputs": ["royaltyPercentages", "expectedPayments", "salt"],
+      "circuit": "royalty_proof.circom",
+      "constraints": [
+        "totalVerified === 1",
+        "royaltyHasher.out === totalRoyaltyHash"
+      ],
+      "training_samples": 800
+    }
+  },
+  "training_parameters": {
+    "batch_size": 64,
+    "epochs": 50,
+    "learning_rate": 0.001,
+    "validation_split": 0.2,
+    "test_split": 0.1,
+    "shuffle": true,
+    "random_seed": 42
+  },
+  "circuit_parameters": {
+    "prime_field": "bn128",
+    "curve": "alt_bn128",
+    "hash_function": "poseidon",
+    "constraint_system": "r1cs",
+    "proof_system": "groth16"
+  },
+  "sample_generation": {
+    "methods": ["random", "realistic", "edge_cases"],
+    "data_sources": [
+      {
+        "source": "musicbrainz",
+        "weight": 0.5,
+        "field_mappings": {
+          "Work.title": "workTitle",
+          "Work.iswc": "identifiers.iswc",
+          "Artist.name": "artistParty"
+        }
+      },
+      {
+        "source": "synthetic",
+        "weight": 0.5,
+        "generation_rules": {
+          "workTitle": "music_title_generator",
+          "artistParty": "artist_name_generator",
+          "rightsType": ["Publishing", "Performance", "Mechanical", "Sync", "Master"],
+          "territory": ["Global", "US", "EU", "UK", "Japan", "Canada", "Australia"],
+          "royaltyInfo.percentage": "distribution_generator(parties, min=0.0, max=1.0, sum=1.0)"
+        }
+      }
+    ]
+  },
+  "verification_scenarios": [
+    {
+      "name": "streaming_service",
+      "description": "Verify rights for a streaming platform",
+      "requested_fields": ["workTitle", "artistParty", "rightsType", "territory"],
+      "proof_type": "selective_disclosure",
+      "test_cases": 100
+    },
+    {
+      "name": "royalty_collection",
+      "description": "Verify royalty distribution for a payment",
+      "proof_type": "royalty_proof",
+      "calculation": {
+        "total_payment": 1000,
+        "verify_distribution": true
+      },
+      "test_cases": 100
+    },
+    {
+      "name": "ownership_transfer",
+      "description": "Verify ownership for rights transfer",
+      "proof_type": "ownership_proof",
+      "additional_checks": ["expiration_date", "territory_restrictions"],
+      "test_cases": 100
+    }
+  ]
+} 

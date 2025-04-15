@@ -1,0 +1,21 @@
+{
+  "id": "29950dd2d2e37cb2",
+  "type": "catalog_analysis",
+  "source": "targeted_scan",
+  "first_discovered": "2025-04-09T23:16:01.288515",
+  "last_seen": "2025-04-09T23:16:01.288515",
+  "seen_count": 1,
+  "session_id": "6f069554-753f-4f63-9cb6-8eaed3ce8711",
+  "agency_identifier": "MESA-DEMO-AGENCY",
+  "confidence": 0.88,
+  "data": {
+    "work_id": "WORK456",
+    "issue": "Metadata mismatch at ASCAP",
+    "estimated_value": "$520.00",
+    "actions": [
+      "correct_metadata",
+      "request_audit"
+    ],
+    "from_catalog_analysis": true
+  }
+}

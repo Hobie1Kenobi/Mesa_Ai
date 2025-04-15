@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MESA Integration Plan: Catalog to Blockchain</title>
+    <style>
+        :root {
+            --primary: #6c63ff;
+            --secondary: #ff6584;
+            --dark: #2f2e41;
+            --light: #f9fafb;
+            --success: #4caf50;
+            --warning: #ff9800;
+            --danger: #f44336;
+            --code-bg: #f5f5f5;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: var(--light);
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        
+        h1, h2, h3, h4 {
+            color: var(--dark);
+        }
+        
+        .phase {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .phase-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .phase-number {
+            background: var(--primary);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            font-weight: bold;
+        }
+        
+        .code-block {
+            background: var(--code-bg);
+            border-radius: 5px;
+            padding: 1rem;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            margin: 1rem 0;
+        }
+        
+        .note {
+            background-color: #e8f4fd;
+            border-left: 4px solid #2196f3;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        .warning {
+            background-color: #fff8e1;
+            border-left: 4px solid var(--warning);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        .success {
+            background-color: #e8f5e9;
+            border-left: 4px solid var(--success);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        .flow-diagram {
+            width: 100%;
+            margin: 2rem 0;
+            padding: 1rem;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        
+        .timeline {
+            display: flex;
+            margin: 2rem 0;
+            position: relative;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: #e0e0e0;
+            z-index: 0;
+        }
+        
+        .step {
+            flex: 1;
+            position: relative;
+            text-align: center;
+            padding-top: 50px;
+        }
+        
+        .step-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+        
+        th, td {
+            padding: 0.75rem;
+            text-align: left;
+            border: 1px solid #e0e0e0;
+        }
+        
+        th {
+            background-color: #f5f5f5;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>MESA Integration Plan</h1>
+        <p>From Publisher Catalog Upload to Base Blockchain Unified IP Container</p>
+    </header>
+    
+    <main>
+        <section class="phase">
+            <div class="phase-header">
+                <div class="phase-number">1</div>
+                <h2>Current System: Publisher Catalog Upload</h2>
+            </div>
+            <p>The existing system allows publishers to upload their music catalogs via CSV files. This phase handles the initial data ingestion and validation.</p>
+            
+            <h3>Current Flow</h3>
+            <div class="timeline">
+                <div class="step">
+                    <div class="step-icon">1</div>
+                    <p>Publisher Login</p>
+                </div>
+                <div class="step">
+                    <div class="step-icon">2</div>
+                    <p>CSV Upload</p>
+                </div>
+                <div class="step">
+                    <div class="step-icon">3</div>
+                    <p>Data Validation</p>
+                </div>
+                <div class="step">
+                    <div class="step-icon">4</div>
+                    <p>Dashboard Display</p>
+                </div>
+            </div>
+            
+            <div class="note">
+                <strong>Note:</strong> This phase remains largely unchanged in the integration, serving as the data entry point.
+            </div>
+        </section>
+        
+        <section class="phase">
+            <div class="phase-header">
+                <div class="phase-number">2</div>
+                <h2>New Phase: Blockchain Registration</h2>
+            </div>
+            <p>After catalog upload and validation, publishers can now register their verified tracks on the Base blockchain as tokenized intellectual property.</p>
+            
+            <h3>New UI Components</h3>
+            <ul>
+                <li><strong>Registration Tab</strong> - A new tab in the publisher dashboard</li>
+                <li><strong>Rights Configuration Interface</strong> - For setting up royalty splits and associated assets</li>
+                <li><strong>"Register on Base" Button</strong> - For each verified track or as a batch operation</li>
+                <li><strong>Transaction Progress UI</strong> - Showing real-time deployment status</li>
+            </ul>
+            
+            <h3>Integration Points</h3>
+            <div class="code-block">
+// After successful CSV processing, add this to the existing handler
+function handleSuccessfulUpload(processedData) {
+  // Existing code for updating UI
+  displayCatalogData(processedData);
+  
+  // New code for blockchain integration
+  showRegistrationOptions(processedData.filter(track => track.status === 'verified'));
+}
+
+function showRegistrationOptions(verifiedTracks) {
+  const registrationTab = document.getElementById('registration-tab');
+  registrationTab.classList.remove('hidden');
+  
+  const trackList = document.getElementById('verified-tracks-list');
+  trackList.innerHTML = ''; // Clear existing
+  
+  verifiedTracks.forEach(track => {
+    const trackEl = document.createElement('div');
+    trackEl.className = 'track-item';
+    trackEl.innerHTML = `
+      <div class="track-info">
+        <h4>${track.title}</h4>
+        <p>Artist: ${track.artist}</p>
+        <p>ISWC: ${track.iswc || 'Not Available'}</p>
+      </div>
+      <button class="register-btn" data-track-id="${track.id}">
+        Register on Base
+      </button>
+    `;
+    trackList.appendChild(trackEl);
+  });
+  
+  // Add batch registration option if multiple tracks
+  if (verifiedTracks.length > 1) {
+    const batchBtn = document.createElement('button');
+    batchBtn.className = 'batch-register-btn';
+    batchBtn.textContent = `Register All ${verifiedTracks.length} Tracks`;
+    batchBtn.onclick = () => prepareForBaseDeployment(verifiedTracks);
+    document.getElementById('batch-actions').appendChild(batchBtn);
+  }
+}
+            </div>
+        </section>
+        
+        <section class="phase">
+            <div class="phase-header">
+                <div class="phase-number">3</div>
+                <h2>Testnet Implementation</h2>
+            </div>
+            <p>For the hackathon, we'll implement this using Base Sepolia testnet with simulated data flow based on the ASCAP CSV format.</p>
+            
+            <div class="warning">
+                <strong>Hackathon Note:</strong> We'll include a clear disclaimer that we're using ASCAP sample data for simulation purposes only.
+            </div>
+            
+            <h3>Required Smart Contracts</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Contract Name</th>
+                        <th>Purpose</th>
+                        <th>Base Implementation</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>MusicRightsNFT</td>
+                        <td>ERC-721 token for representing music rights</td>
+                        <td>Deployed to Base Sepolia</td>
+                    </tr>
+                    <tr>
+                        <td>ERC6551Registry</td>
+                        <td>Standard registry for creating token-bound accounts</td>
+                        <td>Use existing Base implementation</td>
+                    </tr>
+                    <tr>
+                        <td>EnhancedIPContainer</td>
+                        <td>Container implementation for holding related assets</td>
+                        <td>Custom implementation for MESA</td>
+                    </tr>
+                    <tr>
+                        <td>MockEAS</td>
+                        <td>Simplified Ethereum Attestation Service</td>
+                        <td>Simplified version for demo</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h3>Data Bridge Implementation</h3>
+            <div class="code-block">
+// Process ASCAP CSV data and create on-chain representations
+async function processAscapData(csvData) {
+  // Parse CSV data
+  const tracks = parseCSVToObjects(csvData);
+  
+  // Create Web3 provider
+  const provider = new ethers.providers.Web3Provider(window.ethereum);
+  const signer = provider.getSigner();
+  
+  // Contract instances
+  const rightsContract = new ethers.Contract(
+    CONTRACT_ADDRESSES.MusicRightsNFT,
+    ABIS.MusicRightsNFT,
+    signer
+  );
+  
+  const registryContract = new ethers.Contract(
+    CONTRACT_ADDRESSES.ERC6551Registry,
+    ABIS.ERC6551Registry,
+    signer
+  );
+  
+  const containerImpl = new ethers.Contract(
+    CONTRACT_ADDRESSES.EnhancedIPContainer,
+    ABIS.EnhancedIPContainer,
+    signer
+  );
+  
+  // Show progress UI
+  showProgressUI();
+  
+  try {
+    // For demo purposes, process a limited number
+    const demoTracks = tracks.slice(0, 5);
+    
+    for (const track of demoTracks) {
+      updateProgressStatus(`Processing "${track.title}"...`);
+      
+      // Mint rights NFT
+      updateProgressStatus(`Minting rights NFT for "${track.title}"...`);
+      const mintTx = await rightsContract.mint(
+        await signer.getAddress(), 
+        {
+          title: track.title,
+          artist: track.writer || track.artist,
+          iswc: track.iswc || generateMockISWC(),
+          rightsHolder: track.publisher
+        }
+      );
+      
+      updateProgressStatus(`Transaction submitted: ${mintTx.hash}`);
+      updateProgressStatus('Waiting for confirmation...');
+      
+      // Wait for confirmation
+      const mintReceipt = await mintTx.wait();
+      const tokenId = parseInt(mintReceipt.logs[0].topics[3], 16);
+      
+      updateProgressStatus(`Rights NFT minted with token ID: ${tokenId}`);
+      
+      // Create container
+      updateProgressStatus(`Creating unified IP container...`);
+      const createContainerTx = await registryContract.createAccount(
+        containerImpl.address,
+        84531, // Base Sepolia chainId
+        rightsContract.address,
+        tokenId,
+        0, // salt
+        "0x" // initData
+      );
+      
+      updateProgressStatus(`Container creation transaction: ${createContainerTx.hash}`);
+      updateProgressStatus('Waiting for confirmation...');
+      
+      const containerReceipt = await createContainerTx.wait();
+      // Extract container address from event logs
+      const containerAddress = extractContainerAddress(containerReceipt);
+      
+      updateProgressStatus(`Container created at: ${containerAddress}`);
+      
+      // Store resulting data
+      track.onChainData = {
+        tokenId,
+        rightsNftAddress: rightsContract.address,
+        containerAddress,
+        transactionHashes: {
+          mint: mintTx.hash,
+          container: createContainerTx.hash
+        }
+      };
+    }
+    
+    updateProgressStatus('All tracks processed successfully!');
+    return tracks;
+    
+  } catch (error) {
+    updateProgressStatus(`Error: ${error.message}`, 'error');
+    console.error('Deployment error:', error);
+    throw error;
+  }
+}
+
+// Helper to extract container address from receipt
+function extractContainerAddress(receipt) {
+  // Implementation depends on the specific event structure
+  // For demo purposes, we can use a mock address
+  return `0x${Array(40).fill('0').join('')}`;
+}
+
+// Generate mock ISWC for tracks without one
+function generateMockISWC() {
+  return `T-${Math.floor(Math.random() * 900000) + 100000}-${Math.floor(Math.random() * 9000) + 1000}-${Math.floor(Math.random() * 90) + 10}`;
+}
+            </div>
+            
+            <h3>Hybrid Approach for Demo</h3>
+            <p>To balance realism with demo performance:</p>
+            <ul>
+                <li>For first 2-3 tracks: Perform actual testnet transactions</li>
+                <li>For remaining tracks: Use pre-computed results with mock transaction hashes</li>
+                <li>Pre-populate the unified IP viewer with sample data for all tracks</li>
+            </ul>
+            
+            <div class="success">
+                <strong>Benefit:</strong> This approach demonstrates the real workflow while ensuring the demo runs smoothly without waiting for multiple blockchain confirmations.
+            </div>
+        </section>
+        
+        <section class="phase">
+            <div class="phase-header">
+                <div class="phase-number">3.5</div>
+                <h2>EAS Integration on Base</h2>
+            </div>
+            <p>To enhance the credibility of our rights management system, we'll integrate with the actual Ethereum Attestation Service (EAS) deployed on Base.</p>
+            
+            <div class="note">
+                <strong>Note:</strong> EAS provides a standard protocol for creating verifiable attestations on-chain. This will replace the "MockEAS" mentioned earlier with actual attestations.
+            </div>
+            
+            <h3>EAS Contract Addresses on Base</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Contract</th>
+                        <th>Base Mainnet</th>
+                        <th>Base Sepolia (Testnet)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>EAS Contract</td>
+                        <td>0x4200000000000000000000000000000000000021</td>
+                        <td>0xC2679fBD37d54388Ce493F1DB75320D236e1815e</td>
+                    </tr>
+                    <tr>
+                        <td>SchemaRegistry</td>
+                        <td>0x4200000000000000000000000000000000000020</td>
+                        <td>0x0a7E2Ff54e76B8E6659aedc9103FB21c038050D0</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h3>Creating a Music Rights Schema</h3>
+            <p>First, we need to define a schema for music rights attestations. This schema will define the structure of our attestations.</p>
+            
+            <div class="code-block">
+// Schema definition for music rights
+const musicRightsSchema = {
+  schema: "tuple(string title, string artist, string iswc, address rightsHolder, uint256 tokenId, string containerAddress)",
+  description: "Attestation for music rights registration",
+  revocable: true
+};
+
+// Deploy the schema to the registry
+async function registerSchema() {
+  // EAS SchemaRegistry contract
+  const schemaRegistry = new ethers.Contract(
+    EAS_ADDRESSES.SchemaRegistry,
+    ABIS.SchemaRegistry,
+    signer
+  );
+  
+  // Register the schema
+  const tx = await schemaRegistry.register(
+    musicRightsSchema.schema,
+    musicRightsSchema.revocable,
+    musicRightsSchema.description
+  );
+  
+  const receipt = await tx.wait();
+  // Extract schema UID from events
+  const schemaUID = receipt.events.find(e => e.event === "Registered").args.uid;
+  console.log(`Schema registered with UID: ${schemaUID}`);
+  
+  return schemaUID;
+}
+            </div>
+            
+            <h3>Creating Attestations for Registered Tracks</h3>
+            <p>After minting rights NFTs and creating containers, we'll create attestations for each track:</p>
+            
+            <div class="code-block">
+// Add to the processAscapData function after container creation
+async function createAttestationForTrack(track, tokenId, containerAddress) {
+  // EAS contract
+  const eas = new ethers.Contract(
+    EAS_ADDRESSES.EAS,
+    ABIS.EAS,
+    signer
+  );
+  
+  // Prepare attestation data
+  const attestationData = ethers.utils.defaultAbiCoder.encode(
+    ["tuple(string title, string artist, string iswc, address rightsHolder, uint256 tokenId, string containerAddress)"],
+    [{
+      title: track.title,
+      artist: track.writer || track.artist,
+      iswc: track.iswc || generateMockISWC(),
+      rightsHolder: await signer.getAddress(),
+      tokenId: tokenId,
+      containerAddress: containerAddress
+    }]
+  );
+  
+  // Schema UID - this should be stored in your config
+  const schemaUID = "0x1234..."; // Replace with actual schema UID from registration
+  
+  updateProgressStatus(`Creating attestation for "${track.title}"...`);
+  
+  // Create attestation
+  const tx = await eas.attest({
+    schema: schemaUID,
+    data: {
+      recipient: containerAddress,  // The container is the recipient
+      expirationTime: 0,            // No expiration
+      revocable: true,              // Can be revoked if rights change
+      refUID: "0x0000000000000000000000000000000000000000000000000000000000000000",
+      data: attestationData,
+      value: 0                      // No value transfer
+    }
+  });
+  
+  updateProgressStatus(`Attestation transaction submitted: ${tx.hash}`);
+  updateProgressStatus('Waiting for confirmation...');
+  
+  const receipt = await tx.wait();
+  
+  // Extract attestation ID from event
+  const attestationUID = receipt.events.find(e => e.event === "Attested").args.uid;
+  
+  updateProgressStatus(`Attestation created with ID: ${attestationUID}`);
+  
+  // Store attestation data
+  track.onChainData.attestation = {
+    uid: attestationUID,
+    schemaUID: schemaUID,
+    transactionHash: tx.hash
+  };
+  
+  return attestationUID;
+}
+
+// Modify the processAscapData function to include attestation creation
+// Add after container creation and before returning tracks:
+
+for (const track of demoTracks) {
+  // ... existing code for minting and container creation ...
+  
+  // Create attestation
+  if (track.onChainData && track.onChainData.containerAddress) {
+    const attestationUID = await createAttestationForTrack(
+      track, 
+      track.onChainData.tokenId,
+      track.onChainData.containerAddress
+    );
+  }
+}
+            </div>
+            
+            <h3>Verifying Attestations</h3>
+            <p>Add a verification function that can be called from the UI:</p>
+            
+            <div class="code-block">
+// Verify an attestation
+async function verifyAttestation(attestationUID) {
+  // EAS contract
+  const eas = new ethers.Contract(
+    EAS_ADDRESSES.EAS,
+    ABIS.EAS,
+    provider
+  );
+  
+  // Get attestation
+  const attestation = await eas.getAttestation(attestationUID);
+  
+  // Check if it's been revoked
+  const isRevoked = await eas.isAttestationRevoked(attestationUID);
+  
+  if (isRevoked) {
+    return {
+      valid: false,
+      reason: "Attestation has been revoked"
+    };
+  }
+  
+  // Check if it's expired
+  const now = Math.floor(Date.now() / 1000);
+  if (attestation.expirationTime > 0 && now > attestation.expirationTime) {
+    return {
+      valid: false,
+      reason: "Attestation has expired"
+    };
+  }
+  
+  return {
+    valid: true,
+    attestation: attestation
+  };
+}
+
+// Add verification button to UI
+function addVerificationButton(containerItem, attestationUID) {
+  const verifyBtn = document.createElement('button');
+  verifyBtn.className = 'verify-btn';
+  verifyBtn.textContent = 'Verify Attestation';
+  verifyBtn.onclick = async () => {
+    const verificationResult = await verifyAttestation(attestationUID);
+    
+    if (verificationResult.valid) {
+      alert('Attestation verified! This music rights record is valid.');
+    } else {
+      alert(`Attestation invalid: ${verificationResult.reason}`);
+    }
+  };
+  
+  containerItem.appendChild(verifyBtn);
+}
+            </div>
+            
+            <h3>Displaying Attestations in the Portfolio Viewer</h3>
+            <p>Modify the Portfolio Viewer to show attestation information:</p>
+            
+            <div class="code-block">
+// Add to unified_ip_viewer.html
+function displayAttestationDetails(demoData) {
+  // Add attestation section if it exists
+  if (demoData.attestation && demoData.attestation.uid) {
+    const attestationSection = document.createElement('div');
+    attestationSection.className = 'card attestation-card';
+    attestationSection.innerHTML = `
+      <div class="card-header">
+        Verified Attestation
+      </div>
+      <div class="card-body">
+        <p><strong>Attestation ID:</strong><br><span class="address">${demoData.attestation.uid}</span></p>
+        <p><strong>Schema ID:</strong><br><span class="address">${demoData.attestation.schemaUID}</span></p>
+        <p><strong>Attester:</strong><br><span class="address">${demoData.attestation.attester}</span></p>
+        <p><strong>Timestamp:</strong> ${new Date(demoData.attestation.timestamp * 1000).toLocaleString()}</p>
+        <p><a href="https://base.easscan.org/attestation/view/${demoData.attestation.uid}" target="_blank" class="btn btn-primary">View on EAS Explorer</a></p>
+      </div>
+    `;
+    
+    document.getElementById('attestation-container').appendChild(attestationSection);
+  }
+}
+            </div>
+            
+            <div class="warning">
+                <strong>Important:</strong> For the hackathon demo, create at least one real attestation on Base Sepolia to showcase the integration. The rest can use simulated attestation data.
+            </div>
+            
+            <h3>EAS Explorer Integration</h3>
+            <p>Add links to the <a href="https://base.easscan.org" target="_blank">Base EAS Explorer</a> for easy verification of attestations:</p>
+            
+            <ul>
+                <li>Base Mainnet: <a href="https://base.easscan.org" target="_blank">https://base.easscan.org</a></li>
+                <li>Base Sepolia: <a href="https://base-sepolia.easscan.org" target="_blank">https://base-sepolia.easscan.org</a></li>
+            </ul>
+            
+            <div class="success">
+                <strong>Benefits of EAS Integration:</strong>
+                <ul>
+                    <li>Adds a standardized verification layer to music rights</li>
+                    <li>Creates transparent, queryable history of rights registration</li>
+                    <li>Leverages existing Base infrastructure instead of custom solutions</li>
+                    <li>Demonstrates integration with Base ecosystem tools</li>
+                </ul>
+            </div>
+            
+        </section>
+        
+        <section class="phase">
+            <div class="phase-header">
+                <div class="phase-number">4</div>
+                <h2>Unified IP Portfolio Viewer Integration</h2>
+            </div>
+            <p>After successful on-chain registration, users can view their unified IP portfolios using the viewer component.</p>
+            
+            <h3>Integration with Existing Frontend</h3>
+            <div class="code-block">
+// Add to the publisher dashboard
+function addPortfolioViewerTab(registeredTracks) {
+  const viewerTab = document.getElementById('portfolio-viewer-tab');
+  viewerTab.classList.remove('hidden');
+  
+  const containersList = document.getElementById('containers-list');
+  containersList.innerHTML = '';
+  
+  registeredTracks.forEach(track => {
+    if (track.onChainData && track.onChainData.containerAddress) {
+      const containerItem = document.createElement('div');
+      containerItem.className = 'container-item';
+      containerItem.innerHTML = `
+        <h4>${track.title}</h4>
+        <p>Container: <span class="address">${track.onChainData.containerAddress}</span></p>
+        <button class="view-btn" data-container="${track.onChainData.containerAddress}">
+          View Portfolio
+        </button>
+      `;
+      containersList.appendChild(containerItem);
+    }
+  });
+  
+  // Add event listeners for view buttons
+  document.querySelectorAll('.view-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const containerAddress = e.target.dataset.container;
+      openPortfolioViewer(containerAddress);
+    });
+  });
+}
+
+// Open the portfolio viewer in a modal or new tab
+function openPortfolioViewer(containerAddress) {
+  // For the hackathon demo, we'll use the existing unified_ip_viewer.html
+  // but modify it to accept a container address parameter
+  
+  // If using a modal:
+  const modal = document.getElementById('portfolio-viewer-modal');
+  const iframe = document.getElementById('viewer-iframe');
+  iframe.src = `templates/unified_ip_viewer.html?container=${containerAddress}`;
+  modal.classList.remove('hidden');
+  
+  // If using a new tab:
+  // window.open(`templates/unified_ip_viewer.html?container=${containerAddress}`, '_blank');
+}
+            </div>
+            
+            <h3>Modifications to Unified IP Viewer</h3>
+            <p>The existing unified_ip_viewer.html needs these modifications:</p>
+            <ul>
+                <li>Accept container address as a URL parameter</li>
+                <li>Add fallback to demo data when no real data is available</li>
+                <li>Clear indication of test/demo status during the hackathon</li>
+            </ul>
+            
+            <div class="code-block">
+// Add to the unified_ip_viewer.html script section
+async function loadContainerData() {
+  try {
+    // Check if container address is provided
+    const urlParams = new URLSearchParams(window.location.search);
+    const containerAddress = urlParams.get('container');
+    
+    let demoData;
+    
+    if (containerAddress) {
+      // Try to load actual data from the blockchain
+      try {
+        // For the hackathon, we'll use a mix of real and simulated data
+        const isTestMode = true; // Set to false in production
+        
+        if (!isTestMode) {
+          // Real blockchain query would go here
+          demoData = await fetchRealContainerData(containerAddress);
+        } else {
+          // Use the simulated data with real container address
+          demoData = generateDemoData(containerAddress);
+          
+          // Add demo banner
+          addDemoBanner("Demo Mode: Using simulated data for this container");
+        }
+      } catch (error) {
+        console.error("Error fetching container data:", error);
+        // Fallback to demo data on error
+        demoData = generateDemoData(containerAddress);
+        addDemoBanner("Demo Mode: Using simulated data (fetch error)");
+      }
+    } else {
+      // No container specified, use pure demo data
+      demoData = generateDemoData();
+      addDemoBanner("Pure Demo Mode: No container specified");
+    }
+    
+    // Populate the UI with the data (existing code)
+    populateUI(demoData);
+    
+  } catch (error) {
+    console.error('Error in viewer initialization:', error);
+    showErrorMessage("Failed to load container data. Please try again.");
+  }
+}
+
+// Add demo banner to the page
+function addDemoBanner(message) {
+  const banner = document.createElement('div');
+  banner.className = 'demo-banner';
+  banner.textContent = message;
+  banner.style.background = '#fff8e1';
+  banner.style.padding = '10px';
+  banner.style.textAlign = 'center';
+  banner.style.borderBottom = '1px solid #ffeb3b';
+  
+  document.body.insertBefore(banner, document.body.firstChild);
+}
+
+// Generate demo data (can be based on the Python script output)
+function generateDemoData(containerAddress = null) {
+  // Use the output format from unified_ip_container_demo.py
+  // but allow overriding the container address
+  const demoData = {
+    // Demo data structure
+    // This would be a simpler version of what the Python script generates
+  };
+  
+  if (containerAddress) {
+    demoData.tba.address = containerAddress;
+  }
+  
+  return demoData;
+}
+
+// Change the document ready handler to use the new function
+document.addEventListener('DOMContentLoaded', loadContainerData);
+            </div>
+        </section>
+        
+        <section class="phase">
+            <div class="phase-header">
+                <div class="phase-number">5</div>
+                <h2>Production Considerations</h2>
+            </div>
+            <p>After the hackathon, these considerations would apply for moving to production:</p>
+            
+            <ul>
+                <li><strong>Gas Fees</strong> - Implement gas estimation and user approval flow</li>
+                <li><strong>Metadata Storage</strong> - Use proper IPFS for metadata with pinning services</li>
+                <li><strong>Contracts Audit</strong> - Full security audit before mainnet deployment</li>
+                <li><strong>Identity Verification</strong> - Strengthen publisher verification process</li>
+                <li><strong>Real Attestations</strong> - Integrate with actual EAS on Base</li>
+                <li><strong>Error Handling</strong> - Comprehensive error recovery for failed transactions</li>
+                <li><strong>Performance Optimization</strong> - Batch minting for large catalogs</li>
+            </ul>
+            
+            <div class="note">
+                <strong>Note:</strong> For the hackathon demo, focus on the happy path flow with simulated data and testnet transactions for the first few tracks.
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <p><strong>MESA Integration Plan</strong> - Base Batch Hackathon</p>
+        <a href="#" class="btn">Back to Dashboard</a>
+    </footer>
+</body>
+</html> 

@@ -1,0 +1,58 @@
+{
+  "discogs": {
+    "oauth": {
+      "consumer_key": "REPLACE_WITH_YOUR_CONSUMER_KEY",
+      "consumer_secret": "REPLACE_WITH_YOUR_CONSUMER_SECRET",
+      "tokens_file": "discogs_tokens.json"
+    },
+    "user_agent": "MESA_Rights_Vault/1.0",
+    "throttle_seconds": 1.0
+  },
+  "output_directory": "output",
+  "import_params": {
+    "limit_per_search": 50,
+    "genres": [
+      "Rock",
+      "Electronic",
+      "Jazz",
+      "Hip Hop",
+      "Classical"
+    ],
+    "artists": [
+      "Radiohead",
+      "Aphex Twin",
+      "Miles Davis",
+      "Kendrick Lamar",
+      "Philip Glass"
+    ],
+    "year_range": {
+      "start": 1970,
+      "end": 2023
+    }
+  },
+  "privacy_settings": {
+    "public_fields": [
+      "workTitle",
+      "genre",
+      "releaseDate",
+      "identifiers.type",
+      "identifiers.value"
+    ],
+    "private_fields": [
+      "royaltyInfo",
+      "contractReference",
+      "notes"
+    ],
+    "selectively_disclosed_fields": [
+      "artistParty",
+      "publisherParty",
+      "territory",
+      "term"
+    ]
+  },
+  "rights_mapping": {
+    "default_type": "master_recording",
+    "default_territory": "worldwide",
+    "default_percentage": 100
+  }
+} 

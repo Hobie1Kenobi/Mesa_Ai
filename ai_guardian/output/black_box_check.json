@@ -1,0 +1,16 @@
+{
+  "identifier": {
+    "type": "isrc",
+    "value": "US-AB1-23-00001"
+  },
+  "pro": "soundexchange",
+  "has_unclaimed_funds": true,
+  "estimated_amount": "$876.54",
+  "usage_periods": [
+    "2021-Q3",
+    "2021-Q4",
+    "2022-Q1"
+  ],
+  "claim_eligibility": "eligible",
+  "claim_deadline": "2023-12-31"
+}

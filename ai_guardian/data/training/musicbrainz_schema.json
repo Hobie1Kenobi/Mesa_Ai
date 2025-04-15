@@ -1,0 +1,153 @@
+{
+  "entities": {
+    "Area": {
+      "properties": {
+        "name": "string",
+        "aliases": ["string"],
+        "type": "string",
+        "iso_codes": ["string"],
+        "begin_date": "date",
+        "end_date": "date",
+        "disambiguation": "string",
+        "mbid": "string"
+      }
+    },
+    "Artist": {
+      "properties": {
+        "name": "string",
+        "sort_name": "string",
+        "areas": ["reference:Area"],
+        "ipi": "string",
+        "isni": "string",
+        "aliases": ["string"],
+        "type": "string",
+        "begin_date": "date",
+        "end_date": "date",
+        "disambiguation": "string",
+        "mbid": "string"
+      }
+    },
+    "Recording": {
+      "properties": {
+        "title": "string",
+        "artist_credit": "string",
+        "duration": "integer",
+        "isrc": "string",
+        "puids": ["string"],
+        "disambiguation": "string",
+        "mbid": "string"
+      }
+    },
+    "Work": {
+      "properties": {
+        "title": "string",
+        "iswc": "string",
+        "disambiguation": "string",
+        "mbid": "string"
+      }
+    },
+    "Release": {
+      "properties": {
+        "title": "string",
+        "artist_credit": "string",
+        "type": "string",
+        "status": "string",
+        "language": "string",
+        "date": "date",
+        "country": "string",
+        "label": "string",
+        "catalog_number": "string",
+        "barcode": "string",
+        "asin": "string",
+        "disambiguation": "string",
+        "mbid": "string"
+      }
+    },
+    "ReleaseGroup": {
+      "properties": {
+        "title": "string",
+        "artist_credit": "string",
+        "type": "string",
+        "disambiguation": "string",
+        "mbid": "string"
+      }
+    },
+    "Label": {
+      "properties": {
+        "name": "string",
+        "area": "reference:Area",
+        "ipi": "string",
+        "isni": "string",
+        "aliases": ["string"],
+        "type": "string",
+        "code": "string",
+        "begin_date": "date",
+        "end_date": "date",
+        "disambiguation": "string",
+        "mbid": "string"
+      }
+    },
+    "Medium": {
+      "properties": {
+        "format": "string",
+        "tracks": ["reference:Track"]
+      }
+    },
+    "Track": {
+      "properties": {
+        "title": "string",
+        "artist_credit": "string",
+        "duration": "integer"
+      }
+    }
+  },
+  "relationships": {
+    "ArtistWork": {
+      "source": "Artist",
+      "target": "Work",
+      "types": ["composer", "lyricist", "arranger"]
+    },
+    "ArtistRecording": {
+      "source": "Artist",
+      "target": "Recording",
+      "types": ["performer", "producer", "engineer"]
+    },
+    "WorkRecording": {
+      "source": "Work",
+      "target": "Recording",
+      "types": ["performance"]
+    },
+    "ReleaseRecording": {
+      "source": "Release",
+      "target": "Recording",
+      "types": ["includes"]
+    }
+  },
+  "identifiers": {
+    "ISWC": {
+      "description": "International Standard Musical Work Code",
+      "format": "T-XXXXXX-XXX-X",
+      "entity": "Work"
+    },
+    "ISRC": {
+      "description": "International Standard Recording Code",
+      "format": "CCXXXYYNNNNN",
+      "entity": "Recording"
+    },
+    "ISNI": {
+      "description": "International Standard Name Identifier",
+      "format": "XXXX XXXX XXXX XXXX",
+      "entity": ["Artist", "Label"]
+    }
+  },
+  "rights_relevant_entities": {
+    "MusicComposition": {
+      "maps_to": "Work",
+      "rights_fields": ["title", "iswc", "composer_credits"]
+    },
+    "SoundRecording": {
+      "maps_to": "Recording",
+      "rights_fields": ["title", "isrc", "owner", "performer_credits"]
+    }
+  }
+} 

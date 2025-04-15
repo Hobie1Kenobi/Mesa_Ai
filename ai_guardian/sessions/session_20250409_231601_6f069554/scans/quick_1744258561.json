@@ -1,0 +1,20 @@
+{
+  "scan_id": "quick_1744258561",
+  "scan_type": "quick",
+  "start_time": "2025-04-09T23:16:01.281623",
+  "monitored_pros": [
+    "ascap",
+    "bmi",
+    "sesac",
+    "soundexchange",
+    "hfa",
+    "mlc"
+  ],
+  "discoveries": [
+    "26c0f3e7e01a33b6",
+    "99d0b4113338a56d",
+    "61d3e99c9a929994"
+  ],
+  "end_time": "2025-04-09T23:16:01.284846",
+  "duration_seconds": 0.003223
+}

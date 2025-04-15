@@ -1,0 +1,20 @@
+{
+  "ownership_proof": {
+    "r1cs_path": "training_output\\ownership_proof\\ownership_proof.r1cs",
+    "wasm_dir": "training_output\\ownership_proof\\ownership_proof_js",
+    "zkey_path": "training_output\\ownership_proof\\ownership_proof.zkey",
+    "vkey_path": "training_output\\ownership_proof\\ownership_proof.vkey.json"
+  },
+  "selective_disclosure": {
+    "r1cs_path": "training_output\\selective_disclosure\\selective_disclosure.r1cs",
+    "wasm_dir": "training_output\\selective_disclosure\\selective_disclosure_js",
+    "zkey_path": "training_output\\selective_disclosure\\selective_disclosure.zkey",
+    "vkey_path": "training_output\\selective_disclosure\\selective_disclosure.vkey.json"
+  },
+  "royalty_proof": {
+    "r1cs_path": "training_output\\royalty_proof\\royalty_proof.r1cs",
+    "wasm_dir": "training_output\\royalty_proof\\royalty_proof_js",
+    "zkey_path": "training_output\\royalty_proof\\royalty_proof.zkey",
+    "vkey_path": "training_output\\royalty_proof\\royalty_proof.vkey.json"
+  }
+}

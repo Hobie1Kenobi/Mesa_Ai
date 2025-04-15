@@ -1,0 +1,32 @@
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    // Contract documents - accessible only to owner
+    match /contracts/{userId}/{rightId}/{document} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+    
+    // Public verification proofs - readable by anyone, writable by owner
+    match /proofs/{rightId}/{proofId} {
+      allow read: if true;
+      allow write: if request.auth != null && 
+                   exists(/databases/$(database)/documents/rights/$(rightId)) &&
+                   get(/databases/$(database)/documents/rights/$(rightId)).data.ownerId == request.auth.uid;
+    }
+    
+    // Encrypted verification data - specific permissions
+    match /encrypted/{rightId}/{document} {
+      allow read: if request.auth != null && 
+                 (exists(/databases/$(database)/documents/permissions/$(rightId)/users/$(request.auth.uid)) ||
+                  get(/databases/$(database)/documents/rights/$(rightId)).data.ownerId == request.auth.uid);
+      allow write: if request.auth != null && 
+                   get(/databases/$(database)/documents/rights/$(rightId)).data.ownerId == request.auth.uid;
+    }
+    
+    // User profile images
+    match /profiles/{userId} {
+      allow read: if true;
+      allow write: if request.auth != null && request.auth.uid == userId;
+    }
+  }
+}

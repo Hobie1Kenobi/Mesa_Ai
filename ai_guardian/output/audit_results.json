@@ -1,0 +1,24 @@
+{
+  "status": "completed",
+  "statement_file": "C:\\Users\\hobie\\owl-ai-agency\\MESA_Base_Hackathon\\ai_guardian\\output\\sample_statement.json",
+  "discrepancies": [
+    {
+      "type": "missing_work",
+      "details": "Song 'Example Title' appears in usage but not in payments",
+      "potential_value": "$120.50",
+      "confidence": 0.92
+    },
+    {
+      "type": "metadata_mismatch",
+      "details": "Writer credit for 'Another Song' has incorrect spelling",
+      "correct_value": "John A. Smith",
+      "statement_value": "John Smith",
+      "confidence": 0.89
+    }
+  ],
+  "summary": {
+    "total_works_checked": 128,
+    "discrepancies_found": 2,
+    "estimated_recovery_value": "$120.50"
+  }
+}

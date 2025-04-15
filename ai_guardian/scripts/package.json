@@ -1,0 +1,24 @@
+{
+  "name": "mesa-supabase-blockchain-integration",
+  "version": "1.0.0",
+  "description": "Integration between MESA Supabase and blockchain attestations",
+  "main": "supabase_to_blockchain_sync.js",
+  "scripts": {
+    "register-schema": "node register_enhanced_schema.js",
+    "setup": "node supabase_to_blockchain_sync.js --setup",
+    "test": "node supabase_to_blockchain_sync.js --test",
+    "start": "node supabase_to_blockchain_sync.js",
+    "test-attestation": "node eas_attestation_service.js"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.49.4",
+    "dotenv": "^16.5.0",
+    "ethers": "^5.7.2"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "author": "MESA AI Guardian Team",
+  "license": "UNLICENSED",
+  "private": true
+}

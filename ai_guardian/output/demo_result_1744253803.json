@@ -1,0 +1,80 @@
+{
+  "traditional_contract": {
+    "title": "Summer Nights",
+    "artist": "John Doe",
+    "rights_holder": "0x1234567890123456789012345678901234567890",
+    "rights_type": "master_recording",
+    "percentage": 75,
+    "territory": "worldwide",
+    "signers": [
+      {
+        "email": "artist@example.com",
+        "role": "artist"
+      },
+      {
+        "email": "producer@example.com",
+        "role": "producer"
+      },
+      {
+        "email": "publisher@example.com",
+        "role": "publisher"
+      }
+    ],
+    "contract_id": "MESA-1744253792",
+    "creation_date": "2025-04-09T21:56:32.321324",
+    "status": "signed",
+    "signed_date": "2025-04-09T21:56:34.324780"
+  },
+  "web3_enhancement": {
+    "schema_id": "0xc366b9307c69bf66555abfd1e85f2e1fe37ef84060dc44fb72d39974501a2ab5",
+    "attestation_id": "0x3c13be5f32c37ee56b377085e81a05f5cf2bbde3d669c49c41f1f65a7b0d41fe",
+    "token_id": 1,
+    "container_address": "0x08c84b6337d8c4274343753173028a52024038b8",
+    "timestamp": "2025-04-09T21:56:41.834952",
+    "contract_id": "MESA-1744253792",
+    "status": "active",
+    "payment_splitting": {
+      "configured": true,
+      "recipients": [
+        "0x1111111111111111111111111111111111111111",
+        "0x2222222222222222222222222222222222222222",
+        "0x3333333333333333333333333333333333333333"
+      ],
+      "roles": [
+        "artist",
+        "producer",
+        "publisher"
+      ],
+      "shares": [
+        70,
+        20,
+        10
+      ]
+    }
+  },
+  "payment_simulation": {
+    "total_amount": 1.0,
+    "timestamp": "2025-04-09T21:56:43.839260",
+    "distributions": [
+      {
+        "role": "artist",
+        "amount": 0.7,
+        "recipient": "0x1111111111111111111111111111111111111111",
+        "share": 70
+      },
+      {
+        "role": "producer",
+        "amount": 0.2,
+        "recipient": "0x2222222222222222222222222222222222222222",
+        "share": 20
+      },
+      {
+        "role": "publisher",
+        "amount": 0.1,
+        "recipient": "0x3333333333333333333333333333333333333333",
+        "share": 10
+      }
+    ]
+  },
+  "timestamp": "2025-04-09T21:56:43.841034"
+}

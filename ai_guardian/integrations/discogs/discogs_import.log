@@ -1,0 +1,34 @@
+2025-04-09 20:19:13,110 - discogs_importer - INFO - Starting Discogs import with config: config.json
+2025-04-09 20:19:13,111 - discogs_importer - INFO - Importing releases for genre: Rock
+2025-04-09 20:19:14,847 - discogs_importer - ERROR - Error searching releases: 401 Client Error: Unauthorized for url: https://api.discogs.com/database/search?type=release&genre=Rock&per_page=100
+2025-04-09 20:19:14,901 - discogs_importer - INFO - Importing releases for genre: Electronic
+2025-04-09 20:19:16,514 - discogs_importer - ERROR - Error searching releases: 401 Client Error: Unauthorized for url: https://api.discogs.com/database/search?type=release&genre=Electronic&per_page=100
+2025-04-09 20:19:16,517 - discogs_importer - INFO - Importing releases for genre: Jazz
+2025-04-09 20:19:18,128 - discogs_importer - ERROR - Error searching releases: 401 Client Error: Unauthorized for url: https://api.discogs.com/database/search?type=release&genre=Jazz&per_page=100
+2025-04-09 20:19:18,129 - discogs_importer - INFO - Importing releases for genre: Hip Hop
+2025-04-09 20:19:19,743 - discogs_importer - ERROR - Error searching releases: 401 Client Error: Unauthorized for url: https://api.discogs.com/database/search?type=release&genre=Hip+Hop&per_page=100
+2025-04-09 20:19:19,744 - discogs_importer - INFO - Importing releases for genre: Classical
+2025-04-09 20:19:21,446 - discogs_importer - ERROR - Error searching releases: 401 Client Error: Unauthorized for url: https://api.discogs.com/database/search?type=release&genre=Classical&per_page=100
+2025-04-09 20:19:21,447 - discogs_importer - INFO - Importing releases for artist: Radiohead
+2025-04-09 20:19:23,059 - discogs_importer - ERROR - Error searching releases: 401 Client Error: Unauthorized for url: https://api.discogs.com/database/search?type=release&artist=Radiohead&per_page=100
+2025-04-09 20:19:23,060 - discogs_importer - INFO - Importing releases for artist: Aphex Twin
+2025-04-09 20:19:24,669 - discogs_importer - ERROR - Error searching releases: 401 Client Error: Unauthorized for url: https://api.discogs.com/database/search?type=release&artist=Aphex+Twin&per_page=100
+2025-04-09 20:19:24,674 - discogs_importer - INFO - Importing releases for artist: Miles Davis
+2025-04-09 20:19:26,281 - discogs_importer - ERROR - Error searching releases: 401 Client Error: Unauthorized for url: https://api.discogs.com/database/search?type=release&artist=Miles+Davis&per_page=100
+2025-04-09 20:19:26,281 - discogs_importer - INFO - Importing releases for artist: Kendrick Lamar
+2025-04-09 20:19:28,006 - discogs_importer - ERROR - Error searching releases: 401 Client Error: Unauthorized for url: https://api.discogs.com/database/search?type=release&artist=Kendrick+Lamar&per_page=100
+2025-04-09 20:19:28,007 - discogs_importer - INFO - Importing releases for artist: Philip Glass
+2025-04-09 20:19:29,625 - discogs_importer - ERROR - Error searching releases: 401 Client Error: Unauthorized for url: https://api.discogs.com/database/search?type=release&artist=Philip+Glass&per_page=100
+2025-04-09 20:19:29,629 - discogs_importer - INFO - Importing releases for year(s): 1970-1979
+2025-04-09 20:19:31,243 - discogs_importer - ERROR - Error searching releases: 401 Client Error: Unauthorized for url: https://api.discogs.com/database/search?type=release&year=1970-1979&per_page=100
+2025-04-09 20:19:31,244 - discogs_importer - INFO - Importing releases for year(s): 1980-1989
+2025-04-09 20:19:32,858 - discogs_importer - ERROR - Error searching releases: 401 Client Error: Unauthorized for url: https://api.discogs.com/database/search?type=release&year=1980-1989&per_page=100
+2025-04-09 20:19:32,861 - discogs_importer - INFO - Importing releases for year(s): 1990-1999
+2025-04-09 20:19:34,498 - discogs_importer - ERROR - Error searching releases: 401 Client Error: Unauthorized for url: https://api.discogs.com/database/search?type=release&year=1990-1999&per_page=100
+2025-04-09 20:19:34,498 - discogs_importer - INFO - Importing releases for year(s): 2000-2010
+2025-04-09 20:19:36,113 - discogs_importer - ERROR - Error searching releases: 401 Client Error: Unauthorized for url: https://api.discogs.com/database/search?type=release&year=2000-2010&per_page=100
+2025-04-09 20:19:36,113 - discogs_importer - INFO - Importing releases for year(s): 2011-2023
+2025-04-09 20:19:37,729 - discogs_importer - ERROR - Error searching releases: 401 Client Error: Unauthorized for url: https://api.discogs.com/database/search?type=release&year=2011-2023&per_page=100
+2025-04-09 20:19:37,729 - discogs_importer - INFO - Saved 0 rights records to output\rights_records.json
+2025-04-09 20:19:37,729 - discogs_importer - INFO - Generated import summary at output\import_summary.md
+2025-04-09 20:19:37,729 - discogs_importer - INFO - Import completed. Total rights records: 0

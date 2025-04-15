@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MESA Rights Vault - Session Collector</title>
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2ecc71;
+            --danger-color: #e74c3c;
+            --warning-color: #f39c12;
+            --dark-color: #2c3e50;
+            --light-color: #ecf0f1;
+            --card-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f7fa;
+            color: #333;
+        }
+        
+        header {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .session-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .metrics {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+        
+        .metric {
+            text-align: center;
+            padding: 1rem;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: var(--card-shadow);
+            flex: 1;
+            margin: 0.5rem;
+            min-width: 180px;
+        }
+        
+        .metric-value {
+            font-size: 2rem;
+            font-weight: bold;
+            margin: 0.5rem 0;
+            color: var(--primary-color);
+        }
+        
+        .metric-label {
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .metric.success .metric-value {
+            color: var(--secondary-color);
+        }
+        
+        .metric.warning .metric-value {
+            color: var(--warning-color);
+        }
+        
+        .metric.danger .metric-value {
+            color: var(--danger-color);
+        }
+        
+        .dashboard {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: var(--card-shadow);
+        }
+        
+        .full-width {
+            grid-column: 1 / -1;
+        }
+        
+        h1, h2, h3 {
+            color: var(--dark-color);
+        }
+        
+        h2 {
+            margin-top: 0;
+            border-bottom: 2px solid var(--light-color);
+            padding-bottom: 0.5rem;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+        
+        th, td {
+            text-align: left;
+            padding: 0.75rem;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        th {
+            background-color: var(--light-color);
+            font-weight: 600;
+        }
+        
+        tr:hover {
+            background-color: rgba(236, 240, 241, 0.5);
+        }
+        
+        .pill {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            background-color: var(--light-color);
+        }
+        
+        .pill-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .pill-success {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+        
+        .pill-warning {
+            background-color: var(--warning-color);
+            color: white;
+        }
+        
+        .pill-danger {
+            background-color: var(--danger-color);
+            color: white;
+        }
+        
+        .progress-container {
+            margin: 0.5rem 0;
+            background-color: var(--light-color);
+            border-radius: 4px;
+            height: 8px;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            border-radius: 4px;
+            background-color: var(--primary-color);
+        }
+        
+        .confidence-high {
+            background-color: var(--secondary-color);
+        }
+        
+        .confidence-medium {
+            background-color: var(--warning-color);
+        }
+        
+        .confidence-low {
+            background-color: var(--danger-color);
+        }
+        
+        .agency-label {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            font-weight: bold;
+            display: inline-block;
+            margin-top: 0.5rem;
+        }
+        
+        .evidence-list {
+            background-color: var(--light-color);
+            padding: 1rem;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 0.9rem;
+            margin-top: 1rem;
+        }
+        
+        .tab-container {
+            margin-top: 2rem;
+        }
+        
+        .tabs {
+            display: flex;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid var(--light-color);
+        }
+        
+        .tab {
+            padding: 0.75rem 1.5rem;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            margin-right: 0.5rem;
+        }
+        
+        .tab.active {
+            border-bottom: 3px solid var(--primary-color);
+            font-weight: bold;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .source-pill {
+            background-color: #95a5a6;
+            color: white;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            margin-right: 0.25rem;
+        }
+        
+        .timeline {
+            position: relative;
+            margin: 2rem 0;
+            padding-left: 2rem;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background-color: var(--light-color);
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--light-color);
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2rem;
+            top: 0.5rem;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+        }
+        
+        .timeline-date {
+            font-size: 0.8rem;
+            color: #666;
+            margin-bottom: 0.5rem;
+        }
+        
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            text-align: center;
+            padding: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .expandable {
+            cursor: pointer;
+        }
+        
+        .expandable::after {
+            content: ' ▼';
+            font-size: 0.7rem;
+            color: #999;
+        }
+        
+        .expendable.expanded::after {
+            content: ' ▲';
+        }
+        
+        .expandable-content {
+            display: none;
+            padding: 1rem;
+            background-color: var(--light-color);
+            border-radius: 4px;
+            margin-top: 0.5rem;
+        }
+        
+        .tooltip {
+            position: relative;
+            display: inline-block;
+            border-bottom: 1px dotted #999;
+        }
+        
+        .tooltip .tooltip-text {
+            visibility: hidden;
+            width: 200px;
+            background-color: rgba(0,0,0,0.8);
+            color: #fff;
+            text-align: center;
+            border-radius: 4px;
+            padding: 0.5rem;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -100px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 0.8rem;
+        }
+        
+        .tooltip:hover .tooltip-text {
+            visibility: visible;
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>MESA Rights Vault - Session Collector</h1>
+        <div class="agency-label" id="agency-identifier">Agency: MESA</div>
+    </header>
+    
+    <div class="container">
+        <div class="session-info">
+            <div>
+                <h2>Session Information</h2>
+                <table>
+                    <tr>
+                        <th>Session ID</th>
+                        <td id="session-id"></td>
+                    </tr>
+                    <tr>
+                        <th>Started</th>
+                        <td id="session-start"></td>
+                    </tr>
+                    <tr>
+                        <th>Duration</th>
+                        <td id="session-duration"></td>
+                    </tr>
+                    <tr>
+                        <th>Report Generated</th>
+                        <td id="report-time"></td>
+                    </tr>
+                </table>
+            </div>
+            <div>
+                <h2>Monitored Sources</h2>
+                <div id="monitored-sources"></div>
+            </div>
+        </div>
+        
+        <div class="metrics">
+            <div class="metric">
+                <div class="metric-label">Total Discoveries</div>
+                <div class="metric-value" id="total-discoveries">0</div>
+            </div>
+            <div class="metric success">
+                <div class="metric-label">Potential Funds</div>
+                <div class="metric-value" id="total-funds">0</div>
+            </div>
+            <div class="metric warning">
+                <div class="metric-label">Total Value</div>
+                <div class="metric-value" id="total-value">$0</div>
+            </div>
+            <div class="metric danger">
+                <div class="metric-label">High Value Items</div>
+                <div class="metric-value" id="high-value-items">0</div>
+            </div>
+        </div>
+        
+        <div class="tab-container">
+            <div class="tabs">
+                <div class="tab active" data-tab="funds">Funds</div>
+                <div class="tab" data-tab="discoveries">Discoveries</div>
+                <div class="tab" data-tab="attribution">Attribution</div>
+            </div>
+            
+            <div class="tab-content active" id="funds-content">
+                <div class="card full-width">
+                    <h2>Potential Fund Recoveries</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Fund ID</th>
+                                <th>Work ID</th>
+                                <th>Value</th>
+                                <th>Source</th>
+                                <th>Confidence</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="funds-table">
+                            <!-- Will be populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="tab-content" id="discoveries-content">
+                <div class="card full-width">
+                    <h2>All Discoveries</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Type</th>
+                                <th>Source</th>
+                                <th>First Seen</th>
+                                <th>Confidence</th>
+                                <th>Details</th>
+                            </tr>
+                        </thead>
+                        <tbody id="discoveries-table">
+                            <!-- Will be populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="tab-content" id="attribution-content">
+                <div class="card full-width">
+                    <h2>Agency Attribution</h2>
+                    <div class="agency-attribution">
+                        <div class="agency-label" id="attribution-agency"></div>
+                        <p><strong>Discovery Method:</strong> <span id="attribution-method"></span></p>
+                        <p><strong>Attribution Strength:</strong> <span id="attribution-strength"></span></p>
+                        <p><strong>Digital Signature:</strong> <code id="attribution-signature"></code></p>
+                    </div>
+                    
+                    <h3 class="expandable" data-target="evidence-section">Evidence & Tracking</h3>
+                    <div id="evidence-section" class="expandable-content">
+                        <div class="evidence-list" id="attribution-evidence">
+                            <!-- Will be populated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <p>MESA Rights Vault - AI Guardian - Session Collector</p>
+    </footer>
+    
+    <script>
+        // Session data - will be replaced with actual data
+        const sessionData = SESSION_DATA_PLACEHOLDER;
+        
+        // Formatters
+        function formatDate(isoString) {
+            const date = new Date(isoString);
+            return date.toLocaleString();
+        }
+        
+        function formatDuration(hours) {
+            const h = Math.floor(hours);
+            const m = Math.floor((hours - h) * 60);
+            const s = Math.floor(((hours - h) * 60 - m) * 60);
+            
+            return `${h}h ${m}m ${s}s`;
+        }
+        
+        function getConfidenceClass(confidence) {
+            const value = parseFloat(confidence);
+            if (value >= 0.9) return 'confidence-high';
+            if (value >= 0.75) return 'confidence-medium';
+            return 'confidence-low';
+        }
+        
+        function renderConfidenceBar(confidence) {
+            const confidenceValue = parseFloat(confidence) * 100;
+            const confidenceClass = getConfidenceClass(confidence);
+            
+            const container = document.createElement('div');
+            container.className = 'progress-container';
+            
+            const bar = document.createElement('div');
+            bar.className = `progress-bar ${confidenceClass}`;
+            bar.style.width = `${confidenceValue}%`;
+            
+            container.appendChild(bar);
+            
+            const text = document.createElement('small');
+            text.textContent = `${confidenceValue.toFixed(0)}%`;
+            
+            const wrapper = document.createElement('div');
+            wrapper.appendChild(container);
+            wrapper.appendChild(text);
+            
+            return wrapper;
+        }
+        
+        // Populate the page with data
+        document.addEventListener('DOMContentLoaded', function() {
+            // Session info
+            document.getElementById('session-id').textContent = sessionData.session_id;
+            document.getElementById('session-start').textContent = formatDate(sessionData.session_start_time);
+            document.getElementById('session-duration').textContent = formatDuration(sessionData.session_duration_hours);
+            document.getElementById('report-time').textContent = formatDate(sessionData.generation_time);
+            document.getElementById('agency-identifier').textContent = `Agency: ${sessionData.agency_identifier}`;
+            
+            // Metrics
+            document.getElementById('total-discoveries').textContent = sessionData.statistics.total_discoveries;
+            document.getElementById('total-funds').textContent = sessionData.statistics.total_potential_funds;
+            document.getElementById('total-value').textContent = sessionData.statistics.total_potential_value;
+            document.getElementById('high-value-items').textContent = sessionData.highest_value_discoveries.length;
+            
+            // Monitored sources
+            const sourcesContainer = document.getElementById('monitored-sources');
+            sessionData.statistics.sources_monitored.forEach(source => {
+                const pill = document.createElement('span');
+                pill.className = 'source-pill';
+                pill.textContent = source;
+                sourcesContainer.appendChild(pill);
+                sourcesContainer.appendChild(document.createTextNode(' '));
+            });
+            
+            // Funds table
+            const fundsTable = document.getElementById('funds-table');
+            sessionData.all_funds.forEach(fund => {
+                const row = document.createElement('tr');
+                
+                const idCell = document.createElement('td');
+                idCell.textContent = fund.fund_id;
+                
+                const workCell = document.createElement('td');
+                workCell.textContent = fund.work_id;
+                
+                const valueCell = document.createElement('td');
+                valueCell.textContent = fund.estimated_value;
+                
+                const sourceCell = document.createElement('td');
+                sourceCell.textContent = fund.source;
+                
+                const confidenceCell = document.createElement('td');
+                confidenceCell.appendChild(renderConfidenceBar(fund.confidence));
+                
+                const statusCell = document.createElement('td');
+                const statusPill = document.createElement('span');
+                statusPill.className = 'pill pill-warning';
+                statusPill.textContent = fund.status;
+                statusCell.appendChild(statusPill);
+                
+                row.appendChild(idCell);
+                row.appendChild(workCell);
+                row.appendChild(valueCell);
+                row.appendChild(sourceCell);
+                row.appendChild(confidenceCell);
+                row.appendChild(statusCell);
+                
+                fundsTable.appendChild(row);
+            });
+            
+            // Discoveries table
+            const discoveriesTable = document.getElementById('discoveries-table');
+            sessionData.all_discoveries.forEach(discovery => {
+                const row = document.createElement('tr');
+                
+                const idCell = document.createElement('td');
+                idCell.textContent = discovery.id;
+                
+                const typeCell = document.createElement('td');
+                typeCell.textContent = discovery.type;
+                
+                const sourceCell = document.createElement('td');
+                sourceCell.textContent = discovery.source;
+                
+                const firstSeenCell = document.createElement('td');
+                firstSeenCell.textContent = formatDate(discovery.first_discovered);
+                
+                const confidenceCell = document.createElement('td');
+                confidenceCell.appendChild(renderConfidenceBar(discovery.confidence));
+                
+                const detailsCell = document.createElement('td');
+                const detailsButton = document.createElement('button');
+                detailsButton.textContent = 'View Details';
+                detailsButton.addEventListener('click', function() {
+                    alert(JSON.stringify(discovery.data, null, 2));
+                });
+                detailsCell.appendChild(detailsButton);
+                
+                row.appendChild(idCell);
+                row.appendChild(typeCell);
+                row.appendChild(sourceCell);
+                row.appendChild(firstSeenCell);
+                row.appendChild(confidenceCell);
+                row.appendChild(detailsCell);
+                
+                discoveriesTable.appendChild(row);
+            });
+            
+            // Attribution
+            document.getElementById('attribution-agency').textContent = sessionData.agency_attribution.agency;
+            document.getElementById('attribution-method').textContent = sessionData.agency_attribution.discovery_method;
+            document.getElementById('attribution-strength').textContent = sessionData.agency_attribution.attribution_strength;
+            document.getElementById('attribution-signature').textContent = sessionData.agency_attribution.digital_signature;
+            
+            // Evidence
+            const evidenceList = document.getElementById('attribution-evidence');
+            if (sessionData.all_funds.length > 0) {
+                const fund = sessionData.all_funds[0]; // Get evidence from first fund
+                fund.attribution.attribution_evidence.forEach(evidence => {
+                    const line = document.createElement('div');
+                    line.textContent = evidence;
+                    evidenceList.appendChild(line);
+                });
+            }
+            
+            // Tab switching
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.addEventListener('click', function() {
+                    // Remove active class from all tabs
+                    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                    
+                    // Add active class to clicked tab
+                    this.classList.add('active');
+                    
+                    // Show corresponding content
+                    const tabId = this.getAttribute('data-tab');
+                    document.getElementById(`${tabId}-content`).classList.add('active');
+                });
+            });
+            
+            // Expandable sections
+            document.querySelectorAll('.expandable').forEach(expandable => {
+                expandable.addEventListener('click', function() {
+                    const targetId = this.getAttribute('data-target');
+                    const target = document.getElementById(targetId);
+                    
+                    if (target.style.display === 'block') {
+                        target.style.display = 'none';
+                        this.classList.remove('expanded');
+                    } else {
+                        target.style.display = 'block';
+                        this.classList.add('expanded');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html> 

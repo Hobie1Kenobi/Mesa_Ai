@@ -1,0 +1,59 @@
+{
+  "user_token": "",
+  "user_agent": "MESA Rights Vault/1.0 +https://mesarightsvault.example.com",
+  "encryption_key": "XVD29xmk8PsXVD29xmk8Psoq67jmn09zBY",
+  "rate_limit": {
+    "requests_per_minute": 25,
+    "cooldown_period": 5
+  },
+  "cache": {
+    "enabled": true,
+    "expiration": 86400,
+    "max_entries": 1000
+  },
+  "privacy": {
+    "default_public_fields": ["workTitle", "releaseDate", "genres"],
+    "default_private_fields": ["identifiers", "artistParty", "publisherParty"],
+    "selective_disclosure": true
+  },
+  "field_mappings": {
+    "release": {
+      "discogs_title": "workTitle",
+      "discogs_artist": "artistParty",
+      "discogs_label": "publisherParty",
+      "discogs_released": "releaseDate",
+      "discogs_genres": "genres",
+      "discogs_styles": "styles",
+      "discogs_country": "territory"
+    },
+    "artist": {
+      "discogs_name": "name",
+      "discogs_realname": "real_name",
+      "discogs_profile": "profile",
+      "discogs_urls": "urls",
+      "discogs_namevariations": "aliases"
+    },
+    "label": {
+      "discogs_name": "name",
+      "discogs_profile": "profile",
+      "discogs_contact_info": "contactInfo",
+      "discogs_urls": "urls",
+      "discogs_parent_label": "parentLabel"
+    }
+  },
+  "integration": {
+    "mesa_vault_endpoint": "http://localhost:5000/api/v1/rights",
+    "zk_proof_service": "http://localhost:5001/api/v1/proofs",
+    "blockchain_connector": "http://localhost:5002/api/v1/blockchain"
+  },
+  "search": {
+    "max_results": 5,
+    "min_score": 20,
+    "boost_identifiers": true
+  },
+  "logging": {
+    "level": "INFO",
+    "file": "discogs_connector.log",
+    "format": "%(asctime)s - %(levelname)s - %(message)s"
+  }
+} 

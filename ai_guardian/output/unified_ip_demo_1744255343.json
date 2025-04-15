@@ -1,0 +1,206 @@
+{
+  "song_info": {
+    "title": "Summer Nights",
+    "artist": "John Doe",
+    "genre": "Pop"
+  },
+  "contracts": {
+    "MusicRightsNFT": "0xc5a5C42992dECbae36851359345FE25997F5C42d",
+    "CoverArtNFT": "0xB742c5A4dBaE61c4F7c08D37d53d259B1eAE1a7F",
+    "MusicVideoNFT": "0x3F26B25fcA757bAe370A068d487c70D139CA06ee",
+    "ERC6551Registry": "0x47A9D630099a7ED605D31ed491C1397BfBc3Cb87",
+    "EnhancedIPContainer": "0x15D0F9dB62F6dB64CBCD1E10dE22F1B1E5d01EfA",
+    "MockEAS": "0x8A791620dd6260079BF849Dc5567aDC3F2FdC318"
+  },
+  "nft_metadata": {
+    "contract": "0xc5a5C42992dECbae36851359345FE25997F5C42d",
+    "tokenId": 1,
+    "tokenURI": "ipfs://Qmce24b77304dd5f66c4e01c40870ee2a54581bb1d",
+    "rightsHolder": "0x1111111111111111111111111111111111111111",
+    "contractId": "MESA-1744255343",
+    "rightsType": "master_recording",
+    "territory": "worldwide"
+  },
+  "tba": {
+    "address": "0x1111111111111111111111111111111111111111",
+    "implementation": "0x15D0F9dB62F6dB64CBCD1E10dE22F1B1E5d01EfA",
+    "chainId": 8453,
+    "tokenContract": "0xc5a5C42992dECbae36851359345FE25997F5C42d",
+    "tokenId": 1
+  },
+  "cover_art": {
+    "contract": "0xB742c5A4dBaE61c4F7c08D37d53d259B1eAE1a7F",
+    "tokenId": 1,
+    "tokenURI": "ipfs://Qm66bc17f1ea83c6fc6a1f901ba73bc017c1e158a4",
+    "title": "Summer Nights",
+    "artist": "John Doe",
+    "workReference": "Summer Nights",
+    "imageFormat": "jpg",
+    "isOfficial": true
+  },
+  "music_video": {
+    "metadata": {
+      "contract": "0x3F26B25fcA757bAe370A068d487c70D139CA06ee",
+      "tokenId": 1,
+      "tokenURI": "ipfs://Qme5cc458f8fab71a7c3a0c3ae61832ad156bfb1f0",
+      "title": "Summer Nights - Official Video",
+      "artist": "John Doe",
+      "workReference": "Summer Nights",
+      "editionType": "MusicVideo",
+      "duration": 240,
+      "maxSupply": 1000,
+      "videoFormat": "mp4",
+      "resolution": "4K"
+    },
+    "editions": [
+      {
+        "owner": "0x0000000000000000000000000000000000000000",
+        "amount": 1
+      },
+      {
+        "owner": "0x1111111111111111111111111111111111111111",
+        "amount": 1
+      },
+      {
+        "owner": "0x2222222222222222222222222222222222222222",
+        "amount": 1
+      },
+      {
+        "owner": "0x3333333333333333333333333333333333333333",
+        "amount": 1
+      },
+      {
+        "owner": "0x4444444444444444444444444444444444444444",
+        "amount": 1
+      },
+      {
+        "owner": "0x5555555555555555555555555555555555555555",
+        "amount": 1
+      },
+      {
+        "owner": "0x6666666666666666666666666666666666666666",
+        "amount": 1
+      },
+      {
+        "owner": "0x7777777777777777777777777777777777777777",
+        "amount": 1
+      },
+      {
+        "owner": "0x8888888888888888888888888888888888888888",
+        "amount": 1
+      },
+      {
+        "owner": "0x9999999999999999999999999999999999999999",
+        "amount": 1
+      }
+    ]
+  },
+  "stems_and_remixes": {
+    "stems": {
+      "contract": "0x3F26B25fcA757bAe370A068d487c70D139CA06ee",
+      "tokenId": 2,
+      "tokenURI": "ipfs://Qm18d1e727872542a8d26160d23f7731ba12c158ac",
+      "title": "Summer Nights - Stems Pack",
+      "artist": "John Doe",
+      "workReference": "Summer Nights",
+      "editionType": "BehindTheScenes",
+      "maxSupply": 500,
+      "format": "wav"
+    },
+    "remix": {
+      "contract": "0x3F26B25fcA757bAe370A068d487c70D139CA06ee",
+      "tokenId": 3,
+      "tokenURI": "ipfs://Qm5234d0d0a60e639febddcc399549844f14828647",
+      "title": "Summer Nights - Club Remix",
+      "artist": "John Doe & DJ Remix",
+      "workReference": "Summer Nights",
+      "editionType": "Remix",
+      "duration": 360,
+      "maxSupply": 800,
+      "videoFormat": "mp4",
+      "resolution": "1080p"
+    }
+  },
+  "payment_config": {
+    "recipients": [
+      {
+        "address": "0x1111111111111111111111111111111111111111",
+        "role": "artist",
+        "share": 70
+      },
+      {
+        "address": "0x2222222222222222222222222222222222222222",
+        "role": "producer",
+        "share": 20
+      },
+      {
+        "address": "0x3333333333333333333333333333333333333333",
+        "role": "publisher",
+        "share": 10
+      }
+    ],
+    "totalShares": 100
+  },
+  "attestation": {
+    "schemaId": "0x9865c7b0f97b16bd3a720c40b716ff403a28bfaa8248c5d7fda6a3edae5740b3",
+    "attestationId": "0x31b76acf9aa442c0d7f98136c67533129e693a1c18b64691844e7ff9e5ad1746",
+    "attester": "0x1234567890123456789012345678901234567890",
+    "recipient": "0x1111111111111111111111111111111111111111",
+    "contractId": "MESA-1744255343",
+    "rightsType": "master_recording",
+    "territory": "worldwide",
+    "timestamp": 1744255343
+  },
+  "portfolio_value": 2.5,
+  "trade": {
+    "fromAddress": "0x1111111111111111111111111111111111111111",
+    "toAddress": "0x9999999999999999999999999999999999999999",
+    "transactionHash": "0x1601d667a2a566cd2aab572a3ae6a5a65ab9234b4f4e76c3bbd57ef507ea038b",
+    "value": 2.5,
+    "timestamp": 1744255343
+  },
+  "timestamp": "2025-04-09T22:22:23.319537",
+  "summary": {
+    "container_address": "0x1111111111111111111111111111111111111111",
+    "total_assets": 5,
+    "assets": [
+      {
+        "type": "rights_nft",
+        "tokenId": 1,
+        "contract": "0xc5a5C42992dECbae36851359345FE25997F5C42d",
+        "description": "Original rights to 'Summer Nights'"
+      },
+      {
+        "type": "cover_art",
+        "tokenId": 1,
+        "contract": "0xB742c5A4dBaE61c4F7c08D37d53d259B1eAE1a7F",
+        "description": "Official cover art for 'Summer Nights'"
+      },
+      {
+        "type": "music_video",
+        "tokenId": 1,
+        "contract": "0x3F26B25fcA757bAe370A068d487c70D139CA06ee",
+        "description": "Official music video for 'Summer Nights'",
+        "editions_minted": 10,
+        "max_supply": 1000
+      },
+      {
+        "type": "stems",
+        "tokenId": 2,
+        "contract": "0x3F26B25fcA757bAe370A068d487c70D139CA06ee",
+        "description": "Stems pack for 'Summer Nights'",
+        "max_supply": 500
+      },
+      {
+        "type": "remix",
+        "tokenId": 3,
+        "contract": "0x3F26B25fcA757bAe370A068d487c70D139CA06ee",
+        "description": "Club remix of 'Summer Nights'",
+        "max_supply": 800
+      }
+    ],
+    "attestations": 1,
+    "payment_recipients": 3,
+    "portfolio_value": 2.5
+  }
+}

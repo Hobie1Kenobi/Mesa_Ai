@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MESA Base Integration | Blockchain Attestations</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #ff2d55;
+            --secondary: #1e8ffe;
+            --dark: #0f172a;
+            --darker: #060b18;
+            --light: #e1e7ef;
+            --success: #00c39a;
+            --warning: #f7c94b;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            background: var(--dark);
+            color: var(--light);
+            font-family: 'Space Grotesk', sans-serif;
+            line-height: 1.6;
+            background-image: 
+                radial-gradient(circle at 10% 10%, rgba(255, 45, 85, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 90% 90%, rgba(30, 143, 254, 0.1) 0%, transparent 50%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 4rem;
+            position: relative;
+        }
+        
+        .logo {
+            margin-bottom: 1rem;
+        }
+        
+        .logo svg {
+            height: 60px;
+        }
+        
+        h1 {
+            font-size: 3rem;
+            margin: 0;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-weight: 700;
+            letter-spacing: -1px;
+        }
+        
+        h2 {
+            font-size: 2rem;
+            margin-top: 3rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+            border-bottom: 1px solid rgba(255, 45, 85, 0.3);
+            padding-bottom: 0.5rem;
+        }
+        
+        h3 {
+            font-size: 1.5rem;
+            color: var(--secondary);
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        p, li {
+            margin-bottom: 1rem;
+        }
+        
+        .card {
+            background: var(--darker);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .glow {
+            position: relative;
+        }
+        
+        .glow::after {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            right: -20px;
+            bottom: -20px;
+            background: radial-gradient(circle at center, rgba(255, 45, 85, 0.3) 0%, transparent 70%);
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .glow:hover::after {
+            opacity: 1;
+        }
+        
+        pre {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 1rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-family: 'Space Mono', monospace;
+            margin: 1.5rem 0;
+            border-left: 3px solid var(--primary);
+        }
+        
+        code {
+            font-family: 'Space Mono', monospace;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-size: 0.9em;
+            color: var(--light);
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 0.2rem 0.6rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-right: 0.5rem;
+        }
+        
+        .badge-primary {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .badge-secondary {
+            background: var(--secondary);
+            color: white;
+        }
+        
+        .badge-dark {
+            background: var(--darker);
+            color: var(--light);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .hash {
+            font-family: 'Space Mono', monospace;
+            color: var(--success);
+            word-break: break-all;
+        }
+        
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+        }
+        
+        .data-table th {
+            text-align: left;
+            padding: 0.75rem 1rem;
+            background: rgba(0, 0, 0, 0.3);
+            color: var(--secondary);
+        }
+        
+        .data-table td {
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .data-table tr:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+        
+        .data-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+            padding-bottom: 0.5rem;
+        }
+        
+        .data-label {
+            font-weight: 600;
+            color: var(--secondary);
+        }
+        
+        a {
+            color: var(--primary);
+            text-decoration: none;
+            transition: color 0.2s, border-bottom 0.2s;
+            border-bottom: 1px dashed rgba(255, 45, 85, 0.3);
+            padding-bottom: 1px;
+        }
+        
+        a:hover {
+            color: var(--secondary);
+            border-bottom: 1px solid var(--secondary);
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(255, 45, 85, 0.1), rgba(30, 143, 254, 0.1));
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border: 1px solid rgba(255, 45, 85, 0.2);
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        ul {
+            padding-left: 1.5rem;
+        }
+        
+        li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .icon {
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 0.5rem;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 4rem;
+            padding: 2rem;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .animate {
+            animation: fadeIn 0.6s ease-out forwards;
+            opacity: 0;
+        }
+        
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+        .delay-4 { animation-delay: 0.4s; }
+        
+        /* Blockchain themed elements */
+        .blockchain-container {
+            position: relative;
+            margin: 3rem 0;
+            padding-top: 2rem;
+            padding-bottom: 2rem;
+        }
+        
+        .blockchain-blocks {
+            display: flex;
+            overflow-x: auto;
+            padding-bottom: 1rem;
+            gap: 0.5rem;
+        }
+        
+        .block {
+            flex: 0 0 auto;
+            width: 150px;
+            height: 150px;
+            background: var(--darker);
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            padding: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+        }
+        
+        .block::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 20px;
+            border-right: 1px solid rgba(255, 255, 255, 0.2);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .block:last-child::after {
+            display: none;
+        }
+        
+        .block-header {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .block-hash {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--success);
+            word-break: break-all;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        
+        .block-content {
+            margin-top: auto;
+            font-size: 0.8rem;
+        }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+            height: 10px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 45, 85, 0.5);
+            border-radius: 5px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 45, 85, 0.8);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <svg width="200" height="80" viewBox="0 0 200 80" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="100%" height="100%" fill="none"/>
+                    <g transform="translate(40, 15)">
+                        <path d="M0,10 L10,50 L20,20 L30,50 L40,10" 
+                              fill="none" stroke="#ff2d55" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                    </g>
+                    <text x="100" y="55" font-family="Space Grotesk" font-size="32" font-weight="bold" fill="white" text-anchor="middle">mesa</text>
+                </svg>
+            </div>
+            <h1>BASE Integration Report</h1>
+            <p>Blockchain Attestations for Music Rights Protection</p>
+            <div class="badges">
+                <span class="badge badge-primary">Base Sepolia</span>
+                <span class="badge badge-secondary">EAS</span>
+                <span class="badge badge-dark">DID</span>
+                <span class="badge badge-dark">Attestations</span>
+            </div>
+        </header>
+        
+        <div class="animate delay-1">
+            <h2>EAS Attestation Script</h2>
+            <div class="card glow">
+                <p>This script creates a real music rights attestation on the Base Sepolia testnet using the Ethereum Attestation Service (EAS).</p>
+                
+                <h3>Prerequisites</h3>
+                <ul>
+                    <li>Node.js installed (v14 or higher)</li>
+                    <li>Base Sepolia testnet ETH in your wallet</li>
+                    <li>A private key with some Base Sepolia ETH</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="animate delay-2">
+            <h3>Setup Instructions</h3>
+            <div class="card">
+                <ol>
+                    <li>Install dependencies:
+                        <pre><code>npm install ethers@5.7.2 dotenv</code></pre>
+                    </li>
+                    <li>Create a <code>.env</code> file in this directory with your private key:
+                        <pre><code>cp .env.example .env</code></pre>
+                    </li>
+                    <li>Edit the <code>.env</code> file and add your private key</li>
+                </ol>
+            </div>
+
+            <h3>Getting Base Sepolia Testnet ETH</h3>
+            <div class="card">
+                <p>You'll need some Base Sepolia testnet ETH to run this script. Here's how to get it:</p>
+                <ol>
+                    <li>Go to the <a href="https://www.coinbase.com/faucets/base-sepolia-faucet" target="_blank">Base Faucet</a></li>
+                    <li>Connect your wallet</li>
+                    <li>Request testnet ETH</li>
+                </ol>
+                <p>Alternatively, you can use these other faucets:</p>
+                <ul>
+                    <li><a href="https://faucet.paradigm.xyz/" target="_blank">Paradigm Faucet</a></li>
+                    <li><a href="https://0xDb6026B5BB6553eb793B76A5742B56742c354dF5@drip.0xcecf.xyz/" target="_blank">0xCecf Drip</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="animate delay-3">
+            <h3>Running the Script</h3>
+            <div class="card">
+                <p>Execute the script with:</p>
+                <pre><code>node create_eas_attestation.js</code></pre>
+                
+                <h4>Expected Output</h4>
+                <p>The script will:</p>
+                <ol>
+                    <li>Register a schema for music rights attestations</li>
+                    <li>Create an attestation for a sample music track</li>
+                    <li>Output the attestation UID and transaction details</li>
+                    <li>Provide a link to view the attestation on the Base Sepolia EAS Explorer</li>
+                </ol>
+            </div>
+            
+            <h3>Viewing Your Attestation</h3>
+            <div class="card">
+                <p>After the script runs successfully, you can view your attestation at:</p>
+                <pre><code>https://base-sepolia.easscan.org/attestation/view/YOUR_ATTESTATION_UID</code></pre>
+            </div>
+            
+            <h3>Troubleshooting</h3>
+            <div class="card">
+                <ul>
+                    <li><strong>"Private key not found"</strong>: Make sure you've created a <code>.env</code> file with your private key</li>
+                    <li><strong>"Wallet has no ETH"</strong>: Get testnet ETH from one of the faucets listed above</li>
+                    <li><strong>Transaction errors</strong>: Make sure the Base Sepolia network is operating normally</li>
+                </ul>
+            </div>
+            
+            <h3>Using in Your Application</h3>
+            <div class="card">
+                <p>The attestation UID you receive can be used in your application to verify the music rights. Save this UID to link it with your track information in your database.</p>
+            </div>
+        </div>
+
+        <div class="animate delay-4">
+            <h2>Test Run Results (BASE Hackathon Preparation)</h2>
+            <div class="highlight-box">
+                <p>We successfully completed a test run of our attestation system for the upcoming BASE Batches Hackathon.</p>
+                
+                <h3>Test Attestation Details</h3>
+                <div class="data-table">
+                    <div class="data-row">
+                        <span class="data-label">Wallet Address</span>
+                        <span class="hash">0xbDE22Ea0D5d21925f8c64d28c0b1a376763a76d8</span>
+                    </div>
+                    <div class="data-row">
+                        <span class="data-label">Schema Used</span>
+                        <span class="hash">0x14554977234f8ef97a88c5a1da6d65e8522922671b511b4aa5d198a4629de6b1</span>
+                    </div>
+                    <div class="data-row">
+                        <span class="data-label">Music Asset</span>
+                        <div>
+                            <div>Title: "Summer Nights"</div>
+                            <div>Artist: "John Doe"</div>
+                            <div>Publisher: "MESA Music Publishing"</div>
+                        </div>
+                    </div>
+                    <div class="data-row">
+                        <span class="data-label">Attestation UID</span>
+                        <span class="hash">0xb2802e2e80824a796b8179349f94c73485d4dbe27e30cb5f04f4b1cd36083495</span>
+                    </div>
+                    <div class="data-row">
+                        <span class="data-label">Transaction Hash</span>
+                        <span class="hash">0xb2802e2e80824a796b8179349f94c73485d4dbe27e30cb5f04f4b1cd36083495</span>
+                    </div>
+                    <div class="data-row">
+                        <span class="data-label">Block Number</span>
+                        <span>24462040</span>
+                    </div>
+                    <div class="data-row">
+                        <span class="data-label">Gas Used</span>
+                        <span>24096</span>
+                    </div>
+                </div>
+                
+                <h3>View The Attestation</h3>
+                <p>Our test attestation can be viewed on the Base Sepolia EAS Explorer:</p>
+                <a href="https://base-sepolia.easscan.org/attestation/view/0xb2802e2e80824a796b8179349f94c73485d4dbe27e30cb5f04f4b1cd36083495" target="_blank" class="button">View Attestation</a>
+            </div>
+            
+            <div class="blockchain-container">
+                <h3>Next Steps for Mainnet Deployment</h3>
+                <div class="blockchain-blocks">
+                    <div class="block">
+                        <div class="block-header">Step 1</div>
+                        <div class="block-content">Update script to use BASE mainnet contract addresses</div>
+                        <div class="block-hash">0x1a2b3c...</div>
+                    </div>
+                    <div class="block">
+                        <div class="block-header">Step 2</div>
+                        <div class="block-content">Register custom schema for music rights data</div>
+                        <div class="block-hash">0x4d5e6f...</div>
+                    </div>
+                    <div class="block">
+                        <div class="block-header">Step 3</div>
+                        <div class="block-content">Batch process the entire music catalog</div>
+                        <div class="block-hash">0x7g8h9i...</div>
+                    </div>
+                    <div class="block">
+                        <div class="block-header">Step 4</div>
+                        <div class="block-content">Implement error handling and retry logic</div>
+                        <div class="block-hash">0xj0k1l2...</div>
+                    </div>
+                </div>
+                <p>The test run confirms our approach works correctly and we're ready for the hackathon next week.</p>
+            </div>
+        </div>
+        
+        <div class="animate">
+            <h2>MESA Decentralized Identifier (DID) Attestation</h2>
+            <div class="card glow">
+                <p>We've also created a Decentralized Identifier (DID) attestation for MESA on the Base Sepolia testnet. This establishes MESA's official identity on the Base blockchain.</p>
+            </div>
+            
+            <h3>MESA DID Script</h3>
+            <div class="card">
+                <p>The <code>create_mesa_did_attestation.js</code> script creates a DID attestation with:</p>
+                <ul>
+                    <li>A unique identifier in the format <code>did:base:mesa:{uniqueId}</code></li>
+                    <li>Official MESA branding information</li>
+                    <li>A visual representation ("tattoo") of MESA's blockchain identity</li>
+                    <li>Complete metadata about MESA's services</li>
+                </ul>
+            </div>
+            
+            <h3>MESA DID Attestation Details</h3>
+            <div class="card">
+                <div class="data-table">
+                    <div class="data-row">
+                        <span class="data-label">DID</span>
+                        <span class="hash">did:base:mesa:f00768d2fbd3</span>
+                    </div>
+                    <div class="data-row">
+                        <span class="data-label">Attestation UID</span>
+                        <span class="hash">0x3cb41fc26c71dd39cbb0f88ab1a7b5b209c76a22238b1017e3fd59c4c17c6073</span>
+                    </div>
+                    <div class="data-row">
+                        <span class="data-label">Transaction Hash</span>
+                        <span class="hash">0x3cb41fc26c71dd39cbb0f88ab1a7b5b209c76a22238b1017e3fd59c4c17c6073</span>
+                    </div>
+                    <div class="data-row">
+                        <span class="data-label">Block Number</span>
+                        <span>24462334</span>
+                    </div>
+                    <div class="data-row">
+                        <span class="data-label">Website</span>
+                        <span><a href="https://www.mesawallet.io" target="_blank">https://www.mesawallet.io</a></span>
+                    </div>
+                    <div class="data-row">
+                        <span class="data-label">Brand Purpose</span>
+                        <span>Protecting music rights with professional splits contracts and work-for-hire agreements</span>
+                    </div>
+                </div>
+                
+                <h4>View The MESA DID Attestation</h4>
+                <p>The DID attestation can be viewed on the Base Sepolia EAS Explorer:</p>
+                <a href="https://base-sepolia.easscan.org/attestation/view/0x3cb41fc26c71dd39cbb0f88ab1a7b5b209c76a22238b1017e3fd59c4c17c6073" target="_blank" class="button">View MESA DID Attestation</a>
+            </div>
+            
+            <h3>Visual Identity</h3>
+            <div class="card">
+                <p>A unique visual representation of MESA's blockchain identity has been created and saved as <code>MESA_DID_visual_tattoo.svg</code>. This visual identifier combines:</p>
+                <ol>
+                    <li>MESA's branding elements</li>
+                    <li>A unique pattern derived from the DID hash</li>
+                    <li>The DID identifier text</li>
+                    <li>MESA's commitment to "Protecting Music Rights On Base"</li>
+                </ol>
+            </div>
+            
+            <div class="grid">
+                <div class="card">
+                    <h3>Uses for MESA's DID</h3>
+                    <p>This DID can be used to:</p>
+                    <ol>
+                        <li>Verify MESA's identity on the Base blockchain</li>
+                        <li>Authenticate music rights attestations created by MESA</li>
+                        <li>Establish trust with artists, collaborators, and industry partners</li>
+                        <li>Build future blockchain-based verification and authentication services</li>
+                    </ol>
+                </div>
+                
+                <div class="card">
+                    <h3>Running the DID Script</h3>
+                    <p>Execute the script with:</p>
+                    <pre><code>node create_mesa_did_attestation.js</code></pre>
+                    <p>For the BASE Batches Hackathon, we plan to upgrade this DID to the BASE mainnet and integrate it with our music rights verification system.</p>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>© 2023 MESA | Created for the BASE Batches Hackathon</p>
+            <p>Protecting music rights through blockchain innovation</p>
+        </footer>
+    </div>
+    
+    <script>
+        // Add animation classes to elements as they scroll into view
+        document.addEventListener('DOMContentLoaded', function() {
+            // Function to check if an element is in viewport
+            function isInViewport(element) {
+                const rect = element.getBoundingClientRect();
+                return (
+                    rect.top >= 0 &&
+                    rect.left >= 0 &&
+                    rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+                    rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+                );
+            }
+            
+            // Add .visible class to elements in viewport
+            function checkAnimations() {
+                const animatedElements = document.querySelectorAll('.animate:not(.visible)');
+                animatedElements.forEach(element => {
+                    if (isInViewport(element)) {
+                        element.classList.add('visible');
+                    }
+                });
+            }
+            
+            // Initial check
+            checkAnimations();
+            
+            // Check on scroll
+            window.addEventListener('scroll', checkAnimations);
+        });
+    </script>
+</body>
+</html> 

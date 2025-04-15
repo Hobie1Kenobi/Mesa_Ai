@@ -1,0 +1,245 @@
+{
+  "report_id": "final_report_1744258681",
+  "is_final": true,
+  "session_id": "6f069554-753f-4f63-9cb6-8eaed3ce8711",
+  "generation_time": "2025-04-09T23:18:01.346647",
+  "session_start_time": "2025-04-09T23:16:01.266325",
+  "session_duration_hours": 0.033355644999999996,
+  "agency_identifier": "MESA-DEMO-AGENCY",
+  "statistics": {
+    "total_discoveries": 5,
+    "total_potential_funds": 2,
+    "total_potential_value": "$1,760.00",
+    "discovery_counts_by_type": {
+      "black_box_quick": 3,
+      "catalog_analysis": 2
+    },
+    "sources_monitored": [
+      "ascap",
+      "bmi",
+      "sesac",
+      "soundexchange",
+      "hfa",
+      "mlc",
+      "spotify",
+      "apple_music",
+      "youtube",
+      "amazon_music",
+      "tidal"
+    ]
+  },
+  "highest_value_discoveries": [
+    {
+      "fund_id": "FUND-d026aa3891cfd535",
+      "discovery_id": "d026aa3891cfd535",
+      "source": "targeted_scan",
+      "work_id": "WORK123",
+      "estimated_value": "$1,240.00",
+      "numeric_value": 1240.0,
+      "discovery_time": "2025-04-09T23:16:01.284846",
+      "last_updated": "2025-04-09T23:16:01.284846",
+      "session_id": "6f069554-753f-4f63-9cb6-8eaed3ce8711",
+      "agency_identifier": "MESA-DEMO-AGENCY",
+      "confidence": 0.95,
+      "status": "potential",
+      "complexity": "low",
+      "attribution": {
+        "discovered_by": "MESA-DEMO-AGENCY",
+        "discovery_method": "ai_royalty_auditor",
+        "attribution_confidence": 0.95,
+        "attribution_evidence": [
+          "First discovered in session 6f069554-753f-4f63-9cb6-8eaed3ce8711",
+          "Tracked in discovery d026aa3891cfd535",
+          "Timestamp: 2025-04-09T23:16:01.288515"
+        ]
+      }
+    },
+    {
+      "fund_id": "FUND-29950dd2d2e37cb2",
+      "discovery_id": "29950dd2d2e37cb2",
+      "source": "targeted_scan",
+      "work_id": "WORK456",
+      "estimated_value": "$520.00",
+      "numeric_value": 520.0,
+      "discovery_time": "2025-04-09T23:16:01.290002",
+      "last_updated": "2025-04-09T23:16:01.290002",
+      "session_id": "6f069554-753f-4f63-9cb6-8eaed3ce8711",
+      "agency_identifier": "MESA-DEMO-AGENCY",
+      "confidence": 0.88,
+      "status": "potential",
+      "complexity": "low",
+      "attribution": {
+        "discovered_by": "MESA-DEMO-AGENCY",
+        "discovery_method": "ai_royalty_auditor",
+        "attribution_confidence": 0.88,
+        "attribution_evidence": [
+          "First discovered in session 6f069554-753f-4f63-9cb6-8eaed3ce8711",
+          "Tracked in discovery 29950dd2d2e37cb2",
+          "Timestamp: 2025-04-09T23:16:01.290002"
+        ]
+      }
+    }
+  ],
+  "agency_attribution": {
+    "agency": "MESA-DEMO-AGENCY",
+    "discovery_method": "MESA Rights Vault AI Royalty Auditor",
+    "attribution_strength": "strong",
+    "digital_signature": "0143abdbfae009e66d45ae0adc9b02f3484e5f3bf748162ab3674e9dcfce90e1"
+  },
+  "all_discoveries": [
+    {
+      "id": "26c0f3e7e01a33b6",
+      "type": "black_box_quick",
+      "source": "ascap",
+      "first_discovered": "2025-04-09T23:16:01.281623",
+      "last_seen": "2025-04-09T23:16:01.281623",
+      "seen_count": 1,
+      "session_id": "6f069554-753f-4f63-9cb6-8eaed3ce8711",
+      "agency_identifier": "MESA-DEMO-AGENCY",
+      "confidence": 0.86,
+      "data": {
+        "pro": "ascap",
+        "potential_funds": true,
+        "fund_types": [
+          "streaming",
+          "performance"
+        ],
+        "estimated_amount": "$825.00"
+      }
+    },
+    {
+      "id": "99d0b4113338a56d",
+      "type": "black_box_quick",
+      "source": "bmi",
+      "first_discovered": "2025-04-09T23:16:01.282673",
+      "last_seen": "2025-04-09T23:16:01.282673",
+      "seen_count": 1,
+      "session_id": "6f069554-753f-4f63-9cb6-8eaed3ce8711",
+      "agency_identifier": "MESA-DEMO-AGENCY",
+      "confidence": 0.85,
+      "data": {
+        "pro": "bmi",
+        "potential_funds": true,
+        "fund_types": [
+          "streaming",
+          "performance"
+        ],
+        "estimated_amount": "$311.00"
+      }
+    },
+    {
+      "id": "61d3e99c9a929994",
+      "type": "black_box_quick",
+      "source": "soundexchange",
+      "first_discovered": "2025-04-09T23:16:01.282673",
+      "last_seen": "2025-04-09T23:16:01.282673",
+      "seen_count": 1,
+      "session_id": "6f069554-753f-4f63-9cb6-8eaed3ce8711",
+      "agency_identifier": "MESA-DEMO-AGENCY",
+      "confidence": 0.87,
+      "data": {
+        "pro": "soundexchange",
+        "potential_funds": true,
+        "fund_types": [
+          "streaming",
+          "performance"
+        ],
+        "estimated_amount": "$538.00"
+      }
+    },
+    {
+      "id": "d026aa3891cfd535",
+      "type": "catalog_analysis",
+      "source": "targeted_scan",
+      "first_discovered": "2025-04-09T23:16:01.284846",
+      "last_seen": "2025-04-09T23:16:01.284846",
+      "seen_count": 1,
+      "session_id": "6f069554-753f-4f63-9cb6-8eaed3ce8711",
+      "agency_identifier": "MESA-DEMO-AGENCY",
+      "confidence": 0.95,
+      "data": {
+        "work_id": "WORK123",
+        "issue": "Unregistered with SoundExchange",
+        "estimated_value": "$1,240.00",
+        "actions": [
+          "register_work",
+          "submit_claim"
+        ],
+        "from_catalog_analysis": true
+      }
+    },
+    {
+      "id": "29950dd2d2e37cb2",
+      "type": "catalog_analysis",
+      "source": "targeted_scan",
+      "first_discovered": "2025-04-09T23:16:01.288515",
+      "last_seen": "2025-04-09T23:16:01.288515",
+      "seen_count": 1,
+      "session_id": "6f069554-753f-4f63-9cb6-8eaed3ce8711",
+      "agency_identifier": "MESA-DEMO-AGENCY",
+      "confidence": 0.88,
+      "data": {
+        "work_id": "WORK456",
+        "issue": "Metadata mismatch at ASCAP",
+        "estimated_value": "$520.00",
+        "actions": [
+          "correct_metadata",
+          "request_audit"
+        ],
+        "from_catalog_analysis": true
+      }
+    }
+  ],
+  "all_funds": [
+    {
+      "fund_id": "FUND-d026aa3891cfd535",
+      "discovery_id": "d026aa3891cfd535",
+      "source": "targeted_scan",
+      "work_id": "WORK123",
+      "estimated_value": "$1,240.00",
+      "numeric_value": 1240.0,
+      "discovery_time": "2025-04-09T23:16:01.284846",
+      "last_updated": "2025-04-09T23:16:01.284846",
+      "session_id": "6f069554-753f-4f63-9cb6-8eaed3ce8711",
+      "agency_identifier": "MESA-DEMO-AGENCY",
+      "confidence": 0.95,
+      "status": "potential",
+      "complexity": "low",
+      "attribution": {
+        "discovered_by": "MESA-DEMO-AGENCY",
+        "discovery_method": "ai_royalty_auditor",
+        "attribution_confidence": 0.95,
+        "attribution_evidence": [
+          "First discovered in session 6f069554-753f-4f63-9cb6-8eaed3ce8711",
+          "Tracked in discovery d026aa3891cfd535",
+          "Timestamp: 2025-04-09T23:16:01.288515"
+        ]
+      }
+    },
+    {
+      "fund_id": "FUND-29950dd2d2e37cb2",
+      "discovery_id": "29950dd2d2e37cb2",
+      "source": "targeted_scan",
+      "work_id": "WORK456",
+      "estimated_value": "$520.00",
+      "numeric_value": 520.0,
+      "discovery_time": "2025-04-09T23:16:01.290002",
+      "last_updated": "2025-04-09T23:16:01.290002",
+      "session_id": "6f069554-753f-4f63-9cb6-8eaed3ce8711",
+      "agency_identifier": "MESA-DEMO-AGENCY",
+      "confidence": 0.88,
+      "status": "potential",
+      "complexity": "low",
+      "attribution": {
+        "discovered_by": "MESA-DEMO-AGENCY",
+        "discovery_method": "ai_royalty_auditor",
+        "attribution_confidence": 0.88,
+        "attribution_evidence": [
+          "First discovered in session 6f069554-753f-4f63-9cb6-8eaed3ce8711",
+          "Tracked in discovery 29950dd2d2e37cb2",
+          "Timestamp: 2025-04-09T23:16:01.290002"
+        ]
+      }
+    }
+  ]
+}

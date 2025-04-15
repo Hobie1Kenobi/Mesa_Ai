@@ -1,0 +1,17 @@
+2025-04-09 18:41:01,780 - INFO - Using temporary storage at: C:\Users\hobie\AppData\Local\Temp\tmpiu2zudwp
+2025-04-09 18:41:01,781 - INFO - Key vault initialized
+2025-04-09 18:41:01,781 - INFO - Privacy layer initialized
+2025-04-09 18:41:02,030 - INFO - User account created: Sarah Wilson (Vault ID: aa7d2959fdaad20d)
+2025-04-09 18:41:02,033 - INFO - Rights registered: Midnight Dreams (ID: ee5dd684ee167b41)
+2025-04-09 18:41:02,033 - INFO - Rights registered: Electronic Horizon (ID: 9aad71b9b1f1cc7e)
+2025-04-09 18:41:02,033 - INFO - Rights registered: Harmony Collection (ID: d83a7f3d9033b175)
+2025-04-09 18:41:02,040 - INFO - Sharing profile created for Streaming Platform (ID: 008f3fecaa0e0076)
+2025-04-09 18:41:02,040 - INFO - Disclosure verification: True (Profile ID: 008f3fecaa0e0076)
+2025-04-09 18:41:02,041 - INFO - Sharing profile created for Royalty Collection Agency (ID: 45995f1abdba642e)
+2025-04-09 18:41:02,042 - INFO - Disclosure verification: True (Profile ID: 45995f1abdba642e)
+2025-04-09 18:41:02,042 - INFO - Sharing profile created for Performance Venue (ID: 6884b6dfb23c7e09)
+2025-04-09 18:41:02,043 - INFO - Disclosure verification: True (Profile ID: 6884b6dfb23c7e09)
+2025-04-09 18:41:02,044 - INFO - Ownership proof created for ee5dd684ee167b41
+2025-04-09 18:41:02,045 - INFO - Ownership verification: True (Rights ID: ee5dd684ee167b41)
+2025-04-09 18:41:02,046 - INFO - Royalty verification created for 9aad71b9b1f1cc7e (Amount: $10000.0)
+2025-04-09 18:41:02,092 - INFO - User data backed up: 718ab417cdfdc47c

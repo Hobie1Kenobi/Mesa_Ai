@@ -1,0 +1,20 @@
+{
+  "id": "26c0f3e7e01a33b6",
+  "type": "black_box_quick",
+  "source": "ascap",
+  "first_discovered": "2025-04-09T23:16:01.281623",
+  "last_seen": "2025-04-09T23:16:01.281623",
+  "seen_count": 1,
+  "session_id": "6f069554-753f-4f63-9cb6-8eaed3ce8711",
+  "agency_identifier": "MESA-DEMO-AGENCY",
+  "confidence": 0.86,
+  "data": {
+    "pro": "ascap",
+    "potential_funds": true,
+    "fund_types": [
+      "streaming",
+      "performance"
+    ],
+    "estimated_amount": "$825.00"
+  }
+}

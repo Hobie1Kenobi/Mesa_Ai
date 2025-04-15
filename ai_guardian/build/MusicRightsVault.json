@@ -1,0 +1,448 @@
+{
+  "abi": [
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "rightsId",
+          "type": "bytes32"
+        },
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "musicBrainzId",
+          "type": "string"
+        },
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "title",
+          "type": "string"
+        },
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "artist",
+          "type": "string"
+        }
+      ],
+      "name": "MusicRightsRegistered",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "rightsId",
+          "type": "bytes32"
+        }
+      ],
+      "name": "RightsDeactivated",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "rightsId",
+          "type": "bytes32"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "owner",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "timestamp",
+          "type": "uint256"
+        }
+      ],
+      "name": "RightsRegistered",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "rightsId",
+          "type": "bytes32"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "owner",
+          "type": "address"
+        }
+      ],
+      "name": "RightsUpdated",
+      "type": "event"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "rightsId",
+          "type": "bytes32"
+        }
+      ],
+      "name": "deactivateRights",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "rightsId",
+          "type": "bytes32"
+        }
+      ],
+      "name": "getMusicMetadata",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "string",
+              "name": "musicBrainzId",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "title",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "artist",
+              "type": "string"
+            },
+            {
+              "internalType": "uint256",
+              "name": "releaseYear",
+              "type": "uint256"
+            },
+            {
+              "internalType": "string[]",
+              "name": "rightsTypes",
+              "type": "string[]"
+            }
+          ],
+          "internalType": "struct MusicRightsVault.MusicMetadata",
+          "name": "",
+          "type": "tuple"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_owner",
+          "type": "address"
+        }
+      ],
+      "name": "getOwnerRights",
+      "outputs": [
+        {
+          "internalType": "bytes32[]",
+          "name": "",
+          "type": "bytes32[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "rightsId",
+          "type": "bytes32"
+        }
+      ],
+      "name": "getRightsData",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "bytes32",
+              "name": "encryptedData",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "bytes32",
+              "name": "dataHash",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "address",
+              "name": "rightsOwner",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "timestamp",
+              "type": "uint256"
+            },
+            {
+              "internalType": "bool",
+              "name": "isActive",
+              "type": "bool"
+            }
+          ],
+          "internalType": "struct RightsVault.RightsData",
+          "name": "",
+          "type": "tuple"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "musicBrainzId",
+          "type": "string"
+        }
+      ],
+      "name": "hasRightsForMusicBrainzId",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "name": "musicMetadata",
+      "outputs": [
+        {
+          "internalType": "string",
+          "name": "musicBrainzId",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "title",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "artist",
+          "type": "string"
+        },
+        {
+          "internalType": "uint256",
+          "name": "releaseYear",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "owner",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "ownerRights",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "rightsId",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "encryptedData",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "dataHash",
+          "type": "bytes32"
+        },
+        {
+          "components": [
+            {
+              "internalType": "string",
+              "name": "musicBrainzId",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "title",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "artist",
+              "type": "string"
+            },
+            {
+              "internalType": "uint256",
+              "name": "releaseYear",
+              "type": "uint256"
+            },
+            {
+              "internalType": "string[]",
+              "name": "rightsTypes",
+              "type": "string[]"
+            }
+          ],
+          "internalType": "struct MusicRightsVault.MusicMetadata",
+          "name": "metadata",
+          "type": "tuple"
+        }
+      ],
+      "name": "registerMusicRights",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "rightsId",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "encryptedData",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "dataHash",
+          "type": "bytes32"
+        }
+      ],
+      "name": "registerRights",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "name": "rightsRegistry",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "encryptedData",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "dataHash",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "address",
+          "name": "rightsOwner",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "timestamp",
+          "type": "uint256"
+        },
+        {
+          "internalType": "bool",
+          "name": "isActive",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "rightsId",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "encryptedData",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "dataHash",
+          "type": "bytes32"
+        }
+      ],
+      "name": "updateRights",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "bytecode": "608060405234801561001057600080fd5b506000805460ff60a01b1933166001600160a81b03199091161790556116518061003b6000396000f3fe608060405234801561001057600080fd5b50600436106100b45760003560e01c8063851831861161007157806385183186146101cb5780638da5cb5b146102a1578063a1178567146102cc578063b201e6b2146102df578063f407f8b8146102f2578063f5195d4f1461031257600080fd5b806322f03ccf146100b957806338e5361d146100ce57806351e281cc146101545780636d52835e1461017757806372ba21e31461018a57806373a497f7146101ab575b600080fd5b6100cc6100c7366004610eae565b610335565b005b6101176100dc366004610eae565b60016020819052600091825260409091208054918101546002820154600383015460049093015491926001600160a01b039091169160ff1685565b6040805195865260208601949094526001600160a01b039092169284019290925260608301919091521515608082015260a0015b60405180910390f35b610167610162366004610fa7565b610486565b604051901515815260200161014b565b6100cc610185366004611083565b610517565b61019d61019836600461119f565b6105e3565b60405190815260200161014b565b6101be6101b93660046111c9565b610614565b60405161014b91906111eb565b6102596101d9366004610eae565b6040805160a0808201835260008083526020808401829052838501829052606080850183905260809485018390529582526001808252918590208551938401865280548452918201549083015260028101546001600160a01b03169382019390935260038301549381019390935260049091015460ff1615159082015290565b60405161014b919081518152602080830151908201526040808301516001600160a01b0316908201526060808301519082015260809182015115159181019190915260a00190565b6000546102b4906001600160a01b031681565b6040516001600160a01b03909116815260200161014b565b6100cc6102da36600461122f565b610680565b6100cc6102ed36600461122f565b6107ff565b610305610300366004610eae565b610940565b60405161014b91906112a1565b610325610320366004610eae565b610c29565b60405161014b9493929190611369565b600054600160a01b900460ff16156103685760405162461bcd60e51b815260040161035f906113b4565b60405180910390fd5b6000805460ff60a01b1916600160a01b178155818152600160205260409020600201546001600160a01b031633146103d55760405162461bcd60e51b815260206004820152601060248201526f2737ba103934b3b43a399037bbb732b960811b604482015260640161035f565b60008181526001602052604090206004015460ff166104365760405162461bcd60e51b815260206004820152601760248201527f52696768747320616c726561647920696e616374697665000000000000000000604482015260640161035f565b600081815260016020526040808220600401805460ff191690555182917ff36e66e688ccd9975ac86cd13238dcbcc6445116b99ee8b91387d82ca16bb3a591a2506000805460ff60a01b19169055565b60008061049233610614565b905060005b815181101561050d578380519060200120600360008484815181106104be576104be6113dc565b602002602001015181526020019081526020016000206000016040516104e4919061142c565b6040518091039020036104fb575060019392505050565b80610505816114a2565b915050610497565b5060009392505050565b610522848484610680565b6000848152600360205260409020815182919081906105419082611518565b50602082015160018201906105569082611518565b506040820151600282019061056b9082611518565b506060820151600382015560808201518051610591916004840191602090910190610de9565b50905050837f5e70edde0f866cb0f257b35f195882c20d407e2102d282d0391c1e80a7992aa38260000151836020015184604001516040516105d5939291906115d8565b60405180910390a250505050565b600260205281600052604060002081815481106105ff57600080fd5b90600052602060002001600091509150505481565b6001600160a01b03811660009081526002602090815260409182902080548351818402810184019094528084526060939283018282801561067457602002820191906000526020600020905b815481526020019060010190808311610660575b50505050509050919050565b600054600160a01b900460ff16156106aa5760405162461bcd60e51b815260040161035f906113b4565b6000805460ff60a01b1916600160a01b178155838152600160205260409020600301541561071a5760405162461bcd60e51b815260206004820152601960248201527f52696768747320616c7265616479207265676973746572656400000000000000604482015260640161035f565b6040805160a081018252838152602080820184815233838501818152426060860181815260016080880181815260008d81528289528a812099518a5596518983015593516002808a0180546001600160a01b0319166001600160a01b03909316929092179091559151600389015592516004909701805460ff19169715159790971790965582845294845285832080549182018155835291839020909101879055925191825285917f580e0842d5023898a9945e238518b680f63b0365080d6ccb1cc0f1e8e2cfe0c2910160405180910390a350506000805460ff60a01b1916905550565b600054600160a01b900460ff16156108295760405162461bcd60e51b815260040161035f906113b4565b6000805460ff60a01b1916600160a01b178155838152600160205260409020600201546001600160a01b031633146108965760405162461bcd60e51b815260206004820152601060248201526f2737ba103934b3b43a399037bbb732b960811b604482015260640161035f565b60008381526001602052604090206004015460ff166108eb5760405162461bcd60e51b8152602060048201526011602482015270526967687473206e6f742061637469766560781b604482015260640161035f565b600083815260016020819052604080832085815590910183905551339185917f3b3565ddcba5cae28427e28eb19aeebeae96812c0d405bc75de7bd0fd995ee779190a350506000805460ff60a01b1916905550565b6109726040518060a0016040528060608152602001606081526020016060815260200160008152602001606081525090565b60008281526003602052604090819020815160a0810190925280548290829061099a906113f2565b80601f01602080910402602001604051908101604052809291908181526020018280546109c6906113f2565b8015610a135780601f106109e857610100808354040283529160200191610a13565b820191906000526020600020905b8154815290600101906020018083116109f657829003601f168201915b50505050508152602001600182018054610a2c906113f2565b80601f0160208091040260200160405190810160405280929190818152602001828054610a58906113f2565b8015610aa55780601f10610a7a57610100808354040283529160200191610aa5565b820191906000526020600020905b815481529060010190602001808311610a8857829003601f168201915b50505050508152602001600282018054610abe906113f2565b80601f0160208091040260200160405190810160405280929190818152602001828054610aea906113f2565b8015610b375780601f10610b0c57610100808354040283529160200191610b37565b820191906000526020600020905b815481529060010190602001808311610b1a57829003601f168201915b505050505081526020016003820154815260200160048201805480602002602001604051908101604052809291908181526020016000905b82821015610c1b578382906000526020600020018054610b8e906113f2565b80601f0160208091040260200160405190810160405280929190818152602001828054610bba906113f2565b8015610c075780601f10610bdc57610100808354040283529160200191610c07565b820191906000526020600020905b815481529060010190602001808311610bea57829003601f168201915b505050505081526020019060010190610b6f565b505050915250909392505050565b600360205260009081526040902080548190610c44906113f2565b80601f0160208091040260200160405190810160405280929190818152602001828054610c70906113f2565b8015610cbd5780601f10610c9257610100808354040283529160200191610cbd565b820191906000526020600020905b815481529060010190602001808311610ca057829003601f168201915b505050505090806001018054610cd2906113f2565b80601f0160208091040260200160405190810160405280929190818152602001828054610cfe906113f2565b8015610d4b5780601f10610d2057610100808354040283529160200191610d4b565b820191906000526020600020905b815481529060010190602001808311610d2e57829003601f168201915b505050505090806002018054610d60906113f2565b80601f0160208091040260200160405190810160405280929190818152602001828054610d8c906113f2565b8015610dd95780601f10610dae57610100808354040283529160200191610dd9565b820191906000526020600020905b815481529060010190602001808311610dbc57829003601f168201915b5050505050908060030154905084565b828054828255906000526020600020908101928215610e2f579160200282015b82811115610e2f5782518290610e1f9082611518565b5091602001919060010190610e09565b50610e3b929150610e3f565b5090565b80821115610e3b576000610e538282610e5c565b50600101610e3f565b508054610e68906113f2565b6000825580601f10610e78575050565b601f016020900490600052602060002090810190610e969190610e99565b50565b5b80821115610e3b5760008155600101610e9a565b600060208284031215610ec057600080fd5b5035919050565b634e487b7160e01b600052604160045260246000fd5b60405160a0810167ffffffffffffffff81118282101715610f0057610f00610ec7565b60405290565b604051601f8201601f1916810167ffffffffffffffff81118282101715610f2f57610f2f610ec7565b604052919050565b600082601f830112610f4857600080fd5b813567ffffffffffffffff811115610f6257610f62610ec7565b610f75601f8201601f1916602001610f06565b818152846020838601011115610f8a57600080fd5b816020850160208301376000918101602001919091529392505050565b600060208284031215610fb957600080fd5b813567ffffffffffffffff811115610fd057600080fd5b610fdc84828501610f37565b949350505050565b600082601f830112610ff557600080fd5b8135602067ffffffffffffffff8083111561101257611012610ec7565b8260051b611021838201610f06565b938452858101830193838101908886111561103b57600080fd5b84880192505b85831015611077578235848111156110595760008081fd5b6110678a87838c0101610f37565b8352509184019190840190611041565b98975050505050505050565b6000806000806080858703121561109957600080fd5b843593506020850135925060408501359150606085013567ffffffffffffffff808211156110c657600080fd5b9086019060a082890312156110da57600080fd5b6110e2610edd565b8235828111156110f157600080fd5b6110fd8a828601610f37565b82525060208301358281111561111257600080fd5b61111e8a828601610f37565b60208301525060408301358281111561113657600080fd5b6111428a828601610f37565b6040830152506060830135606082015260808301358281111561116457600080fd5b6111708a828601610fe4565b6080830152509598949750929550505050565b80356001600160a01b038116811461119a57600080fd5b919050565b600080604083850312156111b257600080fd5b6111bb83611183565b946020939093013593505050565b6000602082840312156111db57600080fd5b6111e482611183565b9392505050565b6020808252825182820181905260009190848201906040850190845b8181101561122357835183529284019291840191600101611207565b50909695505050505050565b60008060006060848603121561124457600080fd5b505081359360208301359350604090920135919050565b6000815180845260005b8181101561128157602081850181015186830182015201611265565b506000602082860101526020601f19601f83011685010191505092915050565b60006020808352835160a0828501526112bd60c085018261125b565b905081850151601f19808684030160408701526112da838361125b565b925060408701519150808684030160608701526112f7838361125b565b92506060870151608087015260808701519150808684030160a08701528282518085528585019150858160051b860101868501945060005b8281101561135b578487830301845261134982875161125b565b9588019593880193915060010161132f565b509998505050505050505050565b60808152600061137c608083018761125b565b828103602084015261138e818761125b565b905082810360408401526113a2818661125b565b91505082606083015295945050505050565b6020808252600e908201526d1499595b9d1c985b9d0818d85b1b60921b604082015260600190565b634e487b7160e01b600052603260045260246000fd5b600181811c9082168061140657607f821691505b60208210810361142657634e487b7160e01b600052602260045260246000fd5b50919050565b600080835461143a816113f2565b60018281168015611452576001811461146757611496565b60ff1984168752821515830287019450611496565b8760005260208060002060005b8581101561148d5781548a820152908401908201611474565b50505082870194505b50929695505050505050565b6000600182016114c257634e487b7160e01b600052601160045260246000fd5b5060010190565b601f82111561151357600081815260208120601f850160051c810160208610156114f05750805b601f850160051c820191505b8181101561150f578281556001016114fc565b5050505b505050565b815167ffffffffffffffff81111561153257611532610ec7565b6115468161154084546113f2565b846114c9565b602080601f83116001811461157b57600084156115635750858301515b600019600386901b1c1916600185901b17855561150f565b600085815260208120601f198616915b828110156115aa5788860151825594840194600190910190840161158b565b50858210156115c85787850151600019600388901b60f8161c191681555b5050505050600190811b01905550565b6060815260006115eb606083018661125b565b82810360208401526115fd818661125b565b90508281036040840152611611818561125b565b969550505050505056fea264697066735822122058143b8bc74e3d6b40587613d890816d056f57fd76f8905f954799a3f151d77c64736f6c63430008130033",
+  "metadata": "{\"compiler\":{\"version\":\"0.8.19+commit.7dd6d404\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"rightsId\",\"type\":\"bytes32\"},{\"indexed\":false,\"internalType\":\"string\",\"name\":\"musicBrainzId\",\"type\":\"string\"},{\"indexed\":false,\"internalType\":\"string\",\"name\":\"title\",\"type\":\"string\"},{\"indexed\":false,\"internalType\":\"string\",\"name\":\"artist\",\"type\":\"string\"}],\"name\":\"MusicRightsRegistered\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"rightsId\",\"type\":\"bytes32\"}],\"name\":\"RightsDeactivated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"rightsId\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"timestamp\",\"type\":\"uint256\"}],\"name\":\"RightsRegistered\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"rightsId\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"}],\"name\":\"RightsUpdated\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"rightsId\",\"type\":\"bytes32\"}],\"name\":\"deactivateRights\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"rightsId\",\"type\":\"bytes32\"}],\"name\":\"getMusicMetadata\",\"outputs\":[{\"components\":[{\"internalType\":\"string\",\"name\":\"musicBrainzId\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"title\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"artist\",\"type\":\"string\"},{\"internalType\":\"uint256\",\"name\":\"releaseYear\",\"type\":\"uint256\"},{\"internalType\":\"string[]\",\"name\":\"rightsTypes\",\"type\":\"string[]\"}],\"internalType\":\"struct MusicRightsVault.MusicMetadata\",\"name\":\"\",\"type\":\"tuple\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_owner\",\"type\":\"address\"}],\"name\":\"getOwnerRights\",\"outputs\":[{\"internalType\":\"bytes32[]\",\"name\":\"\",\"type\":\"bytes32[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"rightsId\",\"type\":\"bytes32\"}],\"name\":\"getRightsData\",\"outputs\":[{\"components\":[{\"internalType\":\"bytes32\",\"name\":\"encryptedData\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"dataHash\",\"type\":\"bytes32\"},{\"internalType\":\"address\",\"name\":\"rightsOwner\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"timestamp\",\"type\":\"uint256\"},{\"internalType\":\"bool\",\"name\":\"isActive\",\"type\":\"bool\"}],\"internalType\":\"struct RightsVault.RightsData\",\"name\":\"\",\"type\":\"tuple\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"musicBrainzId\",\"type\":\"string\"}],\"name\":\"hasRightsForMusicBrainzId\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"name\":\"musicMetadata\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"musicBrainzId\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"title\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"artist\",\"type\":\"string\"},{\"internalType\":\"uint256\",\"name\":\"releaseYear\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"ownerRights\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"rightsId\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"encryptedData\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"dataHash\",\"type\":\"bytes32\"},{\"components\":[{\"internalType\":\"string\",\"name\":\"musicBrainzId\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"title\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"artist\",\"type\":\"string\"},{\"internalType\":\"uint256\",\"name\":\"releaseYear\",\"type\":\"uint256\"},{\"internalType\":\"string[]\",\"name\":\"rightsTypes\",\"type\":\"string[]\"}],\"internalType\":\"struct MusicRightsVault.MusicMetadata\",\"name\":\"metadata\",\"type\":\"tuple\"}],\"name\":\"registerMusicRights\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"rightsId\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"encryptedData\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"dataHash\",\"type\":\"bytes32\"}],\"name\":\"registerRights\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"name\":\"rightsRegistry\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"encryptedData\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"dataHash\",\"type\":\"bytes32\"},{\"internalType\":\"address\",\"name\":\"rightsOwner\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"timestamp\",\"type\":\"uint256\"},{\"internalType\":\"bool\",\"name\":\"isActive\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"rightsId\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"encryptedData\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"dataHash\",\"type\":\"bytes32\"}],\"name\":\"updateRights\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"details\":\"Extension of RightsVault for music-specific rights management\",\"kind\":\"dev\",\"methods\":{\"deactivateRights(bytes32)\":{\"details\":\"Deactivate rights\",\"params\":{\"rightsId\":\"Rights identifier to deactivate\"}},\"getMusicMetadata(bytes32)\":{\"details\":\"Get music metadata for specific rights\",\"params\":{\"rightsId\":\"Rights identifier\"},\"returns\":{\"_0\":\"MusicMetadata struct containing the music information\"}},\"getOwnerRights(address)\":{\"details\":\"Get all rights IDs for an owner\",\"params\":{\"_owner\":\"Address of the rights owner\"},\"returns\":{\"_0\":\"Array of rights IDs\"}},\"getRightsData(bytes32)\":{\"details\":\"Get rights data\",\"params\":{\"rightsId\":\"Rights identifier\"},\"returns\":{\"_0\":\"RightsData struct containing the rights information\"}},\"hasRightsForMusicBrainzId(string)\":{\"details\":\"Verify if rights exist for a specific MusicBrainz ID\",\"params\":{\"musicBrainzId\":\"MusicBrainz identifier to check\"},\"returns\":{\"_0\":\"bool indicating if rights exist\"}},\"registerMusicRights(bytes32,bytes32,bytes32,(string,string,string,uint256,string[]))\":{\"details\":\"Register music rights with metadata\",\"params\":{\"dataHash\":\"Hash of the original data\",\"encryptedData\":\"Encrypted rights data\",\"metadata\":\"Music-specific metadata\",\"rightsId\":\"Unique identifier for the rights\"}},\"registerRights(bytes32,bytes32,bytes32)\":{\"details\":\"Register new rights data\",\"params\":{\"dataHash\":\"Hash of the original data\",\"encryptedData\":\"Encrypted rights data\",\"rightsId\":\"Unique identifier for the rights\"}},\"updateRights(bytes32,bytes32,bytes32)\":{\"details\":\"Update existing rights data\",\"params\":{\"dataHash\":\"New hash of the original data\",\"encryptedData\":\"New encrypted rights data\",\"rightsId\":\"Rights identifier to update\"}}},\"title\":\"MusicRightsVault\",\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"MusicRightsVault.sol\":\"MusicRightsVault\"},\"evmVersion\":\"paris\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"MusicRightsVault.sol\":{\"keccak256\":\"0x780b2cd4288a1dff2a30088ad106020f3e487771c56bd0be425c013bddf9d73d\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://866ae706ef3e74d2ed3f076a21676a02112294a4431fecb8745b7f1afdafd76c\",\"dweb:/ipfs/QmQ5B7LGVKgdyc7UgWK9DMAn4VPj2Rqt9MwqVAF4ifDisd\"]},\"RightsVault.sol\":{\"keccak256\":\"0x2ead305b94b9e92516c13cfd49d9e75afa551654331315d8aa5e6447298f3c9f\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://3e64886fe8ef73b8cd896aae862e160fc0b68aa96fc33198d050a8dc897ac5f2\",\"dweb:/ipfs/QmPni2f8QR4JMcetHSfnAmudgA56VB5Yh1kgf59vzprEcG\"]}},\"version\":1}"
+}

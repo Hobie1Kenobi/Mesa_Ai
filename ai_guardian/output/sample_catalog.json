@@ -1,0 +1,39 @@
+{
+  "rights_holder": "Sample Artist",
+  "catalog_id": "CAT-2023-001",
+  "works": [
+    {
+      "id": "WORK123",
+      "title": "Sample Song Title",
+      "writers": [
+        {
+          "name": "John A. Smith",
+          "role": "Composer",
+          "share": "50%"
+        },
+        {
+          "name": "Jane B. Doe",
+          "role": "Lyricist",
+          "share": "50%"
+        }
+      ],
+      "isrc": "US-AB1-23-00001",
+      "iswc": "T-123456789-1",
+      "publisher": "Sample Music Publishing"
+    },
+    {
+      "id": "WORK456",
+      "title": "Another Example Track",
+      "writers": [
+        {
+          "name": "John A. Smith",
+          "role": "Composer",
+          "share": "100%"
+        }
+      ],
+      "isrc": "US-AB1-23-00002",
+      "iswc": "T-123456790-2",
+      "publisher": "Sample Music Publishing"
+    }
+  ]
+}

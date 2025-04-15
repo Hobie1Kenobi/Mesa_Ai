@@ -1,0 +1,44 @@
+{
+  "name": "mesa-rights-vault",
+  "version": "0.1.0",
+  "description": "Privacy-First Portable Music Rights on Base",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "compile": "hardhat compile",
+    "test": "hardhat test",
+    "deploy:testnet": "hardhat run scripts/deploy.js --network base-testnet",
+    "deploy:mainnet": "hardhat run scripts/deploy.js --network base-mainnet",
+    "verify:testnet": "hardhat verify --network base-testnet",
+    "verify:mainnet": "hardhat verify --network base-mainnet"
+  },
+  "dependencies": {
+    "@coinbase/onchainkit": "^0.2.0",
+    "ethers": "^5.7.2",
+    "next": "^14.0.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "snarkjs": "^0.7.2",
+    "wagmi": "^1.4.5",
+    "circomlib": "^2.0.5",
+    "web3modal": "^1.9.12"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^3.0.0",
+    "@nomicfoundation/hardhat-verify": "^1.0.3",
+    "@openzeppelin/contracts": "^4.9.3",
+    "@tailwindcss/forms": "^0.5.6",
+    "autoprefixer": "^10.4.16",
+    "circom": "^0.5.46",
+    "dotenv": "^16.3.1",
+    "hardhat": "^2.17.4",
+    "hardhat-gas-reporter": "^1.0.9",
+    "postcss": "^8.4.31",
+    "tailwindcss": "^3.3.5"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+} 

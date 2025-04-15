@@ -1,0 +1,496 @@
+{
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_rightsVault",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "multiSigId",
+          "type": "bytes32"
+        }
+      ],
+      "name": "MultiSigVerificationCompleted",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "multiSigId",
+          "type": "bytes32"
+        },
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "rightsId",
+          "type": "bytes32"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "requiredSignatures",
+          "type": "uint256"
+        }
+      ],
+      "name": "MultiSigVerificationCreated",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "multiSigId",
+          "type": "bytes32"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "signer",
+          "type": "address"
+        }
+      ],
+      "name": "MultiSigVerificationSigned",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "verificationId",
+          "type": "bytes32"
+        },
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "rightsId",
+          "type": "bytes32"
+        },
+        {
+          "indexed": false,
+          "internalType": "enum EnhancedVerification.VerificationType",
+          "name": "vType",
+          "type": "uint8"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "verifier",
+          "type": "address"
+        }
+      ],
+      "name": "VerificationAdded",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "verificationId",
+          "type": "bytes32"
+        }
+      ],
+      "name": "VerificationInvalidated",
+      "type": "event"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "rightsId",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "enum EnhancedVerification.VerificationType",
+          "name": "vType",
+          "type": "uint8"
+        },
+        {
+          "internalType": "string",
+          "name": "evidence",
+          "type": "string"
+        }
+      ],
+      "name": "addVerification",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "rightsId",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "address[]",
+          "name": "verifiers",
+          "type": "address[]"
+        },
+        {
+          "internalType": "uint256",
+          "name": "requiredSignatures",
+          "type": "uint256"
+        }
+      ],
+      "name": "createMultiSigVerification",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "multiSigId",
+          "type": "bytes32"
+        }
+      ],
+      "name": "getMultiSigRequiredSignatures",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "multiSigId",
+          "type": "bytes32"
+        }
+      ],
+      "name": "getMultiSigVerificationData",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "rightsId",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "address[]",
+          "name": "verifiers",
+          "type": "address[]"
+        },
+        {
+          "internalType": "uint256",
+          "name": "requiredSignatures",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "signatureCount",
+          "type": "uint256"
+        },
+        {
+          "internalType": "bool",
+          "name": "isComplete",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "multiSigId",
+          "type": "bytes32"
+        }
+      ],
+      "name": "getMultiSigVerifiers",
+      "outputs": [
+        {
+          "internalType": "address[]",
+          "name": "",
+          "type": "address[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "rightsId",
+          "type": "bytes32"
+        }
+      ],
+      "name": "getRightsVerifications",
+      "outputs": [
+        {
+          "internalType": "bytes32[]",
+          "name": "",
+          "type": "bytes32[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "verificationId",
+          "type": "bytes32"
+        }
+      ],
+      "name": "getVerification",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "bytes32",
+              "name": "rightsId",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "enum EnhancedVerification.VerificationType",
+              "name": "vType",
+              "type": "uint8"
+            },
+            {
+              "internalType": "address",
+              "name": "verifier",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "timestamp",
+              "type": "uint256"
+            },
+            {
+              "internalType": "bool",
+              "name": "isValid",
+              "type": "bool"
+            },
+            {
+              "internalType": "string",
+              "name": "evidence",
+              "type": "string"
+            }
+          ],
+          "internalType": "struct EnhancedVerification.Verification",
+          "name": "",
+          "type": "tuple"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "verificationId",
+          "type": "bytes32"
+        }
+      ],
+      "name": "invalidateVerification",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "multiSigId",
+          "type": "bytes32"
+        }
+      ],
+      "name": "isMultiSigComplete",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "name": "multiSigVerifications",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "rightsId",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "uint256",
+          "name": "requiredSignatures",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "signatureCount",
+          "type": "uint256"
+        },
+        {
+          "internalType": "bool",
+          "name": "isComplete",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "owner",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "rightsVault",
+      "outputs": [
+        {
+          "internalType": "contract RightsVault",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "rightsVerifications",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "multiSigId",
+          "type": "bytes32"
+        }
+      ],
+      "name": "signMultiSigVerification",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "name": "verifications",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "rightsId",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "enum EnhancedVerification.VerificationType",
+          "name": "vType",
+          "type": "uint8"
+        },
+        {
+          "internalType": "address",
+          "name": "verifier",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "timestamp",
+          "type": "uint256"
+        },
+        {
+          "internalType": "bool",
+          "name": "isValid",
+          "type": "bool"
+        },
+        {
+          "internalType": "string",
+          "name": "evidence",
+          "type": "string"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "bytecode": "608060405234801561001057600080fd5b5060405161153238038061153283398101604081905261002f91610070565b60018054600080546001600160a01b0319166001600160a01b0394909416939093179092556001600160a81b03199091163360ff60a01b19161790556100a0565b60006020828403121561008257600080fd5b81516001600160a01b038116811461009957600080fd5b9392505050565b611483806100af6000396000f3fe608060405234801561001057600080fd5b50600436106100f55760003560e01c806394ef244011610097578063ba5f74cb11610066578063ba5f74cb14610268578063bdd5f50d1461028c578063c3c2992f1461029f578063f43626ad146102b257600080fd5b806394ef2440146102025780639d09231d14610222578063a987302914610242578063af6f43f11461025557600080fd5b8063455276d5116100d3578063455276d51461015d57806358ed6f2a1461017e57806362a922e8146101b45780638da5cb5b146101d757600080fd5b806310c74e16146100fa57806336509ef714610128578063405770d114610148575b600080fd5b61010d610108366004610e5c565b61030e565b60405161011f96959493929190610ef3565b60405180910390f35b61013b610136366004610e5c565b6103df565b60405161011f9190610f85565b61015b610156366004610e5c565b61044e565b005b61017061016b366004610f9f565b6106a7565b60405190815260200161011f565b6101a461018c366004610e5c565b60009081526004602052604090206005015460ff1690565b604051901515815260200161011f565b6101706101c2366004610e5c565b60009081526004602052604090206002015490565b6001546101ea906001600160a01b031681565b6040516001600160a01b03909116815260200161011f565b610215610210366004610e5c565b6106d8565b60405161011f9190610fc1565b610235610230366004610e5c565b61083c565b60405161011f9190611029565b61015b610250366004610e5c565b61089d565b61017061026336600461106d565b6109d8565b61027b610276366004610e5c565b610b2f565b60405161011f9594939291906110f2565b61017061029a36600461112a565b610bd4565b6000546101ea906001600160a01b031681565b6102ec6102c0366004610e5c565b600460208190526000918252604090912080546002820154928201546005909201549092919060ff1684565b604080519485526020850193909352918301521515606082015260800161011f565b600260208190526000918252604090912080546001820154928201546003830154600484018054939560ff808216966101009092046001600160a01b03169593169290919061035c906111b7565b80601f0160208091040260200160405190810160405280929190818152602001828054610388906111b7565b80156103d55780601f106103aa576101008083540402835291602001916103d5565b820191906000526020600020905b8154815290600101906020018083116103b857829003601f168201915b5050505050905086565b60008181526004602090815260409182902060010180548351818402810184019094528084526060939283018282801561044257602002820191906000526020600020905b81546001600160a01b03168152600190910190602001808311610424575b50505050509050919050565b600154600160a01b900460ff16156104815760405162461bcd60e51b8152600401610478906111f1565b60405180910390fd5b6001805460ff60a01b1916600160a01b1790556000818152600460205260409020600581015460ff16156104f75760405162461bcd60e51b815260206004820152601d60248201527f566572696669636174696f6e20616c726561647920636f6d706c6574650000006044820152606401610478565b33600090815260038201602052604090205460ff161561054a5760405162461bcd60e51b815260206004820152600e60248201526d105b1c9958591e481cda59db995960921b6044820152606401610478565b6000805b60018301548110156105ae57336001600160a01b031683600101828154811061057957610579611219565b6000918252602090912001546001600160a01b03160361059c57600191506105ae565b806105a68161122f565b91505061054e565b50806105ed5760405162461bcd60e51b815260206004820152600e60248201526d2737ba1030903b32b934b334b2b960911b6044820152606401610478565b3360009081526003830160205260408120805460ff19166001179055600483018054916106198361122f565b9091555050604051339084907f286b983632176ac4ac302d2db4fb504f58652b0e2f41cc7ef321e70cee29d34790600090a381600201548260040154106106955760058201805460ff1916600117905560405183907ff3e8589fa68755e4d56f0cc329bede6e98f75eadddfdc19304160ed6e56d492f90600090a25b50506001805460ff60a01b1916905550565b600360205281600052604060002081815481106106c357600080fd5b90600052602060002001600091509150505481565b61071d6040805160c0810190915260008082526020820190815260200160006001600160a01b0316815260200160008152602001600015158152602001606081525090565b600082815260026020908152604091829020825160c08101909352805483526001810154909183019060ff16600381111561075a5761075a610e75565b600381111561076b5761076b610e75565b8152600182015461010090046001600160a01b0316602082015260028201546040820152600382015460ff16151560608201526004820180546080909201916107b3906111b7565b80601f01602080910402602001604051908101604052809291908181526020018280546107df906111b7565b801561082c5780601f106108015761010080835404028352916020019161082c565b820191906000526020600020905b81548152906001019060200180831161080f57829003601f168201915b5050505050815250509050919050565b60008181526003602090815260409182902080548351818402810184019094528084526060939283018282801561044257602002820191906000526020600020905b81548152602001906001019080831161087e5750505050509050919050565b600154600160a01b900460ff16156108c75760405162461bcd60e51b8152600401610478906111f1565b6001805460ff60a01b1916600160a01b1781556000828152600260205260409020015461010090046001600160a01b031633146109355760405162461bcd60e51b815260206004820152600c60248201526b2737ba103b32b934b334b2b960a11b6044820152606401610478565b60008181526002602052604090206003015460ff166109885760405162461bcd60e51b815260206004820152600f60248201526e105b1c9958591e481a5b9d985b1a59608a1b6044820152606401610478565b600081815260026020526040808220600301805460ff191690555182917f37e2b1b822662f8cdce3cf9551c4bdb00ea43bf04a6f631067f878062f471c7f91a2506001805460ff60a01b19169055565b600154600090600160a01b900460ff1615610a055760405162461bcd60e51b8152600401610478906111f1565b6001805460ff60a01b1916600160a01b1790558115801590610a275750828211155b610a735760405162461bcd60e51b815260206004820152601b60248201527f496e76616c6964207265717569726564207369676e61747572657300000000006044820152606401610478565b60008585858542604051602001610a8e959493929190611256565b60408051601f198184030181529181528151602092830120600081815260049093529120878155909150610ac6600182018787610de4565b50600281018490556000600482015560058101805460ff19169055604051848152879083907fc1edefa07d7284b26b0e4d58df37444eb8f1fb4773666c5cb40d2cdadf5d203e9060200160405180910390a3506001805460ff60a01b1916905595945050505050565b6000818152600460208181526040808420805460028201549482015460058301546001840180548651818902810189019097528087526060988a98899889989796949592949360ff909316929091869190830182828015610bb957602002820191906000526020600020905b81546001600160a01b03168152600190910190602001808311610b9b575b50505050509350955095509550955095505091939590929450565b600154600090600160a01b900460ff1615610c015760405162461bcd60e51b8152600401610478906111f1565b6001805460ff60a01b1916600160a01b179055604051600090610c32908790879033904290899089906020016112af565b6040516020818303038152906040528051906020012090506040518060c00160405280878152602001866003811115610c6d57610c6d610e75565b8152602001336001600160a01b0316815260200142815260200160011515815260200185858080601f0160208091040260200160405190810160405280939291908181526020018383808284376000920182905250939094525050838152600260209081526040909120835181559083015160018083018054939450919260ff191690836003811115610d0257610d02610e75565b02179055506040820151600182018054610100600160a81b0319166101006001600160a01b039093169290920291909117905560608201516002820155608082015160038201805460ff191691151591909117905560a08201516004820190610d6b9082611379565b505050600086815260036020908152604080832080546001810182559084529190922001829055513390879083907f337204f52e9d82e471576e4b1eb592fc59b843a7ee73039b256d6a4cf478d2ad90610dc6908a90611439565b60405180910390a46001805460ff60a01b1916905595945050505050565b828054828255906000526020600020908101928215610e37579160200282015b82811115610e375781546001600160a01b0319166001600160a01b03843516178255602090920191600190910190610e04565b50610e43929150610e47565b5090565b5b80821115610e435760008155600101610e48565b600060208284031215610e6e57600080fd5b5035919050565b634e487b7160e01b600052602160045260246000fd5b60048110610ea957634e487b7160e01b600052602160045260246000fd5b9052565b6000815180845260005b81811015610ed357602081850181015186830182015201610eb7565b506000602082860101526020601f19601f83011685010191505092915050565b868152610f036020820187610e8b565b60018060a01b0385166040820152836060820152821515608082015260c060a08201526000610f3560c0830184610ead565b98975050505050505050565b600081518084526020808501945080840160005b83811015610f7a5781516001600160a01b031687529582019590820190600101610f55565b509495945050505050565b602081526000610f986020830184610f41565b9392505050565b60008060408385031215610fb257600080fd5b50508035926020909101359150565b602081528151602082015260006020830151610fe06040840182610e8b565b5060018060a01b036040840151166060830152606083015160808301526080830151151560a083015260a083015160c08084015261102160e0840182610ead565b949350505050565b6020808252825182820181905260009190848201906040850190845b8181101561106157835183529284019291840191600101611045565b50909695505050505050565b6000806000806060858703121561108357600080fd5b84359350602085013567ffffffffffffffff808211156110a257600080fd5b818701915087601f8301126110b657600080fd5b8135818111156110c557600080fd5b8860208260051b85010111156110da57600080fd5b95986020929092019750949560400135945092505050565b85815260a06020820152600061110b60a0830187610f41565b6040830195909552506060810192909252151560809091015292915050565b6000806000806060858703121561114057600080fd5b8435935060208501356004811061115657600080fd5b9250604085013567ffffffffffffffff8082111561117357600080fd5b818701915087601f83011261118757600080fd5b81358181111561119657600080fd5b8860208285010111156111a857600080fd5b95989497505060200194505050565b600181811c908216806111cb57607f821691505b6020821081036111eb57634e487b7160e01b600052602260045260246000fd5b50919050565b6020808252600e908201526d1499595b9d1c985b9d0818d85b1b60921b604082015260600190565b634e487b7160e01b600052603260045260246000fd5b60006001820161124f57634e487b7160e01b600052601160045260246000fd5b5060010190565b85815260006020808301876000805b898110156112975782356001600160a01b038116808214611284578384fd5b8552509284019291840191600101611265565b50505094855284019290925250506040019392505050565b8681526000600487106112d257634e487b7160e01b600052602160045260246000fd5b8660f81b60208301526bffffffffffffffffffffffff198660601b16602183015284603583015282846055840137506000910160550190815295945050505050565b634e487b7160e01b600052604160045260246000fd5b601f82111561137457600081815260208120601f850160051c810160208610156113515750805b601f850160051c820191505b818110156113705782815560010161135d565b5050505b505050565b815167ffffffffffffffff81111561139357611393611314565b6113a7816113a184546111b7565b8461132a565b602080601f8311600181146113dc57600084156113c45750858301515b600019600386901b1c1916600185901b178555611370565b600085815260208120601f198616915b8281101561140b578886015182559484019460019091019084016113ec565b50858210156114295787850151600019600388901b60f8161c191681555b5050505050600190811b01905550565b602081016114478284610e8b565b9291505056fea26469706673582212203ba033a485d7587bbcf6064afa3904a2767a0e5832c19d73fadc87660fdad52464736f6c63430008130033",
+  "metadata": "{\"compiler\":{\"version\":\"0.8.19+commit.7dd6d404\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_rightsVault\",\"type\":\"address\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"multiSigId\",\"type\":\"bytes32\"}],\"name\":\"MultiSigVerificationCompleted\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"multiSigId\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"rightsId\",\"type\":\"bytes32\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"requiredSignatures\",\"type\":\"uint256\"}],\"name\":\"MultiSigVerificationCreated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"multiSigId\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"signer\",\"type\":\"address\"}],\"name\":\"MultiSigVerificationSigned\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"verificationId\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"rightsId\",\"type\":\"bytes32\"},{\"indexed\":false,\"internalType\":\"enum EnhancedVerification.VerificationType\",\"name\":\"vType\",\"type\":\"uint8\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"verifier\",\"type\":\"address\"}],\"name\":\"VerificationAdded\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"verificationId\",\"type\":\"bytes32\"}],\"name\":\"VerificationInvalidated\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"rightsId\",\"type\":\"bytes32\"},{\"internalType\":\"enum EnhancedVerification.VerificationType\",\"name\":\"vType\",\"type\":\"uint8\"},{\"internalType\":\"string\",\"name\":\"evidence\",\"type\":\"string\"}],\"name\":\"addVerification\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"rightsId\",\"type\":\"bytes32\"},{\"internalType\":\"address[]\",\"name\":\"verifiers\",\"type\":\"address[]\"},{\"internalType\":\"uint256\",\"name\":\"requiredSignatures\",\"type\":\"uint256\"}],\"name\":\"createMultiSigVerification\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"multiSigId\",\"type\":\"bytes32\"}],\"name\":\"getMultiSigRequiredSignatures\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"multiSigId\",\"type\":\"bytes32\"}],\"name\":\"getMultiSigVerificationData\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"rightsId\",\"type\":\"bytes32\"},{\"internalType\":\"address[]\",\"name\":\"verifiers\",\"type\":\"address[]\"},{\"internalType\":\"uint256\",\"name\":\"requiredSignatures\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"signatureCount\",\"type\":\"uint256\"},{\"internalType\":\"bool\",\"name\":\"isComplete\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"multiSigId\",\"type\":\"bytes32\"}],\"name\":\"getMultiSigVerifiers\",\"outputs\":[{\"internalType\":\"address[]\",\"name\":\"\",\"type\":\"address[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"rightsId\",\"type\":\"bytes32\"}],\"name\":\"getRightsVerifications\",\"outputs\":[{\"internalType\":\"bytes32[]\",\"name\":\"\",\"type\":\"bytes32[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"verificationId\",\"type\":\"bytes32\"}],\"name\":\"getVerification\",\"outputs\":[{\"components\":[{\"internalType\":\"bytes32\",\"name\":\"rightsId\",\"type\":\"bytes32\"},{\"internalType\":\"enum EnhancedVerification.VerificationType\",\"name\":\"vType\",\"type\":\"uint8\"},{\"internalType\":\"address\",\"name\":\"verifier\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"timestamp\",\"type\":\"uint256\"},{\"internalType\":\"bool\",\"name\":\"isValid\",\"type\":\"bool\"},{\"internalType\":\"string\",\"name\":\"evidence\",\"type\":\"string\"}],\"internalType\":\"struct EnhancedVerification.Verification\",\"name\":\"\",\"type\":\"tuple\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"verificationId\",\"type\":\"bytes32\"}],\"name\":\"invalidateVerification\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"multiSigId\",\"type\":\"bytes32\"}],\"name\":\"isMultiSigComplete\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"name\":\"multiSigVerifications\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"rightsId\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"requiredSignatures\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"signatureCount\",\"type\":\"uint256\"},{\"internalType\":\"bool\",\"name\":\"isComplete\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"rightsVault\",\"outputs\":[{\"internalType\":\"contract RightsVault\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"rightsVerifications\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"multiSigId\",\"type\":\"bytes32\"}],\"name\":\"signMultiSigVerification\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"name\":\"verifications\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"rightsId\",\"type\":\"bytes32\"},{\"internalType\":\"enum EnhancedVerification.VerificationType\",\"name\":\"vType\",\"type\":\"uint8\"},{\"internalType\":\"address\",\"name\":\"verifier\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"timestamp\",\"type\":\"uint256\"},{\"internalType\":\"bool\",\"name\":\"isValid\",\"type\":\"bool\"},{\"internalType\":\"string\",\"name\":\"evidence\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"details\":\"Enhanced verification system for rights management\",\"kind\":\"dev\",\"methods\":{\"addVerification(bytes32,uint8,string)\":{\"details\":\"Add a new verification\",\"params\":{\"evidence\":\"Verification evidence\",\"rightsId\":\"Rights identifier\",\"vType\":\"Type of verification\"},\"returns\":{\"_0\":\"verificationId Unique identifier for the verification\"}},\"createMultiSigVerification(bytes32,address[],uint256)\":{\"details\":\"Create a new multi-signature verification\",\"params\":{\"requiredSignatures\":\"Number of required signatures\",\"rightsId\":\"Rights identifier\",\"verifiers\":\"Array of verifier addresses\"},\"returns\":{\"_0\":\"multiSigId Unique identifier for the multi-sig verification\"}},\"getMultiSigRequiredSignatures(bytes32)\":{\"details\":\"Get required signatures for a multi-signature verification\",\"params\":{\"multiSigId\":\"Multi-signature verification identifier\"},\"returns\":{\"_0\":\"Number of required signatures\"}},\"getMultiSigVerificationData(bytes32)\":{\"details\":\"Get multi-signature verification data\",\"params\":{\"multiSigId\":\"Multi-signature verification identifier\"},\"returns\":{\"isComplete\":\"Whether the verification is complete\",\"requiredSignatures\":\"Number of required signatures\",\"rightsId\":\"Rights identifier\",\"signatureCount\":\"Current number of signatures\",\"verifiers\":\"Array of verifier addresses\"}},\"getMultiSigVerifiers(bytes32)\":{\"details\":\"Get verifiers for a multi-signature verification\",\"params\":{\"multiSigId\":\"Multi-signature verification identifier\"},\"returns\":{\"_0\":\"Array of verifier addresses\"}},\"getRightsVerifications(bytes32)\":{\"details\":\"Get all verifications for specific rights\",\"params\":{\"rightsId\":\"Rights identifier\"},\"returns\":{\"_0\":\"Array of verification IDs\"}},\"getVerification(bytes32)\":{\"details\":\"Get verification data\",\"params\":{\"verificationId\":\"Verification identifier\"},\"returns\":{\"_0\":\"Verification struct containing the verification information\"}},\"invalidateVerification(bytes32)\":{\"details\":\"Invalidate a verification\",\"params\":{\"verificationId\":\"Verification identifier\"}},\"isMultiSigComplete(bytes32)\":{\"details\":\"Check if a multi-signature verification is complete\",\"params\":{\"multiSigId\":\"Multi-signature verification identifier\"},\"returns\":{\"_0\":\"Whether the verification is complete\"}},\"signMultiSigVerification(bytes32)\":{\"details\":\"Sign a multi-signature verification\",\"params\":{\"multiSigId\":\"Multi-signature verification identifier\"}}},\"title\":\"EnhancedVerification\",\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"EnhancedVerification.sol\":\"EnhancedVerification\"},\"evmVersion\":\"paris\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"EnhancedVerification.sol\":{\"keccak256\":\"0x4f3fb49d1010f3cb41a99c943cefb3d5fff8b5574e32be01bf4e7b8a711db30b\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://f00368e22ba2b253e4e83382895f094380fa8a8a38be06980098c267ea33dd1e\",\"dweb:/ipfs/QmVQ2YACMA1bG7tD4CmSepmmKvaZpJaXALzEfgqYmkNfdE\"]},\"RightsVault.sol\":{\"keccak256\":\"0x2ead305b94b9e92516c13cfd49d9e75afa551654331315d8aa5e6447298f3c9f\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://3e64886fe8ef73b8cd896aae862e160fc0b68aa96fc33198d050a8dc897ac5f2\",\"dweb:/ipfs/QmPni2f8QR4JMcetHSfnAmudgA56VB5Yh1kgf59vzprEcG\"]}},\"version\":1}"
+}

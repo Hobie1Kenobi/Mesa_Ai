@@ -1,0 +1,687 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Discogs Integration Schema",
+  "description": "Schema for mapping Discogs data to MESA Rights Vault format",
+  "type": "object",
+  "definitions": {
+    "release": {
+      "type": "object",
+      "description": "Discogs Release entity",
+      "required": ["id", "title"],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "description": "Discogs release ID"
+        },
+        "title": {
+          "type": "string",
+          "description": "Title of the release"
+        },
+        "artists": {
+          "type": "array",
+          "description": "Artists involved in the release",
+          "items": {
+            "$ref": "#/definitions/artist_reference"
+          }
+        },
+        "extraartists": {
+          "type": "array",
+          "description": "Additional artists with specific roles",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "integer",
+                "description": "Artist ID"
+              },
+              "name": {
+                "type": "string",
+                "description": "Artist name"
+              },
+              "role": {
+                "type": "string",
+                "description": "Artist's role in the release"
+              },
+              "anv": {
+                "type": "string",
+                "description": "Artist name variation"
+              }
+            }
+          }
+        },
+        "labels": {
+          "type": "array",
+          "description": "Labels that released this",
+          "items": {
+            "$ref": "#/definitions/label_reference"
+          }
+        },
+        "formats": {
+          "type": "array",
+          "description": "Physical formats of the release",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Format name (CD, Vinyl, etc.)"
+              },
+              "qty": {
+                "type": "string",
+                "description": "Quantity of this format"
+              },
+              "descriptions": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "genres": {
+          "type": "array",
+          "description": "Musical genres",
+          "items": {
+            "type": "string"
+          }
+        },
+        "styles": {
+          "type": "array",
+          "description": "More specific subgenres",
+          "items": {
+            "type": "string"
+          }
+        },
+        "country": {
+          "type": "string",
+          "description": "Country of release"
+        },
+        "released": {
+          "type": "string",
+          "description": "Release date"
+        },
+        "master_id": {
+          "type": ["integer", "null"],
+          "description": "ID of the master release"
+        },
+        "tracklist": {
+          "type": "array",
+          "description": "List of tracks",
+          "items": {
+            "$ref": "#/definitions/track"
+          }
+        },
+        "identifiers": {
+          "type": "array",
+          "description": "External identifiers",
+          "items": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "description": "Identifier type (Barcode, ISRC, etc.)"
+              },
+              "value": {
+                "type": "string",
+                "description": "Identifier value"
+              }
+            }
+          }
+        },
+        "videos": {
+          "type": "array",
+          "description": "Related videos",
+          "items": {
+            "type": "object",
+            "properties": {
+              "uri": {
+                "type": "string",
+                "description": "Video URL"
+              },
+              "title": {
+                "type": "string",
+                "description": "Video title"
+              }
+            }
+          }
+        },
+        "companies": {
+          "type": "array",
+          "description": "Companies involved in the release",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "integer",
+                "description": "Company ID"
+              },
+              "name": {
+                "type": "string",
+                "description": "Company name"
+              },
+              "entity_type": {
+                "type": "string",
+                "description": "Type of entity"
+              },
+              "entity_type_name": {
+                "type": "string",
+                "description": "Human-readable entity type"
+              },
+              "resource_url": {
+                "type": "string",
+                "description": "API URL for this company"
+              }
+            }
+          }
+        }
+      }
+    },
+    "artist_reference": {
+      "type": "object",
+      "description": "Reference to an artist",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "description": "Artist ID"
+        },
+        "name": {
+          "type": "string",
+          "description": "Artist name"
+        },
+        "anv": {
+          "type": "string",
+          "description": "Artist name variation"
+        },
+        "join": {
+          "type": "string",
+          "description": "Text used to join artist names"
+        },
+        "role": {
+          "type": "string",
+          "description": "Role of the artist"
+        },
+        "tracks": {
+          "type": "string",
+          "description": "Tracks that the artist performed on"
+        },
+        "resource_url": {
+          "type": "string",
+          "description": "API URL for this artist"
+        }
+      }
+    },
+    "artist": {
+      "type": "object",
+      "description": "Discogs Artist entity",
+      "required": ["id", "name"],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "description": "Artist ID"
+        },
+        "name": {
+          "type": "string",
+          "description": "Artist name"
+        },
+        "realname": {
+          "type": "string",
+          "description": "Artist's real name"
+        },
+        "profile": {
+          "type": "string",
+          "description": "Biography/description"
+        },
+        "urls": {
+          "type": "array",
+          "description": "Related URLs",
+          "items": {
+            "type": "string"
+          }
+        },
+        "namevariations": {
+          "type": "array",
+          "description": "Alternative spellings of name",
+          "items": {
+            "type": "string"
+          }
+        },
+        "aliases": {
+          "type": "array",
+          "description": "Other names used by the artist",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "integer",
+                "description": "Alias ID"
+              },
+              "name": {
+                "type": "string",
+                "description": "Alias name"
+              },
+              "resource_url": {
+                "type": "string",
+                "description": "API URL for this alias"
+              }
+            }
+          }
+        },
+        "members": {
+          "type": "array",
+          "description": "Members of a group",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "integer",
+                "description": "Member ID"
+              },
+              "name": {
+                "type": "string",
+                "description": "Member name"
+              },
+              "resource_url": {
+                "type": "string",
+                "description": "API URL for this member"
+              }
+            }
+          }
+        },
+        "images": {
+          "type": "array",
+          "description": "Artist images",
+          "items": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "description": "Image type"
+              },
+              "uri": {
+                "type": "string",
+                "description": "Image URI"
+              },
+              "resource_url": {
+                "type": "string",
+                "description": "API URL for this image"
+              },
+              "uri150": {
+                "type": "string",
+                "description": "Thumbnail image URI"
+              },
+              "width": {
+                "type": "integer",
+                "description": "Image width"
+              },
+              "height": {
+                "type": "integer",
+                "description": "Image height"
+              }
+            }
+          }
+        }
+      }
+    },
+    "label_reference": {
+      "type": "object",
+      "description": "Reference to a label",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "description": "Label ID"
+        },
+        "name": {
+          "type": "string",
+          "description": "Label name"
+        },
+        "catno": {
+          "type": "string",
+          "description": "Catalog number"
+        },
+        "entity_type": {
+          "type": "string",
+          "description": "Type of entity"
+        },
+        "entity_type_name": {
+          "type": "string",
+          "description": "Human-readable entity type"
+        },
+        "resource_url": {
+          "type": "string",
+          "description": "API URL for this label"
+        }
+      }
+    },
+    "label": {
+      "type": "object",
+      "description": "Discogs Label entity",
+      "required": ["id", "name"],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "description": "Label ID"
+        },
+        "name": {
+          "type": "string",
+          "description": "Label name"
+        },
+        "profile": {
+          "type": "string",
+          "description": "Label description/history"
+        },
+        "contact_info": {
+          "type": "string",
+          "description": "Contact information"
+        },
+        "parent_label": {
+          "type": "object",
+          "description": "Parent label if this is a sublabel",
+          "properties": {
+            "id": {
+              "type": "integer",
+              "description": "Parent label ID"
+            },
+            "name": {
+              "type": "string",
+              "description": "Parent label name"
+            },
+            "resource_url": {
+              "type": "string",
+              "description": "API URL for parent label"
+            }
+          }
+        },
+        "subsidiaries": {
+          "type": "array",
+          "description": "Sublabels owned by this label",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "integer",
+                "description": "Subsidiary ID"
+              },
+              "name": {
+                "type": "string",
+                "description": "Subsidiary name"
+              },
+              "resource_url": {
+                "type": "string",
+                "description": "API URL for subsidiary"
+              }
+            }
+          }
+        },
+        "urls": {
+          "type": "array",
+          "description": "Related URLs",
+          "items": {
+            "type": "string"
+          }
+        },
+        "images": {
+          "type": "array",
+          "description": "Label images",
+          "items": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "description": "Image type"
+              },
+              "uri": {
+                "type": "string",
+                "description": "Image URI"
+              },
+              "resource_url": {
+                "type": "string",
+                "description": "API URL for this image"
+              },
+              "uri150": {
+                "type": "string",
+                "description": "Thumbnail image URI"
+              },
+              "width": {
+                "type": "integer",
+                "description": "Image width"
+              },
+              "height": {
+                "type": "integer",
+                "description": "Image height"
+              }
+            }
+          }
+        }
+      }
+    },
+    "track": {
+      "type": "object",
+      "description": "Track on a release",
+      "properties": {
+        "position": {
+          "type": "string",
+          "description": "Position on release (e.g., A1, B2)"
+        },
+        "title": {
+          "type": "string",
+          "description": "Track title"
+        },
+        "duration": {
+          "type": "string",
+          "description": "Track duration"
+        },
+        "extraartists": {
+          "type": "array",
+          "description": "Additional artists on this track",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "integer",
+                "description": "Artist ID"
+              },
+              "name": {
+                "type": "string",
+                "description": "Artist name"
+              },
+              "role": {
+                "type": "string",
+                "description": "Artist's role"
+              },
+              "anv": {
+                "type": "string",
+                "description": "Artist name variation"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "properties": {
+    "release_mapping": {
+      "type": "object",
+      "description": "Mapping from Discogs release to MESA Rights Vault format",
+      "properties": {
+        "workTitle": {
+          "type": "string",
+          "description": "Field in Discogs to map to workTitle",
+          "enum": ["title"]
+        },
+        "releaseDate": {
+          "type": "string",
+          "description": "Field in Discogs to map to releaseDate",
+          "enum": ["released"]
+        },
+        "artistParty": {
+          "type": "string",
+          "description": "Field in Discogs to map to artistParty",
+          "enum": ["artists", "extraartists"]
+        },
+        "publisherParty": {
+          "type": "string",
+          "description": "Field in Discogs to map to publisherParty",
+          "enum": ["labels", "companies"]
+        },
+        "territory": {
+          "type": "string",
+          "description": "Field in Discogs to map to territory",
+          "enum": ["country"]
+        },
+        "identifiers": {
+          "type": "string",
+          "description": "Field in Discogs to map to identifiers",
+          "enum": ["identifiers"]
+        }
+      }
+    },
+    "artist_mapping": {
+      "type": "object",
+      "description": "Mapping from Discogs artist to MESA Rights Vault format",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Field in Discogs to map to name",
+          "enum": ["name"]
+        },
+        "realname": {
+          "type": "string",
+          "description": "Field in Discogs to map to realname",
+          "enum": ["realname"]
+        },
+        "profile": {
+          "type": "string",
+          "description": "Field in Discogs to map to profile",
+          "enum": ["profile"]
+        },
+        "urls": {
+          "type": "string",
+          "description": "Field in Discogs to map to URLs",
+          "enum": ["urls"]
+        }
+      }
+    },
+    "label_mapping": {
+      "type": "object",
+      "description": "Mapping from Discogs label to MESA Rights Vault format",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Field in Discogs to map to name",
+          "enum": ["name"]
+        },
+        "profile": {
+          "type": "string",
+          "description": "Field in Discogs to map to profile",
+          "enum": ["profile"]
+        },
+        "contactInfo": {
+          "type": "string",
+          "description": "Field in Discogs to map to contactInfo",
+          "enum": ["contact_info"]
+        },
+        "parentLabel": {
+          "type": "string",
+          "description": "Field in Discogs to map to parentLabel",
+          "enum": ["parent_label"]
+        }
+      }
+    },
+    "mesa_mapping": {
+      "type": "object",
+      "description": "Fields that should be extracted for MESA Rights Vault",
+      "properties": {
+        "rightId": {
+          "type": "string",
+          "description": "Unique identifier for the right"
+        },
+        "workTitle": {
+          "type": "string",
+          "description": "Title of the musical work"
+        },
+        "artistParty": {
+          "type": "array",
+          "description": "Artists involved in the work",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Artist name"
+              },
+              "id": {
+                "type": "string",
+                "description": "Artist ID"
+              },
+              "role": {
+                "type": "string",
+                "description": "Role of the artist"
+              }
+            }
+          }
+        },
+        "publisherParty": {
+          "type": "array",
+          "description": "Publishers/labels for the work",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Publisher name"
+              },
+              "id": {
+                "type": "string",
+                "description": "Publisher ID"
+              },
+              "catno": {
+                "type": "string",
+                "description": "Catalog number"
+              }
+            }
+          }
+        },
+        "releaseDate": {
+          "type": "string",
+          "description": "When the work was released"
+        },
+        "territory": {
+          "type": "string",
+          "description": "Territory where the right applies"
+        },
+        "identifiers": {
+          "type": "array",
+          "description": "External identifiers for the work",
+          "items": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "description": "Type of identifier"
+              },
+              "value": {
+                "type": "string",
+                "description": "Identifier value"
+              }
+            }
+          }
+        },
+        "genres": {
+          "type": "array",
+          "description": "Musical genres",
+          "items": {
+            "type": "string"
+          }
+        },
+        "styles": {
+          "type": "array",
+          "description": "More specific musical styles",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+} 

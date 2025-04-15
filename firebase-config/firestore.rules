@@ -1,0 +1,57 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Rights data - only accessible by owner or with explicit permission
+    match /rights/{rightId} {
+      // Allow read if user is the owner
+      allow read: if request.auth != null && 
+                   (resource.data.ownerId == request.auth.uid ||
+                    exists(/databases/$(database)/documents/permissions/$(rightId)/users/$(request.auth.uid)));
+      
+      // Allow write only if user is the owner
+      allow write: if request.auth != null && resource.data.ownerId == request.auth.uid;
+      
+      // Rights metadata collection - public but limited information
+      match /metadata/{metadataId} {
+        allow read: if true;
+        allow write: if request.auth != null && get(/databases/$(database)/documents/rights/$(rightId)).data.ownerId == request.auth.uid;
+      }
+    }
+    
+    // User profiles
+    match /users/{userId} {
+      allow read: if request.auth != null && request.auth.uid == userId;
+      allow write: if request.auth != null && request.auth.uid == userId;
+      
+      // User's public profile
+      match /public/{document=**} {
+        allow read: if true;
+        allow write: if request.auth != null && request.auth.uid == userId;
+      }
+    }
+    
+    // Permissions for shared rights
+    match /permissions/{rightId}/users/{userId} {
+      allow read: if request.auth != null && request.auth.uid == userId;
+      allow write: if request.auth != null && 
+                   get(/databases/$(database)/documents/rights/$(rightId)).data.ownerId == request.auth.uid;
+    }
+    
+    // Verification records
+    match /verifications/{verificationId} {
+      allow read: if request.auth != null && 
+                  (resource.data.requestorId == request.auth.uid || 
+                   resource.data.providerId == request.auth.uid);
+      allow create: if request.auth != null;
+      allow update, delete: if request.auth != null && 
+                            (resource.data.requestorId == request.auth.uid || 
+                             resource.data.providerId == request.auth.uid);
+    }
+    
+    // MESA Track ID mapping data (mostly public)
+    match /mesa_tracks/{document=**} {
+      allow read: if true;
+      allow write: if request.auth != null;
+    }
+  }
+}

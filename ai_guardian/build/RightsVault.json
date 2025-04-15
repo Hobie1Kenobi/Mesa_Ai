@@ -1,0 +1,268 @@
+{
+  "abi": [
+    {
+      "inputs": [],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "rightsId",
+          "type": "bytes32"
+        }
+      ],
+      "name": "RightsDeactivated",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "rightsId",
+          "type": "bytes32"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "owner",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "timestamp",
+          "type": "uint256"
+        }
+      ],
+      "name": "RightsRegistered",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "rightsId",
+          "type": "bytes32"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "owner",
+          "type": "address"
+        }
+      ],
+      "name": "RightsUpdated",
+      "type": "event"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "rightsId",
+          "type": "bytes32"
+        }
+      ],
+      "name": "deactivateRights",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_owner",
+          "type": "address"
+        }
+      ],
+      "name": "getOwnerRights",
+      "outputs": [
+        {
+          "internalType": "bytes32[]",
+          "name": "",
+          "type": "bytes32[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "rightsId",
+          "type": "bytes32"
+        }
+      ],
+      "name": "getRightsData",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "bytes32",
+              "name": "encryptedData",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "bytes32",
+              "name": "dataHash",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "address",
+              "name": "rightsOwner",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "timestamp",
+              "type": "uint256"
+            },
+            {
+              "internalType": "bool",
+              "name": "isActive",
+              "type": "bool"
+            }
+          ],
+          "internalType": "struct RightsVault.RightsData",
+          "name": "",
+          "type": "tuple"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "owner",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "ownerRights",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "rightsId",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "encryptedData",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "dataHash",
+          "type": "bytes32"
+        }
+      ],
+      "name": "registerRights",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "name": "rightsRegistry",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "encryptedData",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "dataHash",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "address",
+          "name": "rightsOwner",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "timestamp",
+          "type": "uint256"
+        },
+        {
+          "internalType": "bool",
+          "name": "isActive",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "rightsId",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "encryptedData",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "dataHash",
+          "type": "bytes32"
+        }
+      ],
+      "name": "updateRights",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "bytecode": "608060405234801561001057600080fd5b506000805460ff60a01b1933166001600160a81b031990911617905561088d8061003b6000396000f3fe608060405234801561001057600080fd5b50600436106100885760003560e01c8063851831861161005b57806385183186146101695780638da5cb5b1461023f578063a11785671461026a578063b201e6b21461027d57600080fd5b806322f03ccf1461008d57806338e5361d146100a257806372ba21e31461012857806373a497f714610149575b600080fd5b6100a061009b36600461073e565b610290565b005b6100eb6100b036600461073e565b60016020819052600091825260409091208054918101546002820154600383015460049093015491926001600160a01b039091169160ff1685565b6040805195865260208601949094526001600160a01b039092169284019290925260608301919091521515608082015260a0015b60405180910390f35b61013b610136366004610773565b6103e1565b60405190815260200161011f565b61015c61015736600461079d565b610412565b60405161011f91906107bf565b6101f761017736600461073e565b6040805160a0808201835260008083526020808401829052838501829052606080850183905260809485018390529582526001808252918590208551938401865280548452918201549083015260028101546001600160a01b03169382019390935260038301549381019390935260049091015460ff1615159082015290565b60405161011f919081518152602080830151908201526040808301516001600160a01b0316908201526060808301519082015260809182015115159181019190915260a00190565b600054610252906001600160a01b031681565b6040516001600160a01b03909116815260200161011f565b6100a0610278366004610803565b61047e565b6100a061028b366004610803565b6105fd565b600054600160a01b900460ff16156102c35760405162461bcd60e51b81526004016102ba9061082f565b60405180910390fd5b6000805460ff60a01b1916600160a01b178155818152600160205260409020600201546001600160a01b031633146103305760405162461bcd60e51b815260206004820152601060248201526f2737ba103934b3b43a399037bbb732b960811b60448201526064016102ba565b60008181526001602052604090206004015460ff166103915760405162461bcd60e51b815260206004820152601760248201527f52696768747320616c726561647920696e61637469766500000000000000000060448201526064016102ba565b600081815260016020526040808220600401805460ff191690555182917ff36e66e688ccd9975ac86cd13238dcbcc6445116b99ee8b91387d82ca16bb3a591a2506000805460ff60a01b19169055565b600260205281600052604060002081815481106103fd57600080fd5b90600052602060002001600091509150505481565b6001600160a01b03811660009081526002602090815260409182902080548351818402810184019094528084526060939283018282801561047257602002820191906000526020600020905b81548152602001906001019080831161045e575b50505050509050919050565b600054600160a01b900460ff16156104a85760405162461bcd60e51b81526004016102ba9061082f565b6000805460ff60a01b1916600160a01b17815583815260016020526040902060030154156105185760405162461bcd60e51b815260206004820152601960248201527f52696768747320616c726561647920726567697374657265640000000000000060448201526064016102ba565b6040805160a081018252838152602080820184815233838501818152426060860181815260016080880181815260008d81528289528a812099518a5596518983015593516002808a0180546001600160a01b0319166001600160a01b03909316929092179091559151600389015592516004909701805460ff19169715159790971790965582845294845285832080549182018155835291839020909101879055925191825285917f580e0842d5023898a9945e238518b680f63b0365080d6ccb1cc0f1e8e2cfe0c2910160405180910390a350506000805460ff60a01b1916905550565b600054600160a01b900460ff16156106275760405162461bcd60e51b81526004016102ba9061082f565b6000805460ff60a01b1916600160a01b178155838152600160205260409020600201546001600160a01b031633146106945760405162461bcd60e51b815260206004820152601060248201526f2737ba103934b3b43a399037bbb732b960811b60448201526064016102ba565b60008381526001602052604090206004015460ff166106e95760405162461bcd60e51b8152602060048201526011602482015270526967687473206e6f742061637469766560781b60448201526064016102ba565b600083815260016020819052604080832085815590910183905551339185917f3b3565ddcba5cae28427e28eb19aeebeae96812c0d405bc75de7bd0fd995ee779190a350506000805460ff60a01b1916905550565b60006020828403121561075057600080fd5b5035919050565b80356001600160a01b038116811461076e57600080fd5b919050565b6000806040838503121561078657600080fd5b61078f83610757565b946020939093013593505050565b6000602082840312156107af57600080fd5b6107b882610757565b9392505050565b6020808252825182820181905260009190848201906040850190845b818110156107f7578351835292840192918401916001016107db565b50909695505050505050565b60008060006060848603121561081857600080fd5b505081359360208301359350604090920135919050565b6020808252600e908201526d1499595b9d1c985b9d0818d85b1b60921b60408201526060019056fea2646970667358221220964ba2c3cb337fe54e20c1e59bfae7a66957aef7b721f51d88118d440c9d80f464736f6c63430008130033",
+  "metadata": "{\"compiler\":{\"version\":\"0.8.19+commit.7dd6d404\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"rightsId\",\"type\":\"bytes32\"}],\"name\":\"RightsDeactivated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"rightsId\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"timestamp\",\"type\":\"uint256\"}],\"name\":\"RightsRegistered\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"rightsId\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"}],\"name\":\"RightsUpdated\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"rightsId\",\"type\":\"bytes32\"}],\"name\":\"deactivateRights\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_owner\",\"type\":\"address\"}],\"name\":\"getOwnerRights\",\"outputs\":[{\"internalType\":\"bytes32[]\",\"name\":\"\",\"type\":\"bytes32[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"rightsId\",\"type\":\"bytes32\"}],\"name\":\"getRightsData\",\"outputs\":[{\"components\":[{\"internalType\":\"bytes32\",\"name\":\"encryptedData\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"dataHash\",\"type\":\"bytes32\"},{\"internalType\":\"address\",\"name\":\"rightsOwner\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"timestamp\",\"type\":\"uint256\"},{\"internalType\":\"bool\",\"name\":\"isActive\",\"type\":\"bool\"}],\"internalType\":\"struct RightsVault.RightsData\",\"name\":\"\",\"type\":\"tuple\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"ownerRights\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"rightsId\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"encryptedData\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"dataHash\",\"type\":\"bytes32\"}],\"name\":\"registerRights\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"name\":\"rightsRegistry\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"encryptedData\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"dataHash\",\"type\":\"bytes32\"},{\"internalType\":\"address\",\"name\":\"rightsOwner\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"timestamp\",\"type\":\"uint256\"},{\"internalType\":\"bool\",\"name\":\"isActive\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"rightsId\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"encryptedData\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"dataHash\",\"type\":\"bytes32\"}],\"name\":\"updateRights\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"details\":\"Core contract for storing and managing rights data with privacy features\",\"kind\":\"dev\",\"methods\":{\"deactivateRights(bytes32)\":{\"details\":\"Deactivate rights\",\"params\":{\"rightsId\":\"Rights identifier to deactivate\"}},\"getOwnerRights(address)\":{\"details\":\"Get all rights IDs for an owner\",\"params\":{\"_owner\":\"Address of the rights owner\"},\"returns\":{\"_0\":\"Array of rights IDs\"}},\"getRightsData(bytes32)\":{\"details\":\"Get rights data\",\"params\":{\"rightsId\":\"Rights identifier\"},\"returns\":{\"_0\":\"RightsData struct containing the rights information\"}},\"registerRights(bytes32,bytes32,bytes32)\":{\"details\":\"Register new rights data\",\"params\":{\"dataHash\":\"Hash of the original data\",\"encryptedData\":\"Encrypted rights data\",\"rightsId\":\"Unique identifier for the rights\"}},\"updateRights(bytes32,bytes32,bytes32)\":{\"details\":\"Update existing rights data\",\"params\":{\"dataHash\":\"New hash of the original data\",\"encryptedData\":\"New encrypted rights data\",\"rightsId\":\"Rights identifier to update\"}}},\"title\":\"RightsVault\",\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"RightsVault.sol\":\"RightsVault\"},\"evmVersion\":\"paris\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"RightsVault.sol\":{\"keccak256\":\"0x2ead305b94b9e92516c13cfd49d9e75afa551654331315d8aa5e6447298f3c9f\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://3e64886fe8ef73b8cd896aae862e160fc0b68aa96fc33198d050a8dc897ac5f2\",\"dweb:/ipfs/QmPni2f8QR4JMcetHSfnAmudgA56VB5Yh1kgf59vzprEcG\"]}},\"version\":1}"
+}

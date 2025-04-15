@@ -1,0 +1,25 @@
+{
+  "collection_intervals": {
+    "quick_scan": 1,
+    "detailed_scan": 2,
+    "deep_analysis": 4
+  },
+  "monitored_pros": [
+    "ascap",
+    "bmi",
+    "sesac",
+    "soundexchange",
+    "hfa",
+    "mlc"
+  ],
+  "monitored_platforms": [
+    "spotify",
+    "apple_music",
+    "youtube",
+    "amazon_music",
+    "tidal"
+  ],
+  "agency_identifier": "MESA-DEMO-AGENCY",
+  "generate_interim_reports": true,
+  "report_interval": 3
+}

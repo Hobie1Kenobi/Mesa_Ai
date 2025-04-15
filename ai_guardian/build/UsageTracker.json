@@ -1,0 +1,565 @@
+{
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_rightsVault",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "licenseId",
+          "type": "bytes32"
+        },
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "rightsId",
+          "type": "bytes32"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "licensee",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "enum UsageTracker.LicenseType",
+          "name": "lType",
+          "type": "uint8"
+        }
+      ],
+      "name": "LicenseCreated",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "licenseId",
+          "type": "bytes32"
+        }
+      ],
+      "name": "LicenseRevoked",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "licenseId",
+          "type": "bytes32"
+        }
+      ],
+      "name": "LicenseUpdated",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "usageId",
+          "type": "bytes32"
+        },
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "rightsId",
+          "type": "bytes32"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "user",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "enum UsageTracker.UsageType",
+          "name": "uType",
+          "type": "uint8"
+        }
+      ],
+      "name": "UsageRecorded",
+      "type": "event"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "rightsId",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "address",
+          "name": "licensee",
+          "type": "address"
+        },
+        {
+          "internalType": "enum UsageTracker.LicenseType",
+          "name": "lType",
+          "type": "uint8"
+        },
+        {
+          "internalType": "uint256",
+          "name": "startTime",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "endTime",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "maxUses",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "fee",
+          "type": "uint256"
+        }
+      ],
+      "name": "createLicense",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "licenseId",
+          "type": "bytes32"
+        }
+      ],
+      "name": "getLicenseData",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "bytes32",
+              "name": "rightsId",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "address",
+              "name": "licensee",
+              "type": "address"
+            },
+            {
+              "internalType": "enum UsageTracker.LicenseType",
+              "name": "lType",
+              "type": "uint8"
+            },
+            {
+              "internalType": "uint256",
+              "name": "startTime",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "endTime",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "maxUses",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "currentUses",
+              "type": "uint256"
+            },
+            {
+              "internalType": "bool",
+              "name": "isActive",
+              "type": "bool"
+            },
+            {
+              "internalType": "uint256",
+              "name": "fee",
+              "type": "uint256"
+            }
+          ],
+          "internalType": "struct UsageTracker.License",
+          "name": "",
+          "type": "tuple"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "rightsId",
+          "type": "bytes32"
+        }
+      ],
+      "name": "getRightsLicenses",
+      "outputs": [
+        {
+          "internalType": "bytes32[]",
+          "name": "",
+          "type": "bytes32[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "rightsId",
+          "type": "bytes32"
+        }
+      ],
+      "name": "getRightsUsageRecords",
+      "outputs": [
+        {
+          "internalType": "bytes32[]",
+          "name": "",
+          "type": "bytes32[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "usageId",
+          "type": "bytes32"
+        }
+      ],
+      "name": "getUsageRecord",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "bytes32",
+              "name": "rightsId",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "address",
+              "name": "user",
+              "type": "address"
+            },
+            {
+              "internalType": "enum UsageTracker.UsageType",
+              "name": "uType",
+              "type": "uint8"
+            },
+            {
+              "internalType": "uint256",
+              "name": "timestamp",
+              "type": "uint256"
+            },
+            {
+              "internalType": "string",
+              "name": "metadata",
+              "type": "string"
+            }
+          ],
+          "internalType": "struct UsageTracker.UsageRecord",
+          "name": "",
+          "type": "tuple"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "licenseId",
+          "type": "bytes32"
+        }
+      ],
+      "name": "isLicenseValid",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "name": "licenses",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "rightsId",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "address",
+          "name": "licensee",
+          "type": "address"
+        },
+        {
+          "internalType": "enum UsageTracker.LicenseType",
+          "name": "lType",
+          "type": "uint8"
+        },
+        {
+          "internalType": "uint256",
+          "name": "startTime",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "endTime",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "maxUses",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "currentUses",
+          "type": "uint256"
+        },
+        {
+          "internalType": "bool",
+          "name": "isActive",
+          "type": "bool"
+        },
+        {
+          "internalType": "uint256",
+          "name": "fee",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "owner",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "rightsId",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "enum UsageTracker.UsageType",
+          "name": "uType",
+          "type": "uint8"
+        },
+        {
+          "internalType": "string",
+          "name": "metadata",
+          "type": "string"
+        }
+      ],
+      "name": "recordUsage",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "licenseId",
+          "type": "bytes32"
+        }
+      ],
+      "name": "revokeLicense",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "rightsLicenses",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "rightsUsageRecords",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "rightsVault",
+      "outputs": [
+        {
+          "internalType": "contract RightsVault",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "licenseId",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "uint256",
+          "name": "endTime",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "maxUses",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "fee",
+          "type": "uint256"
+        }
+      ],
+      "name": "updateLicense",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "name": "usageRecords",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "rightsId",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "address",
+          "name": "user",
+          "type": "address"
+        },
+        {
+          "internalType": "enum UsageTracker.UsageType",
+          "name": "uType",
+          "type": "uint8"
+        },
+        {
+          "internalType": "uint256",
+          "name": "timestamp",
+          "type": "uint256"
+        },
+        {
+          "internalType": "string",
+          "name": "metadata",
+          "type": "string"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "bytecode": "608060405234801561001057600080fd5b5060405161152a38038061152a83398101604081905261002f91610070565b60018054600080546001600160a01b0319166001600160a01b0394909416939093179092556001600160a81b03199091163360ff60a01b19161790556100a0565b60006020828403121561008257600080fd5b81516001600160a01b038116811461009957600080fd5b9392505050565b61147b806100af6000396000f3fe608060405234801561001057600080fd5b50600436106100f55760003560e01c8063a7183ce011610097578063e98155b211610066578063e98155b214610290578063ed11ad7d146102b0578063edabd0e2146102c3578063f5956b32146102e357600080fd5b8063a7183ce0146101de578063b9e94caf146101f1578063c3c2992f14610204578063cde74e511461021757600080fd5b80637ceb015e116100d35780637ceb015e1461014b57806385f4b1f21461016c5780638da5cb5b1461018f5780639d447d34146101ba57600080fd5b806346725369146100fa57806363c7ea9114610123578063680c97b014610138575b600080fd5b61010d610108366004610e40565b6102f6565b60405161011a9190610e59565b60405180910390f35b610136610131366004610e40565b610358565b005b610136610146366004610e9d565b61043d565b61015e610159366004610ecf565b6105ae565b60405190815260200161011a565b61017f61017a366004610e40565b61079e565b604051901515815260200161011a565b6001546101a2906001600160a01b031681565b6040516001600160a01b03909116815260200161011a565b6101cd6101c8366004610e40565b6107ee565b60405161011a959493929190610fcc565b61015e6101ec366004611012565b6108b6565b61015e6101ff366004611012565b6108e7565b6000546101a2906001600160a01b031681565b61027b610225366004610e40565b60026020819052600091825260409091208054600182015492820154600383015460048401546005850154600686015460079096015494966001600160a01b0381169660ff600160a01b90920482169691169089565b60405161011a99989796959493929190611044565b6102a361029e366004610e40565b610903565b60405161011a919061109d565b61015e6102be366004611113565b610a07565b6102d66102d1366004610e40565b610ca1565b60405161011a9190611188565b61010d6102f1366004610e40565b610de0565b60008181526003602090815260409182902080548351818402810184019094528084526060939283018282801561034c57602002820191906000526020600020905b815481526020019060010190808311610338575b50505050509050919050565b600154600160a01b900460ff161561038b5760405162461bcd60e51b8152600401610382906111e4565b60405180910390fd5b6001805460ff60a01b1916600160a01b1790556000818152600260205260409020600681015460ff166103f55760405162461bcd60e51b81526020600482015260126024820152714c6963656e7365206e6f742061637469766560701b6044820152606401610382565b60068101805460ff1916905560405182907f0cddff7d26fb450c5bd6fa66ef9bd79abd5f2424333c0381532898b0ef59638c90600090a250506001805460ff60a01b19169055565b600154600160a01b900460ff16156104675760405162461bcd60e51b8152600401610382906111e4565b6001805460ff60a01b1916600160a01b1790556000848152600260205260409020600681015460ff166104d15760405162461bcd60e51b81526020600482015260126024820152714c6963656e7365206e6f742061637469766560701b6044820152606401610382565b4284116105135760405162461bcd60e51b815260206004820152601060248201526f496e76616c696420656e642074696d6560801b6044820152606401610382565b806005015483101561055a5760405162461bcd60e51b815260206004820152601060248201526f496e76616c6964206d6178207573657360801b6044820152606401610382565b60038101849055600481018390556007810182905560405185907fe008f1e36ee5fb99f87cff85447cc8646ff08a70376752fb0a80467fa4f1566b90600090a250506001805460ff60a01b19169055505050565b600154600090600160a01b900460ff16156105db5760405162461bcd60e51b8152600401610382906111e4565b6001805460ff60a01b1916600160a01b17905560405160009061060c9087903390889042908990899060200161120c565b6040516020818303038152906040528051906020012090506040518060a00160405280878152602001336001600160a01b0316815260200186600481111561065657610656610f5c565b815260200142815260200185858080601f01602080910402602001604051908101604052809392919081815260200183838082843760009201829052509390945250508381526004602081815260409283902085518155908501516001820180546001600160a01b031981166001600160a01b03909316928317825594870151929550919391926001600160a81b03199092161790600160a01b90849081111561070257610702610f5c565b021790555060608201516002820155608082015160038201906107259082611302565b505050600086815260056020908152604080832080546001810182559084529190922001829055513390879083907fc9bf37bc0488fe0133db1e306f23e1b09905c29291bb45c4c41f0f24c356b59590610780908a906113c2565b60405180910390a46001805460ff60a01b1916905595945050505050565b6000818152600260205260408120600681015460ff1680156107c4575080600201544210155b80156107d4575080600301544211155b80156107e7575080600401548160050154105b9392505050565b600460205260009081526040902080546001820154600283015460038401805493946001600160a01b03841694600160a01b90940460ff169390919061083390611279565b80601f016020809104026020016040519081016040528092919081815260200182805461085f90611279565b80156108ac5780601f10610881576101008083540402835291602001916108ac565b820191906000526020600020905b81548152906001019060200180831161088f57829003601f168201915b5050505050905085565b600360205281600052604060002081815481106108d257600080fd5b90600052602060002001600091509150505481565b600560205281600052604060002081815481106108d257600080fd5b61095460408051610120810182526000808252602082018190529091820190815260200160008152602001600081526020016000815260200160008152602001600015158152602001600081525090565b6000828152600260209081526040918290208251610120810184528154815260018201546001600160a01b0381169382019390935292909190830190600160a01b900460ff1660038111156109ab576109ab610f5c565b60038111156109bc576109bc610f5c565b815260028201546020820152600382015460408201526004820154606082015260058201546080820152600682015460ff16151560a082015260079091015460c09091015292915050565b600154600090600160a01b900460ff1615610a345760405162461bcd60e51b8152600401610382906111e4565b6001805460ff60a01b1916600160a01b179055848411610a8b5760405162461bcd60e51b8152602060048201526012602482015271496e76616c69642074696d652072616e676560701b6044820152606401610382565b60008311610ace5760405162461bcd60e51b815260206004820152601060248201526f496e76616c6964206d6178207573657360801b6044820152606401610382565b60008888888888888842604051602001610aef9897969594939291906113d6565b6040516020818303038152906040528051906020012090506040518061012001604052808a8152602001896001600160a01b03168152602001886003811115610b3a57610b3a610f5c565b81526020808201899052604080830189905260608301889052600060808401819052600160a0850181905260c090940188905285815260028352819020845181559184015192820180546001600160a01b031981166001600160a01b03909516948517825591850151929390916001600160a81b03191617600160a01b836003811115610bc957610bc9610f5c565b021790555060608201516002820155608082015160038083019190915560a0830151600483015560c0830151600583015560e083015160068301805460ff19169115159190911790556101009092015160079091015560008a815260209182526040808220805460018101825590835292909120909101829055516001600160a01b038916908a9083907f5c181e4995a1b4911a9276d72151524e57be47a5030401771baf8bda228c9d2490610c80908c90611437565b60405180910390a46001805460ff60a01b1916905598975050505050505050565b610cd36040805160a0810182526000808252602082018190529091820190815260200160008152602001606081525090565b600082815260046020818152604092839020835160a0810185528154815260018201546001600160a01b0381169382019390935293909290840191600160a01b900460ff1690811115610d2857610d28610f5c565b6004811115610d3957610d39610f5c565b815260200160028201548152602001600382018054610d5790611279565b80601f0160208091040260200160405190810160405280929190818152602001828054610d8390611279565b8015610dd05780601f10610da557610100808354040283529160200191610dd0565b820191906000526020600020905b815481529060010190602001808311610db357829003601f168201915b5050505050815250509050919050565b60008181526005602090815260409182902080548351818402810184019094528084526060939283018282801561034c57602002820191906000526020600020908154815260200190600101908083116103385750505050509050919050565b600060208284031215610e5257600080fd5b5035919050565b6020808252825182820181905260009190848201906040850190845b81811015610e9157835183529284019291840191600101610e75565b50909695505050505050565b60008060008060808587031215610eb357600080fd5b5050823594602084013594506040840135936060013592509050565b60008060008060608587031215610ee557600080fd5b84359350602085013560058110610efb57600080fd5b9250604085013567ffffffffffffffff80821115610f1857600080fd5b818701915087601f830112610f2c57600080fd5b813581811115610f3b57600080fd5b886020828501011115610f4d57600080fd5b95989497505060200194505050565b634e487b7160e01b600052602160045260246000fd5b60058110610f8257610f82610f5c565b9052565b6000815180845260005b81811015610fac57602081850181015186830182015201610f90565b506000602082860101526020601f19601f83011685010191505092915050565b8581526001600160a01b0385166020820152610feb6040820185610f72565b82606082015260a06080820152600061100760a0830184610f86565b979650505050505050565b6000806040838503121561102557600080fd5b50508035926020909101359150565b60048110610f8257610f82610f5c565b8981526001600160a01b03891660208201526101208101611068604083018a611034565b8760608301528660808301528560a08301528460c083015283151560e0830152826101008301529a9950505050505050505050565b815181526020808301516001600160a01b0316908201526040808301516101208301916110cc90840182611034565b50606083015160608301526080830151608083015260a083015160a083015260c083015160c083015260e0830151151560e083015261010080840151818401525092915050565b600080600080600080600060e0888a03121561112e57600080fd5b8735965060208801356001600160a01b038116811461114c57600080fd5b955060408801356004811061116057600080fd5b969995985095966060810135965060808101359560a0820135955060c0909101359350915050565b602081528151602082015260018060a01b036020830151166040820152600060408301516111b96060840182610f72565b5060608301516080830152608083015160a0808401526111dc60c0840182610f86565b949350505050565b6020808252600e908201526d1499595b9d1c985b9d0818d85b1b60921b604082015260600190565b8681526bffffffffffffffffffffffff198660601b16602082015260006005861061123957611239610f5c565b8560f81b603483015284603583015282846055840137506000910160550190815295945050505050565b634e487b7160e01b600052604160045260246000fd5b600181811c9082168061128d57607f821691505b6020821081036112ad57634e487b7160e01b600052602260045260246000fd5b50919050565b601f8211156112fd57600081815260208120601f850160051c810160208610156112da5750805b601f850160051c820191505b818110156112f9578281556001016112e6565b5050505b505050565b815167ffffffffffffffff81111561131c5761131c611263565b6113308161132a8454611279565b846112b3565b602080601f831160018114611365576000841561134d5750858301515b600019600386901b1c1916600185901b1785556112f9565b600085815260208120601f198616915b8281101561139457888601518255948401946001909101908401611375565b50858210156113b25787850151600019600388901b60f8161c191681555b5050505050600190811b01905550565b602081016113d08284610f72565b92915050565b8881526bffffffffffffffffffffffff198860601b16602082015260006004881061140357611403610f5c565b5060f89690961b6034870152603586019490945260558501929092526075840152609583015260b582015260d50192915050565b602081016113d0828461103456fea2646970667358221220173ac6bcad727f0a294ecfcd212a5fd41e9206034a6b48bc586c416519edcd3364736f6c63430008130033",
+  "metadata": "{\"compiler\":{\"version\":\"0.8.19+commit.7dd6d404\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_rightsVault\",\"type\":\"address\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"licenseId\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"rightsId\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"licensee\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"enum UsageTracker.LicenseType\",\"name\":\"lType\",\"type\":\"uint8\"}],\"name\":\"LicenseCreated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"licenseId\",\"type\":\"bytes32\"}],\"name\":\"LicenseRevoked\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"licenseId\",\"type\":\"bytes32\"}],\"name\":\"LicenseUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"usageId\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"rightsId\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"user\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"enum UsageTracker.UsageType\",\"name\":\"uType\",\"type\":\"uint8\"}],\"name\":\"UsageRecorded\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"rightsId\",\"type\":\"bytes32\"},{\"internalType\":\"address\",\"name\":\"licensee\",\"type\":\"address\"},{\"internalType\":\"enum UsageTracker.LicenseType\",\"name\":\"lType\",\"type\":\"uint8\"},{\"internalType\":\"uint256\",\"name\":\"startTime\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"endTime\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"maxUses\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"fee\",\"type\":\"uint256\"}],\"name\":\"createLicense\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"licenseId\",\"type\":\"bytes32\"}],\"name\":\"getLicenseData\",\"outputs\":[{\"components\":[{\"internalType\":\"bytes32\",\"name\":\"rightsId\",\"type\":\"bytes32\"},{\"internalType\":\"address\",\"name\":\"licensee\",\"type\":\"address\"},{\"internalType\":\"enum UsageTracker.LicenseType\",\"name\":\"lType\",\"type\":\"uint8\"},{\"internalType\":\"uint256\",\"name\":\"startTime\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"endTime\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"maxUses\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"currentUses\",\"type\":\"uint256\"},{\"internalType\":\"bool\",\"name\":\"isActive\",\"type\":\"bool\"},{\"internalType\":\"uint256\",\"name\":\"fee\",\"type\":\"uint256\"}],\"internalType\":\"struct UsageTracker.License\",\"name\":\"\",\"type\":\"tuple\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"rightsId\",\"type\":\"bytes32\"}],\"name\":\"getRightsLicenses\",\"outputs\":[{\"internalType\":\"bytes32[]\",\"name\":\"\",\"type\":\"bytes32[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"rightsId\",\"type\":\"bytes32\"}],\"name\":\"getRightsUsageRecords\",\"outputs\":[{\"internalType\":\"bytes32[]\",\"name\":\"\",\"type\":\"bytes32[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"usageId\",\"type\":\"bytes32\"}],\"name\":\"getUsageRecord\",\"outputs\":[{\"components\":[{\"internalType\":\"bytes32\",\"name\":\"rightsId\",\"type\":\"bytes32\"},{\"internalType\":\"address\",\"name\":\"user\",\"type\":\"address\"},{\"internalType\":\"enum UsageTracker.UsageType\",\"name\":\"uType\",\"type\":\"uint8\"},{\"internalType\":\"uint256\",\"name\":\"timestamp\",\"type\":\"uint256\"},{\"internalType\":\"string\",\"name\":\"metadata\",\"type\":\"string\"}],\"internalType\":\"struct UsageTracker.UsageRecord\",\"name\":\"\",\"type\":\"tuple\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"licenseId\",\"type\":\"bytes32\"}],\"name\":\"isLicenseValid\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"name\":\"licenses\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"rightsId\",\"type\":\"bytes32\"},{\"internalType\":\"address\",\"name\":\"licensee\",\"type\":\"address\"},{\"internalType\":\"enum UsageTracker.LicenseType\",\"name\":\"lType\",\"type\":\"uint8\"},{\"internalType\":\"uint256\",\"name\":\"startTime\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"endTime\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"maxUses\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"currentUses\",\"type\":\"uint256\"},{\"internalType\":\"bool\",\"name\":\"isActive\",\"type\":\"bool\"},{\"internalType\":\"uint256\",\"name\":\"fee\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"rightsId\",\"type\":\"bytes32\"},{\"internalType\":\"enum UsageTracker.UsageType\",\"name\":\"uType\",\"type\":\"uint8\"},{\"internalType\":\"string\",\"name\":\"metadata\",\"type\":\"string\"}],\"name\":\"recordUsage\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"licenseId\",\"type\":\"bytes32\"}],\"name\":\"revokeLicense\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"rightsLicenses\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"rightsUsageRecords\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"rightsVault\",\"outputs\":[{\"internalType\":\"contract RightsVault\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"licenseId\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"endTime\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"maxUses\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"fee\",\"type\":\"uint256\"}],\"name\":\"updateLicense\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"name\":\"usageRecords\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"rightsId\",\"type\":\"bytes32\"},{\"internalType\":\"address\",\"name\":\"user\",\"type\":\"address\"},{\"internalType\":\"enum UsageTracker.UsageType\",\"name\":\"uType\",\"type\":\"uint8\"},{\"internalType\":\"uint256\",\"name\":\"timestamp\",\"type\":\"uint256\"},{\"internalType\":\"string\",\"name\":\"metadata\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"details\":\"Tracks usage and licensing of rights\",\"kind\":\"dev\",\"methods\":{\"createLicense(bytes32,address,uint8,uint256,uint256,uint256,uint256)\":{\"details\":\"Create a new license\",\"params\":{\"endTime\":\"End time of the license\",\"fee\":\"License fee in wei\",\"lType\":\"Type of license\",\"licensee\":\"Address of the licensee\",\"maxUses\":\"Maximum number of uses allowed\",\"rightsId\":\"Rights identifier\",\"startTime\":\"Start time of the license\"},\"returns\":{\"_0\":\"licenseId Unique identifier for the license\"}},\"getLicenseData(bytes32)\":{\"details\":\"Get license data\",\"params\":{\"licenseId\":\"License identifier\"},\"returns\":{\"_0\":\"License struct containing the license information\"}},\"getRightsLicenses(bytes32)\":{\"details\":\"Get all licenses for specific rights\",\"params\":{\"rightsId\":\"Rights identifier\"},\"returns\":{\"_0\":\"Array of license IDs\"}},\"getRightsUsageRecords(bytes32)\":{\"details\":\"Get all usage records for specific rights\",\"params\":{\"rightsId\":\"Rights identifier\"},\"returns\":{\"_0\":\"Array of usage record IDs\"}},\"getUsageRecord(bytes32)\":{\"details\":\"Get usage record data\",\"params\":{\"usageId\":\"Usage record identifier\"},\"returns\":{\"_0\":\"UsageRecord struct containing the usage information\"}},\"isLicenseValid(bytes32)\":{\"details\":\"Check if a license is valid for usage\",\"params\":{\"licenseId\":\"License identifier\"},\"returns\":{\"_0\":\"bool Whether the license is valid\"}},\"recordUsage(bytes32,uint8,string)\":{\"details\":\"Record usage of rights\",\"params\":{\"metadata\":\"Additional usage metadata\",\"rightsId\":\"Rights identifier\",\"uType\":\"Type of usage\"},\"returns\":{\"_0\":\"usageId Unique identifier for the usage record\"}},\"revokeLicense(bytes32)\":{\"details\":\"Revoke a license\",\"params\":{\"licenseId\":\"License identifier\"}},\"updateLicense(bytes32,uint256,uint256,uint256)\":{\"details\":\"Update a license\",\"params\":{\"endTime\":\"New end time\",\"fee\":\"New license fee\",\"licenseId\":\"License identifier\",\"maxUses\":\"New maximum uses\"}}},\"title\":\"UsageTracker\",\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"UsageTracker.sol\":\"UsageTracker\"},\"evmVersion\":\"paris\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"RightsVault.sol\":{\"keccak256\":\"0x2ead305b94b9e92516c13cfd49d9e75afa551654331315d8aa5e6447298f3c9f\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://3e64886fe8ef73b8cd896aae862e160fc0b68aa96fc33198d050a8dc897ac5f2\",\"dweb:/ipfs/QmPni2f8QR4JMcetHSfnAmudgA56VB5Yh1kgf59vzprEcG\"]},\"UsageTracker.sol\":{\"keccak256\":\"0xa7d11a57a4d9a0997b2a9342b1f497a526b6445090867fa9a733980ca60562ae\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://2db67669e52b48e5089fe8a65e7c7ea7295344c1527714f2ad307edb96fb98e4\",\"dweb:/ipfs/QmdSid13DTXcCLfkcUFkza6TckxfMJZ4ET57msCcQJjCd1\"]}},\"version\":1}"
+}

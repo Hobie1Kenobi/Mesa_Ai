@@ -1,0 +1,249 @@
+{
+  "rights_holder": "Demo Artist",
+  "catalog_id": "CAT-DEMO-1744258561",
+  "works": [
+    {
+      "id": "WORK100",
+      "title": "Summer Breeze",
+      "writers": [
+        {
+          "name": "John A. Smith",
+          "role": "Composer",
+          "share": "100%"
+        }
+      ],
+      "isrc": "US-AB1-23-01000",
+      "iswc": "T-123450001-1",
+      "publisher": "Melody Publishing Co."
+    },
+    {
+      "id": "WORK101",
+      "title": "Midnight Symphony",
+      "writers": [
+        {
+          "name": "Jane B. Doe",
+          "role": "Lyricist",
+          "share": "50%"
+        },
+        {
+          "name": "Michael C. Johnson",
+          "role": "Producer",
+          "share": "50%"
+        }
+      ],
+      "isrc": "US-AB1-23-01001",
+      "iswc": "T-123450002-1",
+      "publisher": "Rhythm Rights Inc."
+    },
+    {
+      "id": "WORK102",
+      "title": "Ocean Waves",
+      "writers": [
+        {
+          "name": "Michael C. Johnson",
+          "role": "Producer",
+          "share": "34%"
+        },
+        {
+          "name": "Sarah D. Williams",
+          "role": "Arranger",
+          "share": "33%"
+        },
+        {
+          "name": "John A. Smith",
+          "role": "Composer",
+          "share": "33%"
+        }
+      ],
+      "isrc": "US-AB1-23-01002",
+      "iswc": "T-123450003-1",
+      "publisher": "Harmony Holdings LLC"
+    },
+    {
+      "id": "WORK103",
+      "title": "Mountain Echo",
+      "writers": [
+        {
+          "name": "Sarah D. Williams",
+          "role": "Arranger",
+          "share": "34%"
+        },
+        {
+          "name": "John A. Smith",
+          "role": "Composer",
+          "share": "33%"
+        },
+        {
+          "name": "Jane B. Doe",
+          "role": "Lyricist",
+          "share": "33%"
+        }
+      ],
+      "isrc": "US-AB1-23-01003",
+      "iswc": "T-123450004-1",
+      "publisher": "Sonic Ventures"
+    },
+    {
+      "id": "WORK104",
+      "title": "City Lights",
+      "writers": [
+        {
+          "name": "John A. Smith",
+          "role": "Composer",
+          "share": "100%"
+        }
+      ],
+      "isrc": "US-AB1-23-01004",
+      "iswc": "T-123450005-1",
+      "publisher": "Melody Publishing Co."
+    },
+    {
+      "id": "WORK105",
+      "title": "Desert Wind",
+      "writers": [
+        {
+          "name": "Jane B. Doe",
+          "role": "Lyricist",
+          "share": "50%"
+        },
+        {
+          "name": "Michael C. Johnson",
+          "role": "Producer",
+          "share": "50%"
+        }
+      ],
+      "isrc": "US-AB1-23-01005",
+      "iswc": "T-123450006-1",
+      "publisher": "Rhythm Rights Inc."
+    },
+    {
+      "id": "WORK106",
+      "title": "Forest Rain",
+      "writers": [
+        {
+          "name": "Michael C. Johnson",
+          "role": "Producer",
+          "share": "34%"
+        },
+        {
+          "name": "Sarah D. Williams",
+          "role": "Arranger",
+          "share": "33%"
+        },
+        {
+          "name": "John A. Smith",
+          "role": "Composer",
+          "share": "33%"
+        }
+      ],
+      "isrc": "US-AB1-23-01006",
+      "iswc": "T-123450007-1",
+      "publisher": "Harmony Holdings LLC"
+    },
+    {
+      "id": "WORK107",
+      "title": "River Flow",
+      "writers": [
+        {
+          "name": "Sarah D. Williams",
+          "role": "Arranger",
+          "share": "34%"
+        },
+        {
+          "name": "John A. Smith",
+          "role": "Composer",
+          "share": "33%"
+        },
+        {
+          "name": "Jane B. Doe",
+          "role": "Lyricist",
+          "share": "33%"
+        }
+      ],
+      "isrc": "US-AB1-23-01007",
+      "iswc": "T-123450008-1",
+      "publisher": "Sonic Ventures"
+    },
+    {
+      "id": "WORK108",
+      "title": "Sunset Dreams",
+      "writers": [
+        {
+          "name": "John A. Smith",
+          "role": "Composer",
+          "share": "100%"
+        }
+      ],
+      "isrc": "US-AB1-23-01008",
+      "iswc": "T-123450009-1",
+      "publisher": "Melody Publishing Co."
+    },
+    {
+      "id": "WORK109",
+      "title": "Morning Rise",
+      "writers": [
+        {
+          "name": "Jane B. Doe",
+          "role": "Lyricist",
+          "share": "50%"
+        },
+        {
+          "name": "Michael C. Johnson",
+          "role": "Producer",
+          "share": "50%"
+        }
+      ],
+      "isrc": "US-AB1-23-01009",
+      "iswc": "T-123450010-1",
+      "publisher": "Rhythm Rights Inc."
+    },
+    {
+      "id": "WORK110",
+      "title": "Evening Star",
+      "writers": [
+        {
+          "name": "Michael C. Johnson",
+          "role": "Producer",
+          "share": "34%"
+        },
+        {
+          "name": "Sarah D. Williams",
+          "role": "Arranger",
+          "share": "33%"
+        },
+        {
+          "name": "John A. Smith",
+          "role": "Composer",
+          "share": "33%"
+        }
+      ],
+      "isrc": "US-AB1-23-01010",
+      "iswc": "T-123450011-1",
+      "publisher": "Harmony Holdings LLC"
+    },
+    {
+      "id": "WORK111",
+      "title": "Winter Snow",
+      "writers": [
+        {
+          "name": "Sarah D. Williams",
+          "role": "Arranger",
+          "share": "34%"
+        },
+        {
+          "name": "John A. Smith",
+          "role": "Composer",
+          "share": "33%"
+        },
+        {
+          "name": "Jane B. Doe",
+          "role": "Lyricist",
+          "share": "33%"
+        }
+      ],
+      "isrc": "US-AB1-23-01011",
+      "iswc": "T-123450012-1",
+      "publisher": "Sonic Ventures"
+    }
+  ]
+}

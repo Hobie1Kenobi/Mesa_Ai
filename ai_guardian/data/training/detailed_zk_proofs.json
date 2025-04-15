@@ -1,0 +1,64 @@
+[
+  {
+    "proof": {
+      "rightId": "0x7b4c5d9e8f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c",
+      "mbIdHashCommitment": "62a545e02eb49a8fb10f424e4aff0134dc3182298be11dfb426df149c5253555",
+      "proofType": "mb_verification",
+      "linkHash": "c224b07af286438903f5b058834709dd3dbf814d6bf1ef7097b282c66bc2da59",
+      "salt": "569af3803ce42950118f6b027f96904d",
+      "timestamp": 1744244512
+    },
+    "signature": "6cdd8f73b2f3e27079dae75c9e6d6159fc4e23317549592f7420819612c72e58",
+    "verified": true,
+    "explanation": {
+      "purpose": "This proof demonstrates that the music right exists in MusicBrainz without revealing private details",
+      "verification_process": [
+        "1. The MusicBrainz ID is hashed to keep it private",
+        "2. The rightId and mbIdHash are linked with a deterministic hash",
+        "3. A random salt ensures the proof cannot be brute-forced",
+        "4. The signature provides cryptographic verification"
+      ],
+      "privacy_benefits": [
+        "Rights owner can prove MB verification without revealing contract details",
+        "Third parties can verify without accessing private data",
+        "Salting prevents correlation attacks across different proofs"
+      ]
+    },
+    "work_info": {
+      "title": "Midnight Dreams",
+      "artist": "Sarah Wilson",
+      "mb_id": "3909c1dd-fb4b-42cf-958c-0da69261294d"
+    }
+  },
+  {
+    "proof": {
+      "rightId": "0x8c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d",
+      "mbIdHashCommitment": "90799cfd6eb05aee356095be5f5e059977d0a88fa02a5dda0c6d1ba6f8e55661",
+      "proofType": "mb_verification",
+      "linkHash": "e1afc5b51e12295e514f85d8681a2306445f888915b825a66f488667edf31e29",
+      "salt": "345fe8b41577671c1c9d75130593f1d2",
+      "timestamp": 1744244512
+    },
+    "signature": "1bf6b67909b0100b43f943f712db4c481da1bffa3de92a812d04d310fbad0f61",
+    "verified": true,
+    "explanation": {
+      "purpose": "This proof demonstrates that the music right exists in MusicBrainz without revealing private details",
+      "verification_process": [
+        "1. The MusicBrainz ID is hashed to keep it private",
+        "2. The rightId and mbIdHash are linked with a deterministic hash",
+        "3. A random salt ensures the proof cannot be brute-forced",
+        "4. The signature provides cryptographic verification"
+      ],
+      "privacy_benefits": [
+        "Rights owner can prove MB verification without revealing contract details",
+        "Third parties can verify without accessing private data",
+        "Salting prevents correlation attacks across different proofs"
+      ]
+    },
+    "work_info": {
+      "title": "Electronic Horizon",
+      "artist": "The Lunar Echoes",
+      "mb_id": "b29f5e12-29c2-432a-8603-f3cf50892f88"
+    }
+  }
+]

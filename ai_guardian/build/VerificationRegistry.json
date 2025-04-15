@@ -1,0 +1,245 @@
+{
+  "abi": [
+    {
+      "inputs": [],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "verificationId",
+          "type": "bytes32"
+        }
+      ],
+      "name": "VerificationInvalidated",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "verificationId",
+          "type": "bytes32"
+        },
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "rightsId",
+          "type": "bytes32"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "verifier",
+          "type": "address"
+        }
+      ],
+      "name": "VerificationRegistered",
+      "type": "event"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "rightsId",
+          "type": "bytes32"
+        }
+      ],
+      "name": "getRightsVerifications",
+      "outputs": [
+        {
+          "internalType": "bytes32[]",
+          "name": "",
+          "type": "bytes32[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "verificationId",
+          "type": "bytes32"
+        }
+      ],
+      "name": "getVerificationData",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "bytes32",
+              "name": "rightsId",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "bytes32",
+              "name": "proofHash",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "address",
+              "name": "verifier",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "timestamp",
+              "type": "uint256"
+            },
+            {
+              "internalType": "bool",
+              "name": "isValid",
+              "type": "bool"
+            }
+          ],
+          "internalType": "struct VerificationRegistry.VerificationData",
+          "name": "",
+          "type": "tuple"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "rightsId",
+          "type": "bytes32"
+        }
+      ],
+      "name": "hasValidVerifications",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "verificationId",
+          "type": "bytes32"
+        }
+      ],
+      "name": "invalidateVerification",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "owner",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "verificationId",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "rightsId",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "proofHash",
+          "type": "bytes32"
+        }
+      ],
+      "name": "registerVerification",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "rightsVerifications",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "name": "verifications",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "rightsId",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "proofHash",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "address",
+          "name": "verifier",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "timestamp",
+          "type": "uint256"
+        },
+        {
+          "internalType": "bool",
+          "name": "isValid",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "bytecode": "608060405234801561001057600080fd5b506000805460ff60a01b1933166001600160a81b031990911617905561080c8061003b6000396000f3fe608060405234801561001057600080fd5b50600436106100885760003560e01c806377d6eff01161005b57806377d6eff01461022d5780638da5cb5b146102425780639d09231d1461026d578063a98730291461028d57600080fd5b806310c74e161461008d5780633348405914610113578063455276d5146101365780636ebaef1d14610157575b600080fd5b6100d661009b3660046106ee565b60016020819052600091825260409091208054918101546002820154600383015460049093015491926001600160a01b039091169160ff1685565b6040805195865260208601949094526001600160a01b039092169284019290925260608301919091521515608082015260a0015b60405180910390f35b6101266101213660046106ee565b6102a0565b604051901515815260200161010a565b610149610144366004610707565b610368565b60405190815260200161010a565b6101e56101653660046106ee565b6040805160a0808201835260008083526020808401829052838501829052606080850183905260809485018390529582526001808252918590208551938401865280548452918201549083015260028101546001600160a01b03169382019390935260038301549381019390935260049091015460ff1615159082015290565b60405161010a919081518152602080830151908201526040808301516001600160a01b0316908201526060808301519082015260809182015115159181019190915260a00190565b61024061023b366004610729565b610399565b005b600054610255906001600160a01b031681565b6040516001600160a01b03909116815260200161010a565b61028061027b3660046106ee565b610535565b60405161010a9190610755565b61024061029b3660046106ee565b610597565b6000818152600260209081526040808320805482518185028101850190935280835284938301828280156102f357602002820191906000526020600020905b8154815260200190600101908083116102df575b5050505050905060005b815181101561035e576001600083838151811061031c5761031c610799565b60209081029190910181015182528101919091526040016000206004015460ff161561034c575060019392505050565b80610356816107af565b9150506102fd565b5060009392505050565b6002602052816000526040600020818154811061038457600080fd5b90600052602060002001600091509150505481565b600054600160a01b900460ff16156103e95760405162461bcd60e51b815260206004820152600e60248201526d1499595b9d1c985b9d0818d85b1b60921b60448201526064015b60405180910390fd5b6000805460ff60a01b1916600160a01b17815583815260016020526040902060030154156104595760405162461bcd60e51b815260206004820152601b60248201527f566572696669636174696f6e20616c726561647920657869737473000000000060448201526064016103e0565b6040805160a081018252838152602080820184815233838501818152426060860190815260016080870181815260008c8152828852898120985189559551888301559251600280890180546001600160a01b0319166001600160a01b03909316929092179091559151600388015591516004909601805460ff1916961515969096179095558783529383528482208054948501815582529181209092018690559151849186917f038336d585f4c73d5526f73a8cf98c7ce6caeda4a2337b5a5842f6a8b1d307049190a450506000805460ff60a01b1916905550565b60008181526002602090815260409182902080548351818402810184019094528084526060939283018282801561058b57602002820191906000526020600020905b815481526020019060010190808311610577575b50505050509050919050565b600054600160a01b900460ff16156105e25760405162461bcd60e51b815260206004820152600e60248201526d1499595b9d1c985b9d0818d85b1b60921b60448201526064016103e0565b6000805460ff60a01b1916600160a01b178155818152600160205260409020600201546001600160a01b0316331461064b5760405162461bcd60e51b815260206004820152600c60248201526b2737ba103b32b934b334b2b960a11b60448201526064016103e0565b60008181526001602052604090206004015460ff1661069e5760405162461bcd60e51b815260206004820152600f60248201526e105b1c9958591e481a5b9d985b1a59608a1b60448201526064016103e0565b600081815260016020526040808220600401805460ff191690555182917f37e2b1b822662f8cdce3cf9551c4bdb00ea43bf04a6f631067f878062f471c7f91a2506000805460ff60a01b19169055565b60006020828403121561070057600080fd5b5035919050565b6000806040838503121561071a57600080fd5b50508035926020909101359150565b60008060006060848603121561073e57600080fd5b505081359360208301359350604090920135919050565b6020808252825182820181905260009190848201906040850190845b8181101561078d57835183529284019291840191600101610771565b50909695505050505050565b634e487b7160e01b600052603260045260246000fd5b6000600182016107cf57634e487b7160e01b600052601160045260246000fd5b506001019056fea264697066735822122033120d6a1e94c0e67074305626c48aa08302d1a61f399c482a15718183c5854764736f6c63430008130033",
+  "metadata": "{\"compiler\":{\"version\":\"0.8.19+commit.7dd6d404\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"verificationId\",\"type\":\"bytes32\"}],\"name\":\"VerificationInvalidated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"verificationId\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"rightsId\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"verifier\",\"type\":\"address\"}],\"name\":\"VerificationRegistered\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"rightsId\",\"type\":\"bytes32\"}],\"name\":\"getRightsVerifications\",\"outputs\":[{\"internalType\":\"bytes32[]\",\"name\":\"\",\"type\":\"bytes32[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"verificationId\",\"type\":\"bytes32\"}],\"name\":\"getVerificationData\",\"outputs\":[{\"components\":[{\"internalType\":\"bytes32\",\"name\":\"rightsId\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"proofHash\",\"type\":\"bytes32\"},{\"internalType\":\"address\",\"name\":\"verifier\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"timestamp\",\"type\":\"uint256\"},{\"internalType\":\"bool\",\"name\":\"isValid\",\"type\":\"bool\"}],\"internalType\":\"struct VerificationRegistry.VerificationData\",\"name\":\"\",\"type\":\"tuple\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"rightsId\",\"type\":\"bytes32\"}],\"name\":\"hasValidVerifications\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"verificationId\",\"type\":\"bytes32\"}],\"name\":\"invalidateVerification\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"verificationId\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"rightsId\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"proofHash\",\"type\":\"bytes32\"}],\"name\":\"registerVerification\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"rightsVerifications\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"name\":\"verifications\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"rightsId\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"proofHash\",\"type\":\"bytes32\"},{\"internalType\":\"address\",\"name\":\"verifier\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"timestamp\",\"type\":\"uint256\"},{\"internalType\":\"bool\",\"name\":\"isValid\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"details\":\"Contract for managing rights verification status and ZK proofs\",\"kind\":\"dev\",\"methods\":{\"getRightsVerifications(bytes32)\":{\"details\":\"Get all verifications for specific rights\",\"params\":{\"rightsId\":\"Rights identifier\"},\"returns\":{\"_0\":\"Array of verification IDs\"}},\"getVerificationData(bytes32)\":{\"details\":\"Get verification data\",\"params\":{\"verificationId\":\"Verification identifier\"},\"returns\":{\"_0\":\"VerificationData struct containing the verification information\"}},\"hasValidVerifications(bytes32)\":{\"details\":\"Check if rights have valid verifications\",\"params\":{\"rightsId\":\"Rights identifier\"},\"returns\":{\"_0\":\"bool indicating if valid verifications exist\"}},\"invalidateVerification(bytes32)\":{\"details\":\"Invalidate a verification\",\"params\":{\"verificationId\":\"ID of the verification to invalidate\"}},\"registerVerification(bytes32,bytes32,bytes32)\":{\"details\":\"Register a new verification\",\"params\":{\"proofHash\":\"Hash of the ZK proof\",\"rightsId\":\"ID of the rights being verified\",\"verificationId\":\"Unique identifier for the verification\"}}},\"title\":\"VerificationRegistry\",\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"VerificationRegistry.sol\":\"VerificationRegistry\"},\"evmVersion\":\"paris\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"VerificationRegistry.sol\":{\"keccak256\":\"0xc5610c1781c8d37a449d876888f0c394e98c6a61231953abf48717fac60de544\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://b4728bc91a6d7046a52ba5c2e507af55917acb8eb22602eef088d4f18d286864\",\"dweb:/ipfs/QmTqkjvAVGLjRd2qUF1mMHyVTrEC7frazGJpnQ75sjvFFR\"]}},\"version\":1}"
+}

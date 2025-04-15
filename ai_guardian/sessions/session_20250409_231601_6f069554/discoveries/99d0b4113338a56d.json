@@ -1,0 +1,20 @@
+{
+  "id": "99d0b4113338a56d",
+  "type": "black_box_quick",
+  "source": "bmi",
+  "first_discovered": "2025-04-09T23:16:01.282673",
+  "last_seen": "2025-04-09T23:16:01.282673",
+  "seen_count": 1,
+  "session_id": "6f069554-753f-4f63-9cb6-8eaed3ce8711",
+  "agency_identifier": "MESA-DEMO-AGENCY",
+  "confidence": 0.85,
+  "data": {
+    "pro": "bmi",
+    "potential_funds": true,
+    "fund_types": [
+      "streaming",
+      "performance"
+    ],
+    "estimated_amount": "$311.00"
+  }
+}

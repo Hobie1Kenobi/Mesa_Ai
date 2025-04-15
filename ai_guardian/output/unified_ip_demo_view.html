@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MESA Rights Vault - Unified IP Portfolio</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #6c63ff;
+            --secondary-color: #ff6584;
+            --dark-color: #2f2e41;
+            --light-color: #f5f5f5;
+            --accent-color: #3f3d56;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f9fafb;
+            color: #333;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 2rem 0;
+            margin-bottom: 2rem;
+        }
+        
+        .card {
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
+            border: none;
+        }
+        
+        .card-header {
+            font-weight: 600;
+            background-color: white;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .asset-card {
+            transition: all 0.3s ease;
+        }
+        
+        .asset-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .rights-nft {
+            border-top: 4px solid var(--primary-color);
+        }
+        
+        .cover-art {
+            border-top: 4px solid var(--secondary-color);
+        }
+        
+        .music-video {
+            border-top: 4px solid #4caf50;
+        }
+        
+        .stems {
+            border-top: 4px solid #ff9800;
+        }
+        
+        .remix {
+            border-top: 4px solid #9c27b0;
+        }
+        
+        .address {
+            font-family: monospace;
+            background-color: #f5f5f5;
+            padding: 0.3rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+        }
+        
+        .badge {
+            font-weight: 500;
+        }
+        
+        .portfolio-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+        
+        .attestation-card {
+            background-color: #f8f9fa;
+        }
+        
+        .trade-card {
+            background-color: #e8f5e9;
+        }
+        
+        .payment-config {
+            background-color: #fff8e1;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="container">
+            <h1 class="display-4">MESA Rights Vault</h1>
+            <p class="lead">Unified IP Portfolio Container Demo</p>
+        </div>
+    </div>
+    
+    <div class="container mb-5">
+        <div class="row mb-4">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="mb-4">Song: <span id="songTitle"></span></h2>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <p><strong>Artist:</strong> <span id="artist"></span></p>
+                                <p><strong>Genre:</strong> <span id="genre"></span></p>
+                            </div>
+                            <div class="col-md-4">
+                                <p><strong>Container Address:</strong><br><span id="containerAddress" class="address"></span></p>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="text-end">
+                                    <p><strong>Portfolio Value:</strong></p>
+                                    <div class="portfolio-value"><span id="portfolioValue"></span> ETH</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row mb-4">
+            <div class="col-md-12">
+                <h3>IP Assets in Container</h3>
+                <p>This container holds <span id="assetCount"></span> IP assets</p>
+                <div id="assetCards" class="row">
+                    <!-- Asset cards will be inserted here -->
+                </div>
+            </div>
+        </div>
+        
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <div class="card attestation-card">
+                    <div class="card-header">
+                        Attestation
+                    </div>
+                    <div class="card-body">
+                        <p><strong>Attestation ID:</strong><br><span id="attestationId" class="address"></span></p>
+                        <p><strong>Schema ID:</strong><br><span id="schemaId" class="address"></span></p>
+                        <p><strong>Rights Type:</strong> <span id="rightsType"></span></p>
+                        <p><strong>Territory:</strong> <span id="territory"></span></p>
+                        <p><strong>Contract ID:</strong> <span id="contractId"></span></p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6">
+                <div class="card payment-config">
+                    <div class="card-header">
+                        Payment Configuration
+                    </div>
+                    <div class="card-body">
+                        <h5>Royalty Recipients</h5>
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Role</th>
+                                    <th>Share</th>
+                                    <th>Address</th>
+                                </tr>
+                            </thead>
+                            <tbody id="recipientsTable">
+                                <!-- Recipients will be inserted here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card trade-card">
+                    <div class="card-header">
+                        Portfolio Trade
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <p><strong>From:</strong><br><span id="tradeFrom" class="address"></span></p>
+                            </div>
+                            <div class="col-md-4">
+                                <p><strong>To:</strong><br><span id="tradeTo" class="address"></span></p>
+                            </div>
+                            <div class="col-md-4">
+                                <p><strong>Value:</strong> <span id="tradeValue"></span> ETH</p>
+                                <p><strong>Transaction:</strong><br><span id="tradeTx" class="address"></span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Function to load and display demo data
+        async function loadDemoData() {
+            try {
+                // In a real application, this would load the data from an API or file
+                // For demo purposes, we'll simulate loading the data
+                const demoData = {
+  "song_info": {
+    "title": "Summer Nights",
+    "artist": "John Doe",
+    "genre": "Pop"
+  },
+  "contracts": {
+    "MusicRightsNFT": "0xc5a5C42992dECbae36851359345FE25997F5C42d",
+    "CoverArtNFT": "0xB742c5A4dBaE61c4F7c08D37d53d259B1eAE1a7F",
+    "MusicVideoNFT": "0x3F26B25fcA757bAe370A068d487c70D139CA06ee",
+    "ERC6551Registry": "0x47A9D630099a7ED605D31ed491C1397BfBc3Cb87",
+    "EnhancedIPContainer": "0x15D0F9dB62F6dB64CBCD1E10dE22F1B1E5d01EfA",
+    "MockEAS": "0x8A791620dd6260079BF849Dc5567aDC3F2FdC318"
+  },
+  "nft_metadata": {
+    "contract": "0xc5a5C42992dECbae36851359345FE25997F5C42d",
+    "tokenId": 1,
+    "tokenURI": "ipfs://Qmce24b77304dd5f66c4e01c40870ee2a54581bb1d",
+    "rightsHolder": "0x1111111111111111111111111111111111111111",
+    "contractId": "MESA-1744255343",
+    "rightsType": "master_recording",
+    "territory": "worldwide"
+  },
+  "tba": {
+    "address": "0x1111111111111111111111111111111111111111",
+    "implementation": "0x15D0F9dB62F6dB64CBCD1E10dE22F1B1E5d01EfA",
+    "chainId": 8453,
+    "tokenContract": "0xc5a5C42992dECbae36851359345FE25997F5C42d",
+    "tokenId": 1
+  },
+  "cover_art": {
+    "contract": "0xB742c5A4dBaE61c4F7c08D37d53d259B1eAE1a7F",
+    "tokenId": 1,
+    "tokenURI": "ipfs://Qm66bc17f1ea83c6fc6a1f901ba73bc017c1e158a4",
+    "title": "Summer Nights",
+    "artist": "John Doe",
+    "workReference": "Summer Nights",
+    "imageFormat": "jpg",
+    "isOfficial": true
+  },
+  "music_video": {
+    "metadata": {
+      "contract": "0x3F26B25fcA757bAe370A068d487c70D139CA06ee",
+      "tokenId": 1,
+      "tokenURI": "ipfs://Qme5cc458f8fab71a7c3a0c3ae61832ad156bfb1f0",
+      "title": "Summer Nights - Official Video",
+      "artist": "John Doe",
+      "workReference": "Summer Nights",
+      "editionType": "MusicVideo",
+      "duration": 240,
+      "maxSupply": 1000,
+      "videoFormat": "mp4",
+      "resolution": "4K"
+    },
+    "editions": [
+      {
+        "owner": "0x0000000000000000000000000000000000000000",
+        "amount": 1
+      },
+      {
+        "owner": "0x1111111111111111111111111111111111111111",
+        "amount": 1
+      },
+      {
+        "owner": "0x2222222222222222222222222222222222222222",
+        "amount": 1
+      },
+      {
+        "owner": "0x3333333333333333333333333333333333333333",
+        "amount": 1
+      },
+      {
+        "owner": "0x4444444444444444444444444444444444444444",
+        "amount": 1
+      },
+      {
+        "owner": "0x5555555555555555555555555555555555555555",
+        "amount": 1
+      },
+      {
+        "owner": "0x6666666666666666666666666666666666666666",
+        "amount": 1
+      },
+      {
+        "owner": "0x7777777777777777777777777777777777777777",
+        "amount": 1
+      },
+      {
+        "owner": "0x8888888888888888888888888888888888888888",
+        "amount": 1
+      },
+      {
+        "owner": "0x9999999999999999999999999999999999999999",
+        "amount": 1
+      }
+    ]
+  },
+  "stems_and_remixes": {
+    "stems": {
+      "contract": "0x3F26B25fcA757bAe370A068d487c70D139CA06ee",
+      "tokenId": 2,
+      "tokenURI": "ipfs://Qm18d1e727872542a8d26160d23f7731ba12c158ac",
+      "title": "Summer Nights - Stems Pack",
+      "artist": "John Doe",
+      "workReference": "Summer Nights",
+      "editionType": "BehindTheScenes",
+      "maxSupply": 500,
+      "format": "wav"
+    },
+    "remix": {
+      "contract": "0x3F26B25fcA757bAe370A068d487c70D139CA06ee",
+      "tokenId": 3,
+      "tokenURI": "ipfs://Qm5234d0d0a60e639febddcc399549844f14828647",
+      "title": "Summer Nights - Club Remix",
+      "artist": "John Doe & DJ Remix",
+      "workReference": "Summer Nights",
+      "editionType": "Remix",
+      "duration": 360,
+      "maxSupply": 800,
+      "videoFormat": "mp4",
+      "resolution": "1080p"
+    }
+  },
+  "payment_config": {
+    "recipients": [
+      {
+        "address": "0x1111111111111111111111111111111111111111",
+        "role": "artist",
+        "share": 70
+      },
+      {
+        "address": "0x2222222222222222222222222222222222222222",
+        "role": "producer",
+        "share": 20
+      },
+      {
+        "address": "0x3333333333333333333333333333333333333333",
+        "role": "publisher",
+        "share": 10
+      }
+    ],
+    "totalShares": 100
+  },
+  "attestation": {
+    "schemaId": "0x9865c7b0f97b16bd3a720c40b716ff403a28bfaa8248c5d7fda6a3edae5740b3",
+    "attestationId": "0x31b76acf9aa442c0d7f98136c67533129e693a1c18b64691844e7ff9e5ad1746",
+    "attester": "0x1234567890123456789012345678901234567890",
+    "recipient": "0x1111111111111111111111111111111111111111",
+    "contractId": "MESA-1744255343",
+    "rightsType": "master_recording",
+    "territory": "worldwide",
+    "timestamp": 1744255343
+  },
+  "portfolio_value": 2.5,
+  "trade": {
+    "fromAddress": "0x1111111111111111111111111111111111111111",
+    "toAddress": "0x9999999999999999999999999999999999999999",
+    "transactionHash": "0x1601d667a2a566cd2aab572a3ae6a5a65ab9234b4f4e76c3bbd57ef507ea038b",
+    "value": 2.5,
+    "timestamp": 1744255343
+  },
+  "timestamp": "2025-04-09T22:22:23.319537",
+  "summary": {
+    "container_address": "0x1111111111111111111111111111111111111111",
+    "total_assets": 5,
+    "assets": [
+      {
+        "type": "rights_nft",
+        "tokenId": 1,
+        "contract": "0xc5a5C42992dECbae36851359345FE25997F5C42d",
+        "description": "Original rights to 'Summer Nights'"
+      },
+      {
+        "type": "cover_art",
+        "tokenId": 1,
+        "contract": "0xB742c5A4dBaE61c4F7c08D37d53d259B1eAE1a7F",
+        "description": "Official cover art for 'Summer Nights'"
+      },
+      {
+        "type": "music_video",
+        "tokenId": 1,
+        "contract": "0x3F26B25fcA757bAe370A068d487c70D139CA06ee",
+        "description": "Official music video for 'Summer Nights'",
+        "editions_minted": 10,
+        "max_supply": 1000
+      },
+      {
+        "type": "stems",
+        "tokenId": 2,
+        "contract": "0x3F26B25fcA757bAe370A068d487c70D139CA06ee",
+        "description": "Stems pack for 'Summer Nights'",
+        "max_supply": 500
+      },
+      {
+        "type": "remix",
+        "tokenId": 3,
+        "contract": "0x3F26B25fcA757bAe370A068d487c70D139CA06ee",
+        "description": "Club remix of 'Summer Nights'",
+        "max_supply": 800
+      }
+    ],
+    "attestations": 1,
+    "payment_recipients": 3,
+    "portfolio_value": 2.5
+  }
+};
+                
+                // Populate song info
+                document.getElementById('songTitle').textContent = demoData.song_info.title;
+                document.getElementById('artist').textContent = demoData.song_info.artist;
+                document.getElementById('genre').textContent = demoData.song_info.genre;
+                
+                // Populate container info
+                document.getElementById('containerAddress').textContent = demoData.tba.address;
+                document.getElementById('portfolioValue').textContent = demoData.portfolio_value;
+                document.getElementById('assetCount').textContent = demoData.summary.total_assets;
+                
+                // Populate attestation info
+                document.getElementById('attestationId').textContent = demoData.attestation.attestationId;
+                document.getElementById('schemaId').textContent = demoData.attestation.schemaId;
+                document.getElementById('rightsType').textContent = demoData.attestation.rightsType;
+                document.getElementById('territory').textContent = demoData.attestation.territory;
+                document.getElementById('contractId').textContent = demoData.attestation.contractId;
+                
+                // Populate trade info
+                document.getElementById('tradeFrom').textContent = demoData.trade.fromAddress;
+                document.getElementById('tradeTo').textContent = demoData.trade.toAddress;
+                document.getElementById('tradeValue').textContent = demoData.trade.value;
+                document.getElementById('tradeTx').textContent = demoData.trade.transactionHash;
+                
+                // Generate asset cards
+                const assetCardsContainer = document.getElementById('assetCards');
+                demoData.summary.assets.forEach(asset => {
+                    const card = document.createElement('div');
+                    card.className = 'col-md-4';
+                    
+                    let assetTypeClass = '';
+                    let assetTypeName = '';
+                    
+                    switch(asset.type) {
+                        case 'rights_nft':
+                            assetTypeClass = 'rights-nft';
+                            assetTypeName = 'Rights NFT';
+                            break;
+                        case 'cover_art':
+                            assetTypeClass = 'cover-art';
+                            assetTypeName = 'Cover Art (1/1)';
+                            break;
+                        case 'music_video':
+                            assetTypeClass = 'music-video';
+                            assetTypeName = 'Music Video';
+                            break;
+                        case 'stems':
+                            assetTypeClass = 'stems';
+                            assetTypeName = 'Stems Pack';
+                            break;
+                        case 'remix':
+                            assetTypeClass = 'remix';
+                            assetTypeName = 'Remix';
+                            break;
+                    }
+                    
+                    let editionsInfo = '';
+                    if (asset.editions_minted) {
+                        editionsInfo = `
+                            <div class="mt-2">
+                                <span class="badge bg-primary">${asset.editions_minted} minted</span>
+                                <span class="badge bg-secondary">Max: ${asset.max_supply}</span>
+                            </div>
+                        `;
+                    }
+                    
+                    card.innerHTML = `
+                        <div class="card asset-card ${assetTypeClass}">
+                            <div class="card-body">
+                                <h5 class="card-title">${assetTypeName}</h5>
+                                <p class="card-text">${asset.description}</p>
+                                <p class="small text-muted">Token ID: ${asset.tokenId}</p>
+                                ${editionsInfo}
+                            </div>
+                        </div>
+                    `;
+                    
+                    assetCardsContainer.appendChild(card);
+                });
+                
+                // Populate payment recipients
+                const recipientsTable = document.getElementById('recipientsTable');
+                demoData.payment_config.recipients.forEach(recipient => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${recipient.role}</td>
+                        <td>${recipient.share}%</td>
+                        <td><span class="address">${recipient.address}</span></td>
+                    `;
+                    recipientsTable.appendChild(row);
+                });
+                
+            } catch (error) {
+                console.error('Error loading demo data:', error);
+            }
+        }
+        
+        // Load data when the page is ready
+        document.addEventListener('DOMContentLoaded', loadDemoData);
+    </script>
+</body>
+</html> 

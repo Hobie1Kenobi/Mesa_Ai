@@ -1,0 +1,25 @@
+{
+  "fund_id": "FUND-29950dd2d2e37cb2",
+  "discovery_id": "29950dd2d2e37cb2",
+  "source": "targeted_scan",
+  "work_id": "WORK456",
+  "estimated_value": "$520.00",
+  "numeric_value": 520.0,
+  "discovery_time": "2025-04-09T23:16:01.290002",
+  "last_updated": "2025-04-09T23:16:01.290002",
+  "session_id": "6f069554-753f-4f63-9cb6-8eaed3ce8711",
+  "agency_identifier": "MESA-DEMO-AGENCY",
+  "confidence": 0.88,
+  "status": "potential",
+  "complexity": "low",
+  "attribution": {
+    "discovered_by": "MESA-DEMO-AGENCY",
+    "discovery_method": "ai_royalty_auditor",
+    "attribution_confidence": 0.88,
+    "attribution_evidence": [
+      "First discovered in session 6f069554-753f-4f63-9cb6-8eaed3ce8711",
+      "Tracked in discovery 29950dd2d2e37cb2",
+      "Timestamp: 2025-04-09T23:16:01.290002"
+    ]
+  }
+}

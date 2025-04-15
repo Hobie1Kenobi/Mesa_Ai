@@ -1,0 +1,6 @@
+trackId,trackTitle,artist,publisher,isrc,year,genre
+track-001,Summer Nights,John Doe,Evergreen Music Publishing,USXXX1234567,2022,Pop
+track-002,Midnight Blues,Jane Smith,Melody Masters Records,USXXX7654321,2023,Jazz
+track-003,Digital Dreams,Tech Beats,Future Sounds LLC,USXXX9876543,2021,Electronic
+track-004,Acoustic Soul,Voice of Nature,Organic Tunes Inc,USXXX3456789,2022,Folk
+track-005,Urban Flow,City Rhythms,Street Records,USXXX5678901,2023,Hip-Hop 

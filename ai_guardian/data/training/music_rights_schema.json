@@ -1,0 +1,227 @@
+{
+  "schemas": {
+    "MusicRight": {
+      "properties": {
+        "rightId": {
+          "type": "string",
+          "description": "Unique identifier for the right, may be a hash of other fields"
+        },
+        "workTitle": {
+          "type": "string",
+          "description": "Title of the musical work"
+        },
+        "artistParty": {
+          "type": "string",
+          "description": "Name of the artist or performing party"
+        },
+        "publisherParty": {
+          "type": "string",
+          "description": "Name of the publisher or rights administration party"
+        },
+        "rightsType": {
+          "type": "string",
+          "enum": ["Publishing", "Performance", "Mechanical", "Sync", "Master", "Neighboring"],
+          "description": "Type of rights being registered"
+        },
+        "territory": {
+          "type": "string",
+          "description": "Geographic territory where the rights apply"
+        },
+        "term": {
+          "type": "string",
+          "description": "Duration of the rights agreement"
+        },
+        "royaltyInfo": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "party": {
+                "type": "string",
+                "description": "Name of the party receiving royalties"
+              },
+              "percentage": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1,
+                "description": "Percentage of royalties (0.0-1.0)"
+              }
+            }
+          },
+          "description": "Information about royalty distribution"
+        },
+        "effectiveDate": {
+          "type": "string",
+          "format": "date",
+          "description": "When the rights agreement becomes effective"
+        },
+        "expirationDate": {
+          "type": "string",
+          "format": "date",
+          "description": "When the rights agreement expires (if applicable)"
+        },
+        "identifiers": {
+          "type": "object",
+          "properties": {
+            "iswc": {
+              "type": "string",
+              "description": "International Standard Musical Work Code"
+            },
+            "isrc": {
+              "type": "string",
+              "description": "International Standard Recording Code"
+            },
+            "isbn": {
+              "type": "string",
+              "description": "International Standard Book Number (for sheet music)"
+            }
+          },
+          "description": "Standard identifiers for the work"
+        },
+        "metadataHash": {
+          "type": "string",
+          "description": "Hash of additional metadata stored off-chain"
+        }
+      },
+      "required": ["rightId", "workTitle", "artistParty", "rightsType", "territory", "effectiveDate"]
+    },
+    "PrivacySettings": {
+      "properties": {
+        "rightId": {
+          "type": "string",
+          "description": "ID of the right these settings apply to"
+        },
+        "publicFields": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Fields that can be publicly disclosed"
+        },
+        "restrictedFields": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Fields that require selective disclosure"
+        },
+        "privateFields": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Fields that should never be disclosed"
+        },
+        "authorizedViewers": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "address": {
+                "type": "string",
+                "description": "Blockchain address of authorized viewer"
+              },
+              "allowedFields": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Fields this viewer is authorized to see"
+              },
+              "expirationTime": {
+                "type": "integer",
+                "description": "Unix timestamp when authorization expires"
+              }
+            }
+          },
+          "description": "List of addresses authorized to view restricted fields"
+        }
+      },
+      "required": ["rightId", "publicFields", "restrictedFields", "privateFields"]
+    },
+    "ProofRequest": {
+      "properties": {
+        "requestId": {
+          "type": "string",
+          "description": "Unique identifier for this proof request"
+        },
+        "rightId": {
+          "type": "string",
+          "description": "ID of the right being verified"
+        },
+        "requestingParty": {
+          "type": "string",
+          "description": "Address of the party requesting proof"
+        },
+        "requestedFields": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Fields being requested for verification"
+        },
+        "requestType": {
+          "type": "string",
+          "enum": ["ownership", "royalty", "selective_disclosure"],
+          "description": "Type of proof being requested"
+        },
+        "timestamp": {
+          "type": "integer",
+          "description": "Unix timestamp of the request"
+        }
+      },
+      "required": ["requestId", "rightId", "requestingParty", "requestedFields", "requestType"]
+    },
+    "ProofResponse": {
+      "properties": {
+        "requestId": {
+          "type": "string",
+          "description": "ID of the request this is responding to"
+        },
+        "proofType": {
+          "type": "string",
+          "enum": ["ownership", "royalty", "selective_disclosure"],
+          "description": "Type of proof being provided"
+        },
+        "disclosedData": {
+          "type": "object",
+          "description": "Selectively disclosed data fields"
+        },
+        "proofElements": {
+          "type": "object",
+          "description": "Zero-knowledge proof elements"
+        },
+        "signature": {
+          "type": "string",
+          "description": "Cryptographic signature validating the proof"
+        },
+        "timestamp": {
+          "type": "integer",
+          "description": "Unix timestamp of the response"
+        }
+      },
+      "required": ["requestId", "proofType", "proofElements", "signature"]
+    }
+  },
+  "example": {
+    "MusicRight": {
+      "rightId": "0x7b4c5d9e8f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c",
+      "workTitle": "Midnight Dreams",
+      "artistParty": "Sarah Wilson",
+      "publisherParty": "Dreamlight Records",
+      "rightsType": "Publishing",
+      "territory": "Global",
+      "term": "2 years with renewal option",
+      "royaltyInfo": [
+        {"party": "Sarah Wilson", "percentage": 0.5},
+        {"party": "Dreamlight Records", "percentage": 0.5}
+      ],
+      "effectiveDate": "2025-04-01",
+      "expirationDate": "2027-04-01",
+      "identifiers": {
+        "iswc": "T-123.456.789-0"
+      },
+      "metadataHash": "0x1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f"
+    }
+  }
+} 
